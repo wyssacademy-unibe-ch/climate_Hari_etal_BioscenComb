@@ -1,4 +1,5 @@
 library("rredlist")
+#https://apiv3.iucnredlist.org/api/v3/docs#habitat-name
 #https://cran.r-project.org/web/packages/rredlist/rredlist.pdf
 
 
@@ -9,3 +10,7 @@ habitats <- rl_habitats(name='Elephas maximus',key=IUCN_REDLIST_KEY, region="glo
 
 #pull together with: 
 find $OUTPUT. -name "*.txt" | xargs -n 1 tail -n +2 >> /storage/harichan/chelsa_V2/WRF/w5e5_wrf_all_",i,".txt 
+
+
+#LUH2 data 
+#https://luh.umd.edu/data.shtml
