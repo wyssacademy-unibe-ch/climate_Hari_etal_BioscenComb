@@ -17,33 +17,33 @@
 #' listISIMIP(type="landuse", scenario="2005soc", var="urbanareas")
 #' }
 #' @export
-listISIMIP <- function(path=getwd(), version="ISIMIP2b", type="GCM", extent="landonly",
-                       model="IPSL-CM5A-LR", scenario="rcp26", startyear=2006,
+listISIMIP <- function(path=getwd(), version="ISIMIP3b", type="GCM", extent="landonly",
+                       model="IPSL-CM6A-LR", scenario="ssp126", startyear=2006,
                        endyear=2010, var="tas"){
   if(version == "ISIMIP2b"){
     # List required files
-    if("EWEMBI" == type){
-      files <- list.files(path=path, pattern=paste0(var, "_ewembi1_", ".*\\.nc4"),
+    if("W5E5" == type){
+      files <- list.files(path=path, pattern=paste0(var, "_w5e5_", ".*\\.nc"),
                           recursive=T, full.names=T)
     } else if("GCM" == type){
       if(startyear < 2006 & scenario != "piControl"){
         files <- list.files(path=path, recursive=T, full.names=T,
-                            pattern=paste0(var, "_day_", model, "_historical_", ".*\\.nc4"))
+                            pattern=paste0(var, "_day_", model, "_historical_", ".*\\.nc"))
         if(endyear >= 2006){
           files2 <- list.files(path=path, recursive=T, full.names=T,
-                               pattern=paste0(var, "_day_", model, "_", scenario, ".*\\.nc4"))
+                               pattern=paste0(var, "_day_", model, "_", scenario, ".*\\.nc"))
           files <- append(files, files2); rm(files2)
         }
       } else{
         files <- list.files(path=path, recursive=T, full.names=T,
-                            pattern=paste0(var, "_day_", model, "_", scenario, ".*\\.nc4"))
+                            pattern=paste0(var, "_day_", model, "_", scenario, ".*\\.nc"))
       }
       if(extent=="landonly"){
         start <- sapply(files, FUN=function(x) substr(strsplit(x, "_landonly_")[[1]][2], 1, 4))
         end <- sapply(files, FUN=function(x) substr(strsplit(x, "_landonly_")[[1]][2], 10, 13))
       } else{
-        start <- sapply(files, FUN=function(x) substr(strsplit(x, "_EWEMBI_")[[1]][2], 1, 4))
-        end <- sapply(files, FUN=function(x) substr(strsplit(x, "_EWEMBI_")[[1]][2], 10, 13))
+        start <- sapply(files, FUN=function(x) substr(strsplit(x, "_W5E5_")[[1]][2], 1, 4))
+        end <- sapply(files, FUN=function(x) substr(strsplit(x, "_W5E5_")[[1]][2], 10, 13))
       }
       files <- files[end >= startyear & start <= endyear]
       #data <- raster::stack(lapply(files, FUN=function(x) raster::stack(x, varname=""))); rm(files)
@@ -60,10 +60,10 @@ listISIMIP <- function(path=getwd(), version="ISIMIP2b", type="GCM", extent="lan
           pattern <- paste0(tolower(model), "_", type, "-", var, "_annual_", ".*\\.nc4")
         }
       }
-      if(scenario %in% c("rcp26", "rcp60", "rcp85")){
+      if(scenario %in% c("ssp126", "ssp370", "ssp585")){
         if(startyear < 2006){
           files <- list.files(path=path, recursive=T, full.names=T,
-                              pattern=paste0("^histsoc_", type, "-", var, "_annual_", ".*\\.nc4"))
+                              pattern=paste0("^histsoc_", type, "-", var, "_annual_", ".*\\.nc"))
           if(endyear >= 2006){
             files2 <- list.files(path=path, recursive=T, full.names=T,
                                  pattern=paste0("^", scenario, "soc_", pattern))
@@ -72,12 +72,12 @@ listISIMIP <- function(path=getwd(), version="ISIMIP2b", type="GCM", extent="lan
         } else if(startyear < 2100){
           files <- list.files(path=path, recursive=T, full.names=T,
                               pattern=paste0("^", scenario, "soc_", pattern))
-          if(scenario == "rcp26" & endyear >= 2100){
+          if(scenario == "ssp370" & endyear >= 2100){
             files2 <- list.files(path=path, recursive=T, full.names=T,
                                  pattern=paste0("2100", scenario, "soc_", pattern))
             files <- append(files, files2); rm(files2)
           }
-        } else if(scenario == "rcp26" & startyear >= 2100){
+        } else if(scenario == "ssp370" & startyear >= 2100){
           files <- list.files(path=path, recursive=T, full.names=T,
                               pattern=paste0("2100", scenario, "soc_", pattern))
         }
