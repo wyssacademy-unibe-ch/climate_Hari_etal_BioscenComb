@@ -1,0 +1,89 @@
+# Install remotes if not previously installed
+if(!"remotes" %in% installed.packages()[,"Package"]) install.packages("remotes")
+
+# Install rISIMIP from Github if not previously installed
+if(!"rISIMIP" %in% installed.packages()[,"Package"]) remotes::install_github("RS-eco/rISIMIP", build_vignettes = TRUE)
+
+# Load rISIMIP package
+library(rISIMIP)
+
+#################################################################
+#from /vignettes/global-landonly-isimip3b
+#Timeframes
+timeframe <- c("1995","2000","2005","2050","2080")
+startyear <- c(1980,1985,1990,2036,2066)
+endyear <- c(2009,2014,2019,2065,2095)
+timeperiods <- data.frame(timeframe=timeframe, startyear=startyear,endyear=endyear)
+#Climate variables
+vars <- c("pr", "tasmax", "tasmin")
+#Climate models
+models <- c("GFDL-ESM4", "IPSL-CM6A-LR", "MPI-ESM1-2-HR", "MRI-ESM2-0", "UKESM1-0-LL")
+#SSP scenarios
+ssps <- c("ssp126", "ssp370", "ssp585")
+#Temperature is in Kelvin and needs to be converted to degree Celsius, while precipitation was originally in kg m-2 s-1 and needs to be converted to kg m-2 day-1, which equals mm per day.
+
+#available data in data(): "historical", "obsclim", "ssp126", "ssp370", "ssp585"
+#obsclim
+bioclim_gswp3-w5e5_obsclim_1995_landonly              
+bioclim_gswp3-w5e5_obsclim_2000_landonly        
+bioclim_gswp3-w5e5_obsclim_2005_landonly 
+
+#historical
+bioclim_gfdl-esm4_historical_1995_landonly      
+bioclim_gfdl-esm4_historical_2000_landonly 
+
+bioclim_ipsl-cm6a-lr_historical_1995_landonly           bioclim_ipsl-cm6a-lr_historical_2000_landonly 
+
+bioclim_mpi-esm1-2-hr_historical_1995_landonly 
+bioclim_mpi-esm1-2-hr_historical_2000_landonly
+
+bioclim_mri-esm2-0_historical_1995_landonly
+bioclim_mri-esm2-0_historical_2000_landonly
+
+bioclim_ukesm1-0-ll_historical_1995_landonly
+bioclim_ukesm1-0-ll_historical_2000_landonly
+
+#SSP126 - 2050
+data("bioclim_gfdl-esm4_ssp126_2050_landonly")
+data("bioclim_ipsl-cm6a-lr_ssp126_2050_landonly")
+data("bioclim_mpi-esm1-2-hr_ssp126_2050_landonly")
+data("bioclim_mri-esm2-0_ssp126_2050_landonly")
+data("bioclim_ukesm1-0-ll_ssp126_2050_landonly")
+
+#SSP126 - 2080
+data("bioclim_gfdl-esm4_ssp126_2080_landonly")
+data("bioclim_ipsl-cm6a-lr_ssp126_2080_landonly")
+data("bioclim_mpi-esm1-2-hr_ssp126_2080_landonly")
+data("bioclim_mri-esm2-0_ssp126_2080_landonly")
+data("bioclim_ukesm1-0-ll_ssp126_2080_landonly")
+
+#ssp370 - 2050 
+data("bioclim_gfdl-esm4_ssp370_2050_landonly")
+data("bioclim_ipsl-cm6a-lr_ssp370_2050_landonly")
+data("bioclim_mpi-esm1-2-hr_ssp370_2050_landonly")
+data("bioclim_mri-esm2-0_ssp370_2050_landonly")
+data("bioclim_ukesm1-0-ll_ssp370_2050_landonly")
+
+#SSP370 -2080
+data("bioclim_gfdl-esm4_ssp370_2080_landonly")
+data("bioclim_ipsl-cm6a-lr_ssp370_2080_landonly")
+data("bioclim_mpi-esm1-2-hr_ssp370_2080_landonly")
+data("bioclim_mri-esm2-0_ssp370_2080_landonly")
+data("bioclim_ukesm1-0-ll_ssp370_2080_landonly")
+
+#SSP585 - 2050
+data("bioclim_gfdl-esm4_ssp585_2050_landonly")
+data("bioclim_ipsl-cm6a-lr_ssp585_2050_landonly")
+data("bioclim_mpi-esm1-2-hr_ssp585_2050_landonly")
+data("bioclim_mri-esm2-0_ssp585_2050_landonly")
+data("bioclim_ukesm1-0-ll_ssp585_2050_landonly")
+
+#SSP585 - 2080
+data("bioclim_gfdl-esm4_ssp585_2080_landonly")
+data("bioclim_ipsl-cm6a-lr_ssp585_2080_landonly")
+data("bioclim_mpi-esm1-2-hr_ssp585_2080_landonly")
+data("bioclim_mri-esm2-0_ssp585_2080_landonly")
+data("bioclim_ukesm1-0-ll_ssp585_2080_landonly")
+
+
+
