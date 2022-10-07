@@ -162,7 +162,10 @@ plot2 <- ggplot() + geom_tile(data=bioclim_ssp126_2080_landonly, aes(x=x, y=y, f
         legend.background = element_rect(fill = "transparent"), 
         legend.box.background = element_rect(fill = "transparent", colour=NA))
 
+
+pdf(paste0("~/scripts/project-1/pdfs/ISIMIP2b_rcp26_2080-ISIMIP3b_ssp126_2080.pdf"))
 plot_grid(plot1, plot2, labels = c("ISIMIP2b - rcp26 - 2080","ISIMIP3b - ssp126 - 2080"))
+dev.off()
 
 #### rcp6.0 - ssp370 - 2080 ####
 data("bioclim_gfdl-esm2m_rcp60_2080_landonly")
@@ -233,7 +236,9 @@ plot2 <- ggplot() + geom_tile(data=bioclim_ssp370_2080_landonly, aes(x=x, y=y, f
         legend.background = element_rect(fill = "transparent"), 
         legend.box.background = element_rect(fill = "transparent", colour=NA))
 
+pdf(paste0("~/scripts/project-1/pdfs/ISIMIP2b_rcp60_2080-ISIMIP3b_ssp370_2080.pdf"))
 plot_grid(plot1, plot2, labels = c("ISIMIP2b - rcp60 - 2080","ISIMIP3b - ssp370 - 2080"))
+dev.off()
 
 #### rcp8.5 - ssp585 - 2080 ####
 data("bioclim_gfdl-esm2m_rcp85_2080_landonly")
@@ -304,7 +309,10 @@ plot2 <- ggplot() + geom_tile(data=bioclim_ssp585_2080_landonly, aes(x=x, y=y, f
         legend.background = element_rect(fill = "transparent"), 
         legend.box.background = element_rect(fill = "transparent", colour=NA))
 
+pdf(paste0("~/scripts/project-1/pdfs/ISIMIP2b_rcp85_2080-ISIMIP3b_ssp585_2080.pdf"))
 plot_grid(plot1, plot2, labels = c("ISIMIP2b - rcp85 - 2080","ISIMIP3b - ssp585 - 2080"))
+dev.off()
+
 
 #map for ISIMIP2b RCP2.6 - 2050
 library(cowplot)
@@ -382,7 +390,9 @@ plot2 <- ggplot() + geom_tile(data=bioclim_ssp126_2050_landonly, aes(x=x, y=y, f
         legend.background = element_rect(fill = "transparent"), 
         legend.box.background = element_rect(fill = "transparent", colour=NA))
 
+pdf(paste0("~/scripts/project-1/pdfs/ISIMIP2b_rcp26_2050-ISIMIP3b_ssp126_2050.pdf"))
 plot_grid(plot1, plot2, labels = c("ISIMIP2b - rcp26 - 2050","ISIMIP3b - ssp126 - 2050"))
+dev.off()
 
 #### rcp6.0 - ssp370 - 2050 ####
 data("bioclim_gfdl-esm2m_rcp60_2050_landonly")
@@ -453,7 +463,10 @@ plot2 <- ggplot() + geom_tile(data=bioclim_ssp370_2050_landonly, aes(x=x, y=y, f
         legend.background = element_rect(fill = "transparent"), 
         legend.box.background = element_rect(fill = "transparent", colour=NA))
 
+pdf(paste0("~/scripts/project-1/pdfs/ISIMIP2b_rcp60_2050-ISIMIP3b_ssp370_2050.pdf"))
 plot_grid(plot1, plot2, labels = c("ISIMIP2b - rcp60 - 2050","ISIMIP3b - ssp370 - 2050"))
+dev.off()
+
 
 #### rcp8.5 - ssp585 - 2050 ####
 data("bioclim_gfdl-esm2m_rcp85_2050_landonly")
@@ -524,8 +537,9 @@ plot2 <- ggplot() + geom_tile(data=bioclim_ssp585_2050_landonly, aes(x=x, y=y, f
         legend.background = element_rect(fill = "transparent"), 
         legend.box.background = element_rect(fill = "transparent", colour=NA))
 
+pdf(paste0("~/scripts/project-1/pdfs/ISIMIP2b_rcp85_2050-ISIMIP3b_ssp585_2050.pdf"))
 plot_grid(plot1, plot2, labels = c("ISIMIP2b - rcp85 - 2050","ISIMIP3b - ssp585 - 2050"))
-
+dev.off()
 
 #2. compare ISIMIP3b global distribution (mean, sd) of the different scenarios and time spans to check if they actually mirror an increase in temperature and if it's within the expectations
 
