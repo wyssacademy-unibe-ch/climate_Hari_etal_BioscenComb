@@ -543,6 +543,33 @@ dev.off()
 
 #2. compare ISIMIP3b global distribution (mean, sd) of the different scenarios and time spans to check if they actually mirror an increase in temperature and if it's within the expectations
 
+#### rcp26 - ssp126 -2080 ####
+bioclim_rcp26_2080_landonly <- bind_rows(`bioclim_gfdl-esm2m_rcp26_2080_landonly`, 
+                                         `bioclim_hadgem2-es_rcp26_2080_landonly`, 
+                                         `bioclim_ipsl-cm5a-lr_rcp26_2080_landonly`, 
+                                         `bioclim_miroc5_rcp26_2080_landonly`)
+bioclim_ssp126_2080_landonly <- bind_rows(`bioclim_gfdl-esm4_ssp126_2080_landonly`, 
+                                         `bioclim_ipsl-cm6a-lr_ssp126_2080_landonly`, 
+                                         `bioclim_mpi-esm1-2-hr_ssp126_2080_landonly`, 
+                                         `bioclim_mri-esm2-0_ssp126_2080_landonly`,
+                                         `bioclim_ukesm1-0-ll_ssp126_2080_landonly`)
 
+bio1_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:3], bioclim_ssp126_2080_landonly[,1:3], by=c("x","y"))
+bio2_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:2,4], bioclim_ssp126_2080_landonly[,1:2,4], by=c("x","y"))
+bio3_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:2,5], bioclim_ssp126_2080_landonly[,1:2,5], by=c("x","y"))
+bio4_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:2,6], bioclim_ssp126_2080_landonly[,1:2,6], by=c("x","y"))
+bio5_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:2,7], bioclim_ssp126_2080_landonly[,1:2,7], by=c("x","y"))
+bio6_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:2,8], bioclim_ssp126_2080_landonly[,1:2,8], by=c("x","y"))
+bio7_rcp26_ssp126_2080 <- all <- merge(bioclim_rcp26_2080_landonly[,1:2,9], bioclim_ssp126_2080_landonly[,1:2,9], by=c("x","y"))
+
+bios <- c(1:19)
+cols <- c(2:21)
+for (i in bios){
+  for (j in cols){
+    assign(paste0('bio',i,'_rcp26_ssp126_2080')),merge(paste0('bioclim_rcp26_2080_landonly[,1:2,',j,']), paste0(bioclim_ssp126_2080_landonly[,1:2',j,'], by=c("x","y"))'))
+  }
+}
+
+assign(paste0('chelsa_w5e5_',s,'_',i,'_',year,'_df'), as.data.frame(paste0('chelsa_w5e5_',s,'_',i,'_',year)))
 
 
