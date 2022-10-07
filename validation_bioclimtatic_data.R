@@ -648,3 +648,7 @@ bio18 <- rbind(bio18, data.frame(mean_bio18_2b=mean(all_bios_rcp26_ssp126_2080$b
 bio19 <- data.frame(mean_bio19_2b=character(0), mean_bio19_3b=character(0), diff_mean=character(),sd_bio19_2b=character(0), sd_bio19_3b=character(0),diff_sd=character(),cor_bio19=character(0))
 
 bio19 <- rbind(bio19, data.frame(mean_bio19_2b=mean(all_bios_rcp26_ssp126_2080$bio19.x), mean_bio19_3b=mean(all_bios_rcp26_ssp126_2080$bio19.y),diff_mean=mean(all_bios_rcp26_ssp126_2080$bio19.x)- mean(all_bios_rcp26_ssp126_2080$bio19.y), sd_bio19_2b=sd(all_bios_rcp26_ssp126_2080$bio19.x), sd_bio19_3b=sd(all_bios_rcp26_ssp126_2080$bio19.y),diff_sd=sd(all_bios_rcp26_ssp126_2080$bio19.x)-sd(all_bios_rcp26_ssp126_2080$bio19.y), cor_bio19=cor(all_bios_rcp26_ssp126_2080$bio19.x,all_bios_rcp26_ssp126_2080$bio19.y)))
+
+full_table <- cbind(bio1,bio2,bio3,bio4,bio5,bio6,bio7,bio8,bio9,bio10,bio11,bio12,bio13,bio14,bio15,bio16,bio17,bio18,bio19)
+
+write.table(full_table, "/storage/homefs/ch21o450/scripts/project-1/tables/table_rcp26_ssp126_2080.csv")
