@@ -21,70 +21,6 @@ models <- c("GFDL-ESM4", "IPSL-CM6A-LR", "MPI-ESM1-2-HR", "MRI-ESM2-0", "UKESM1-
 #SSP scenarios
 ssps <- c("ssp126", "ssp370", "ssp585")
 #Temperature is in Kelvin and needs to be converted to degree Celsius, while precipitation was originally in kg m-2 s-1 and needs to be converted to kg m-2 day-1, which equals mm per day.
-
-#available data in data(): "historical", "obsclim", "ssp126", "ssp370", "ssp585"
-#obsclim
-bioclim_gswp3-w5e5_obsclim_1995_landonly              
-bioclim_gswp3-w5e5_obsclim_2000_landonly        
-bioclim_gswp3-w5e5_obsclim_2005_landonly 
-
-#historical
-bioclim_gfdl-esm4_historical_1995_landonly      
-bioclim_gfdl-esm4_historical_2000_landonly 
-
-bioclim_ipsl-cm6a-lr_historical_1995_landonly           bioclim_ipsl-cm6a-lr_historical_2000_landonly 
-
-bioclim_mpi-esm1-2-hr_historical_1995_landonly 
-bioclim_mpi-esm1-2-hr_historical_2000_landonly
-
-bioclim_mri-esm2-0_historical_1995_landonly
-bioclim_mri-esm2-0_historical_2000_landonly
-
-bioclim_ukesm1-0-ll_historical_1995_landonly
-bioclim_ukesm1-0-ll_historical_2000_landonly
-
-#SSP126 - 2050
-data("bioclim_gfdl-esm4_ssp126_2050_landonly")
-data("bioclim_ipsl-cm6a-lr_ssp126_2050_landonly")
-data("bioclim_mpi-esm1-2-hr_ssp126_2050_landonly")
-data("bioclim_mri-esm2-0_ssp126_2050_landonly")
-data("bioclim_ukesm1-0-ll_ssp126_2050_landonly")
-
-#SSP126 - 2080
-data("bioclim_gfdl-esm4_ssp126_2080_landonly")
-data("bioclim_ipsl-cm6a-lr_ssp126_2080_landonly")
-data("bioclim_mpi-esm1-2-hr_ssp126_2080_landonly")
-data("bioclim_mri-esm2-0_ssp126_2080_landonly")
-data("bioclim_ukesm1-0-ll_ssp126_2080_landonly")
-
-#ssp370 - 2050 
-data("bioclim_gfdl-esm4_ssp370_2050_landonly")
-data("bioclim_ipsl-cm6a-lr_ssp370_2050_landonly")
-data("bioclim_mpi-esm1-2-hr_ssp370_2050_landonly")
-data("bioclim_mri-esm2-0_ssp370_2050_landonly")
-data("bioclim_ukesm1-0-ll_ssp370_2050_landonly")
-
-#SSP370 -2080
-data("bioclim_gfdl-esm4_ssp370_2080_landonly")
-data("bioclim_ipsl-cm6a-lr_ssp370_2080_landonly")
-data("bioclim_mpi-esm1-2-hr_ssp370_2080_landonly")
-data("bioclim_mri-esm2-0_ssp370_2080_landonly")
-data("bioclim_ukesm1-0-ll_ssp370_2080_landonly")
-
-#SSP585 - 2050
-data("bioclim_gfdl-esm4_ssp585_2050_landonly")
-data("bioclim_ipsl-cm6a-lr_ssp585_2050_landonly")
-data("bioclim_mpi-esm1-2-hr_ssp585_2050_landonly")
-data("bioclim_mri-esm2-0_ssp585_2050_landonly")
-data("bioclim_ukesm1-0-ll_ssp585_2050_landonly")
-
-#SSP585 - 2080
-data("bioclim_gfdl-esm4_ssp585_2080_landonly")
-data("bioclim_ipsl-cm6a-lr_ssp585_2080_landonly")
-data("bioclim_mpi-esm1-2-hr_ssp585_2080_landonly")
-data("bioclim_mri-esm2-0_ssp585_2080_landonly")
-data("bioclim_ukesm1-0-ll_ssp585_2080_landonly")
-
 #1. compare ISIMIP3B maps to ISIMIP2b maps
 #map for ISIMIP2b RCP2.6 - 2080
 library(cowplot)
@@ -649,6 +585,16 @@ bio19 <- data.frame(mean_bio19_2b=character(0), mean_bio19_3b=character(0), diff
 
 bio19 <- rbind(bio19, data.frame(mean_bio19_2b=mean(all_bios_rcp26_ssp126_2080$bio19.x), mean_bio19_3b=mean(all_bios_rcp26_ssp126_2080$bio19.y),diff_mean=mean(all_bios_rcp26_ssp126_2080$bio19.x)- mean(all_bios_rcp26_ssp126_2080$bio19.y), sd_bio19_2b=sd(all_bios_rcp26_ssp126_2080$bio19.x), sd_bio19_3b=sd(all_bios_rcp26_ssp126_2080$bio19.y),diff_sd=sd(all_bios_rcp26_ssp126_2080$bio19.x)-sd(all_bios_rcp26_ssp126_2080$bio19.y), cor_bio19=cor(all_bios_rcp26_ssp126_2080$bio19.x,all_bios_rcp26_ssp126_2080$bio19.y)))
 
-full_table <- cbind(bio1,bio2,bio3,bio4,bio5,bio6,bio7,bio8,bio9,bio10,bio11,bio12,bio13,bio14,bio15,bio16,bio17,bio18,bio19)
+
+bios <- c("bio1","bio2","bio3","bio4","bio5","bio6","bio7","bio8","bio9","bio10","bio11","bio12","bio13","bio14","bio15","bio16","bio17","bio18","bio19")
+
+
+output_list <- list()
+for (i in 1:19){
+  output_list[[i]]<- get(bios[i])
+ 
+}
+
+full_table <- do.call("cbind", output_list)
 
 write.table(full_table, "/storage/homefs/ch21o450/scripts/project-1/tables/table_rcp26_ssp126_2080.csv")
