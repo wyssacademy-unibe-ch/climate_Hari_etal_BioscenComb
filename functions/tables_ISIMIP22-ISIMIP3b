@@ -13,19 +13,32 @@ bioclim_ssp126_2080_landonly <- bind_rows(`bioclim_gfdl-esm4_ssp126_2080_landonl
 
 all_bios_rcp26_ssp126_2080 <- merge(bioclim_rcp26_2080_landonly, bioclim_ssp126_2080_landonly, by=c("x","y"))
 
+
 vals_2b <- list(all_bios_rcp26_ssp126_2080$bio1.x,all_bios_rcp26_ssp126_2080$bio2.x,all_bios_rcp26_ssp126_2080$bio3.x,all_bios_rcp26_ssp126_2080$bio4.x,all_bios_rcp26_ssp126_2080$bio5.x, all_bios_rcp26_ssp126_2080$bio6.x, all_bios_rcp26_ssp126_2080$bio7.x, all_bios_rcp26_ssp126_2080$bio8.x, all_bios_rcp26_ssp126_2080$bio9.x,all_bios_rcp26_ssp126_2080$bio10.x, all_bios_rcp26_ssp126_2080$bio11.x, all_bios_rcp26_ssp126_2080$bio12.x, all_bios_rcp26_ssp126_2080$bio13.x, all_bios_rcp26_ssp126_2080$bio14.x, all_bios_rcp26_ssp126_2080$bio15.x, all_bios_rcp26_ssp126_2080$bio16.x, all_bios_rcp26_ssp126_2080$bio17.x, all_bios_rcp26_ssp126_2080$bio18.x, all_bios_rcp26_ssp126_2080$bio19.x)
- 
+vals_3b <- list(all_bios_rcp26_ssp126_2080$bio1.y,all_bios_rcp26_ssp126_2080$bio2.y,all_bios_rcp26_ssp126_2080$bio3.y,all_bios_rcp26_ssp126_2080$bio4.y,all_bios_rcp26_ssp126_2080$bio5.y, all_bios_rcp26_ssp126_2080$bio6.y, all_bios_rcp26_ssp126_2080$bio7.y, all_bios_rcp26_ssp126_2080$bio8.y, all_bios_rcp26_ssp126_2080$bio9.y,all_bios_rcp26_ssp126_2080$bio10.y, all_bios_rcp26_ssp126_2080$bio11.y, all_bios_rcp26_ssp126_2080$bio12.y, all_bios_rcp26_ssp126_2080$bio13.y, all_bios_rcp26_ssp126_2080$bio14.y, all_bios_rcp26_ssp126_2080$bio15.y, all_bios_rcp26_ssp126_2080$bio16.y, all_bios_rcp26_ssp126_2080$bio17.y, all_bios_rcp26_ssp126_2080$bio18.y, all_bios_rcp26_ssp126_2080$bio19.y)
+
 output_list <- list()
 for (i in 1:19){
-   output_list[[i]]<- sapply(vals_2b[i], mean)
+  output_list[[i]]<- sapply(vals_2b[i], mean)
+  
+}
 
-   
- }
- 
-means_2b <- do.call("rbind", output_list)
+means_2b <- do.call("cbind", output_list)
+outlist <- list()
+for (i in 1:19){
+  
+  outlist[[i]]<- sapply(vals_3b[i], mean)
+    
+    
+  }
+  
+means_3b <- do.call("cbind", outlist)
+  
+table <- rbind(means_3b, means_2b)
+table <- t(table)
+colnames(table) <- c("mean_2b","mean_3b")
+row.names(table) <- c("bio1", "bio2", "bio3", "bio4", "bio5", "bio6", "bio7", "bio8", "bio9", "bio10", "bio11", "bio12", "bio13","bio14", "bio15", "bio16", "bio17", "bio18", "bio19")
 
-
-output_list <- list()
 
 bio1 <- data.frame(mean_bio1_2b=character(0), mean_bio1_3b=character(0), diff_mean=character(),sd_bio1_2b=character(0), sd_bio1_3b=character(0),diff_sd=character(),cor_bio1=character(0))
 
