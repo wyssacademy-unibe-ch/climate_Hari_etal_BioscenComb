@@ -106,7 +106,7 @@ table <- rbind(table, cors)
 
 
 table <- t(table)
-colnames(table) <- c("mean_2b","mean_3b","diff_means","sd_2b","sd_3b","diff_sd","cor")
+colnames(table) <- c("","mean_2b","mean_3b","diff_means","sd_2b","sd_3b","diff_sd","cor")
 row.names(table) <- c("bio1", "bio2", "bio3", "bio4", "bio5", "bio6", "bio7", "bio8", "bio9", "bio10", "bio11", "bio12", "bio13","bio14", "bio15", "bio16", "bio17", "bio18", "bio19")
 
 write.table(table, "/storage/homefs/ch21o450/scripts/project-1/tables/table_rcp26_ssp126_2080.csv")
