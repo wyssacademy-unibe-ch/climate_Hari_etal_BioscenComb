@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH -A node
+#SBATCH --chdir=/storage/homefs/ch21o450/
+#SBATCH --qos normal
+#SBATCH --mail-user=chantal.hari@unibe.ch
+#SBATCH --mail-type==SUBMIT,END,FAIL
+#SBATCH -o logs/calc_pa%j.out
+#SBATCH -e logs/calc_pa%j.err
+#SBATCH --ntasks=1
+#SBATCH --mem=200G
+#SBATCH --cpus-per-task=64
+#SBATCH --time=696:24:15
+#SBATCH --output=/home/harichan/logs/calc_pa_%A_%a.out
+
+AVAILABLE_FILES=$SLURM_ARRAY_TASK_ID 
+
+R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R --args $AVAILABLE_FILES
