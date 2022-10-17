@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #SBATCH --chdir=/storage/homefs/ch21o450/
-#SBATCH --qos normal
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
 #SBATCH -o logs/calc_pa%j.out
