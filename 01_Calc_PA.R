@@ -30,7 +30,7 @@ library(rasterSp)
 
 # Specify file dir
 
-filedir="/storage/homefs/ch21o450/data/"
+filedir="/storage/homefs/ch21o450/data"
 
 
 ########################################
@@ -48,7 +48,7 @@ taxa <- c("Mammals")
 "Ter_Mammal"
 
 # Read in the path to species files
-spfilePathWGS <- paste0(filedir, "SpeciesData/")
+spfilePathWGS <- paste0(filedir, "/SpeciesData/")
 
 # Check which files are already there 
 available_files <- list.files(spfilePathWGS)
@@ -63,19 +63,13 @@ rm(available_files)
 speciesList <- list()
 speciesList[[1]] <- mammals$binomial[mammals$binomial %in% available_names]
 
-########################################
-
-#' ## Calculate pseudo absences
-#'
-#' Calculation is based on the distance to a species' range 
-#' using Naiara's distance weighting "One over distance 2"
-
+######
 # Run code for all three taxa
 for(i in 1:length(taxa)){
   
   # Read in the path to result files
   resultspath <- paste0(filedir, "/", taxa[i], "_Distances/")
-  
+  filetest <-  paste0(filedir, "/", taxa[i], "_Distances/")
   if(!dir.exists(resultspath)){dir.create(resultspath)}
   
   # Load paths of raster files
@@ -91,10 +85,10 @@ for(i in 1:length(taxa)){
   sfLibrary(maptools); sfLibrary(SDMTools)
   
   # Source the distance.calc function
-  source("/storage/homefs/ch21o450/scratch/scripts/BioScen1.5_SDM/R/distance_func.R")
+  source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/distance_func.R")
   
   # Import all the data and data paths needed to each CPU
-  sfExport(list=c("resultspath", "sp.path", "distance.calc", 
+  sfExport(list=c("resultspath", "filetest","sp.path", "distance.calc", 
                   "spfilePathWGS"), local=T) 
   
   # Run distance.calc function parallel
@@ -107,6 +101,7 @@ for(i in 1:length(taxa)){
   
   # Check output
   resultspath <- "/storage/homefs/ch21o450/"
+
   test <- get(load(list.files(resultspath, full.names=TRUE)[1]))
   head(test)
   ggplot() + geom_raster(data=test,aes(x=x,y=y,fill=OneOverDist2))
@@ -145,3 +140,4 @@ for(i in 1:length(taxa)){
   head(test[["PA1"]])
   ggplot()+geom_raster(data=test,aes(x=x,y=y,fill=factor(presence)))
 }
+
