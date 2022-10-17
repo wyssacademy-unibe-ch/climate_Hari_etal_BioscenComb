@@ -30,7 +30,7 @@ file.remove("data/ter_mammals_dist.csv.xz")
 
 # Extract data of non-modelled species
 
-load("data/amphibians_dist.rda")
+load("data/ter_mammals_dist.rda")
 ter_mammals_dist$group <- "Mammals"
 ter_mammals_dist$presence <- 1
 
