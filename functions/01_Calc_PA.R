@@ -146,7 +146,7 @@ for(i in 1:length(available_files)){
       FinalDist <- FinalDist[,c("x","y","OneOverDist2")]
       
       # Save the resulting distance dataframe as Rdata file for each species
-      save(FinalDist, file=paste0(resultspath, sp.name,".Rdata"),compress="xz")
+      save(FinalDist, file=paste0(resultspath,  available_files[[i]],".Rdata"),compress="xz")
       
       removeTmpFiles(h=6)
       
@@ -158,7 +158,7 @@ for(i in 1:length(available_files)){
   # 
   # # Load paths of raster files
   # sp.path <- lapply(speciesList[[i]],function(x){
-  #   species <- paste0(spfilePathWGS, available_files)
+  #   species <- paste0(spfilePathWGS, available_files[[i]])
   # })
   # 
   # 
