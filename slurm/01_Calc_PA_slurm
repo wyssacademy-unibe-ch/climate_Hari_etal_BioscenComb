@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --p=epyc2
+#SBATCH --partition=epyc2
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
