@@ -52,8 +52,8 @@ spfilePathWGS <- paste0(filedir, "/SpeciesData/")
 available_files <- list.files( spfilePathWGS)
 
 
-# available_names <- sapply(available_files, FUN=function(x) 
-#   strsplit(as.character(x), split="_0.5.tif")[[1]][1])
+available_names <- sapply(available_files, FUN=function(x) 
+   strsplit(as.character(x), split="_0.5.tif")[[1]][1])
 # strings <- available_names
 # available_names <- strings %>% stringr::str_replace("_", " ")
 # 
@@ -65,8 +65,8 @@ available_files <- list.files( spfilePathWGS)
 
 # Read in the path to result files
 
-for (i in 1:length(taxa)){
-resultspath <- paste0(filedir, "/", taxa[i], "_Distances/")
+for (n in 1:length(taxa)){
+resultspath <- paste0(filedir, "/", taxa[n], "_Distances/")
 
 if(!dir.exists(resultspath)){dir.create(resultspath)}
 }
@@ -146,7 +146,7 @@ for(i in 1:length(available_files)){
       FinalDist <- FinalDist[,c("x","y","OneOverDist2")]
       
       # Save the resulting distance dataframe as Rdata file for each species
-      save(FinalDist, file=paste0(resultspath,  available_files[[i]],".Rdata"),compress="xz")
+      save(FinalDist, file=paste0(resultspath,  available_names[[i]],".Rdata"),compress="xz")
       
       removeTmpFiles(h=6)
       
@@ -206,28 +206,74 @@ for(i in 1:length(available_files)){
   spPresDir <- spfilePathWGS # paste0(filedir, "/SpeciesData/")
   spName[[1]]
   
+for (n in 1:length(taxa)){
   # Specify output file dir
-  filetest <-  paste0(filedir, "/", taxa[i], "_Pseudoabsences/")
+  filetest <-  paste0(filedir, "/", taxa[n], "_Pseudoabsences/")
   
   # Create file dir if necessary
   if(!dir.exists(filetest)){dir.create(filetest)}
+ } 
   
+#-#-# Function for absence selection #-#-#
+
   
-  # Initialise parallel processing
-  sfInit(parallel=TRUE, cpus=detectCores()-1)
-  sfLibrary(base);sfLibrary(lattice);sfLibrary(raster)
-  
-  # Source the distance.calc function
-  source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/PA_func.R")
-  
-  # Import all the data and data paths needed to each CPU
-  sfExport(list=c("spDistDir", "spName", "spPresDir", "filetest", "PA.calc")) 
-  
-  system.time(
-    sfLapply(spName,function(sp) PA.calc(sp))
-  )
-  sfStop()
-  
+  filename <- paste(strsplit(available_names[[i]],".",fixed=TRUE)[[1]][1])
+  if(!file.exists(paste0(filedir,filename,"_PA1.Rdata"))){
+    spData_alldistance <- get(load(paste0(spDistDir,available_names[[i]],".Rdata")))
+    spDistr <- raster(paste0(spPresDir, filename,"_0.5.tif"))
+    
+    
+    coord <- round(coordinates(spDistr),4)
+    presence <- getValues(spDistr)
+    spDistr <- (as.data.frame(cbind(coord,presence)))
+    spDistr[is.na(spDistr)] <- 0
+    NP <- nrow(spDistr[which(spDistr$presence==1),])  # number of presences
+    
+    if((NP >= 10) == TRUE) { #Skip species with less than 10 presences
+      
+      if((NP > 35000) == FALSE){ #Return names for very widespread species where presence equals absence wont work
+        
+        speciesData <- merge(spData_alldistance,spDistr)
+        allCoor <-  speciesData[,c("x","y")]
+        distData <- speciesData[which(speciesData$presence == 0),] # Select the absence rows (contain distance info)
+        
+        if((NP < 1001) == TRUE) { #Depending which species need to be selected - use 1000 absences or NP!
+          
+          allData <- lapply(seq(1,10,1), function(i,NP,speciesData){
+            smpl_distance <- distData[sample.int(nrow(distData),1000, prob=distData$OneOverDist2,  replace=F),c("x","y")] # randomly pick absence cell weighted by 1/D
+            smpl_distance$presence <- 0
+            smpl_distance <- rbind(smpl_distance,speciesData[which(speciesData$presence == 1),c("x","y","presence")])
+            smpl_distance$sample_id <- i
+            return(smpl_distance)
+          },NP=NP,speciesData=speciesData)
+          names(allData) <- c("PA1", "PA2", "PA3", "PA4", "PA5", 
+                              "PA6", "PA7", "PA8", "PA9", "PA10")
+          save(allData,file=paste0(filedir,filename,"_PA.Rdata"), compress="xz")   
+          
+        } else {
+          allData <- lapply(seq(1,10,1), function(i,NP,speciesData){
+            smpl_distance <- distData[sample.int(nrow(distData),NP, prob=distData$OneOverDist2,  replace=T),c("x","y")] # randomly pick absence cell weighted by 1/D
+            smpl_distance$presence <- 0
+            smpl_distance <- rbind(smpl_distance,speciesData[which(speciesData$presence == 1),c("x","y","presence")])
+            smpl_distance$sample_id <- i
+            return(smpl_distance)
+          },NP=NP,speciesData=speciesData)
+          names(allData) <- c("PA1", "PA2", "PA3", "PA4", "PA5", 
+                              "PA6", "PA7", "PA8", "PA9", "PA10")
+          save(allData,file=paste0(filedir, filename,"_PA.Rdata"), compress="xz")   
+        }
+      } else {
+        wide.range <- c(wide.range, filename)
+        print(filename) 
+      }
+    } else {
+      print("no presence")
+    }  
+  } else {
+    print("done")
+  }
+
+
   # Check the output
   test <- get(load(list.files(filetest, full.names=TRUE)[1]))
   head(test[["PA1"]])
