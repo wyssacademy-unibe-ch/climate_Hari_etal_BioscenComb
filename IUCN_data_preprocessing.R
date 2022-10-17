@@ -52,6 +52,7 @@ ter_mammals_dist_smallrange <- ter_mammals_dist %>%
 # Save to file
 save(ter_mammals_dist_smallrange, file="data/ter_mammals_dist_smallrange.rda", compress="xz")
 
+########################################################################################################################
 ## Create dataframe of species range areas and select smallest 15%
 source("/storage/homefs/ch21o450/scripts/rasterSp/R/getRangeArea.R")
 range_mammals <- getRangeArea(dsn=paste0(filedir, "MAMMALS.shp"), 
