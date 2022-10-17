@@ -18,6 +18,7 @@ mammals %<>% as.data.frame() %>% select(-geometry) %>%
 
 
 source("/storage/homefs/ch21o450/scripts/rasterSp/R/speciesData.R")
+data(ter_mammals)
 speciesData(species_names=unique(mammals$binomial), 
             path=paste0(filedir, "/SpeciesData/"), 
             filename="mammals_dist.csv.xz")
