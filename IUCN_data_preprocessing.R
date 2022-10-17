@@ -15,7 +15,7 @@ mammals %<>% as.data.frame() %>% select(-geometry) %>%
   group_by(binomial, presence, origin, seasonal, kingdom, phylum, class, order_, family) %>% 
   summarise_at("SHAPE_Area", sum)
 
-
+save(mammals, file="data/ter_mammals.rda", compress="xz")
 
 source("/storage/homefs/ch21o450/scripts/rasterSp/R/speciesData.R")
 data(ter_mammals)
