@@ -9,4 +9,6 @@
 #SBATCH --time=00:01:00
 #SBATCH --output=//storage/homefs/ch21o450/logs/calc_pa_%A_%a.out
 
-R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R $SLURM_ARRAY_TASK_ID
+module load R/4.1.0-foss-2021a
+
+R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R --args $SLURM_ARRAY_TASK_ID
