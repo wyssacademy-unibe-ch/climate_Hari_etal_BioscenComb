@@ -59,10 +59,8 @@ available_names <- sapply(available_files, FUN=function(x)
 # 
 # rm(available_files)
 
-args <- commandArgs(trailingOnly=TRUE)
-content <- strsplit(args, " ")
-i <- contents[[1]]
-i <- suppressWarnings(as.numeric(as.character(i)))
+i <- commandArgs(trailingOnly=TRUE)
+
 
 
 # Only use species for which raster files exist
