@@ -59,6 +59,12 @@ available_names <- sapply(available_files, FUN=function(x)
 # 
 # rm(available_files)
 
+args <- commandArgs(trailingOnly=TRUE)
+content <- strsplit(args, " ")
+i <- contents[[1]]
+i <- suppressWarnings(as.numeric(as.character(i)))
+
+
 # Only use species for which raster files exist
 # speciesList <- list()
 # speciesList[[1]] <- mammals$binomial[mammals$binomial %in% available_names]
@@ -74,7 +80,7 @@ if(!dir.exists(resultspath)){dir.create(resultspath)}
 
 ###### distance function ###########
 # Run code for all three taxa
-for(i in 1:length(available_files)){
+#for(i in 1:length(available_files)){
     ObDist <- raster(paste0("/storage/homefs/ch21o450/data/SpeciesData/", available_files[[i]]))
     coord <- round(coordinates(ObDist),4)
     presence <- getValues(ObDist)
@@ -151,7 +157,7 @@ for(i in 1:length(available_files)){
       removeTmpFiles(h=6)
       
     } 
-  } 
+#  } 
 #########
 
   # 
