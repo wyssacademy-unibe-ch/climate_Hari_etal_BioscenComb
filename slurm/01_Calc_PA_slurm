@@ -8,7 +8,7 @@
 #SBATCH --ntasks=1
 #SBATCH --mem=200G
 #SBATCH --cpus-per-task=64
-#SBATCH --time=696:24:15
+#SBATCH --time=24:00:00
 #SBATCH --output=/home/harichan/logs/calc_pa_%A_%a.out
 
 R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R $SLURM_ARRAY_TASK_ID
