@@ -7,7 +7,7 @@
 #SBATCH -o logs/calc_pa%j.out
 #SBATCH -e logs/calc_pa%j.err
 #SBATCH --ntasks=1
-#SBATCH --mem=50G
+#SBATCH --mem=5G
 #SBATCH --cpus-per-task=20
 #SBATCH --time=00:01:00
 #SBATCH --output=/home/harichan/logs/calc_pa_%A_%a.out
