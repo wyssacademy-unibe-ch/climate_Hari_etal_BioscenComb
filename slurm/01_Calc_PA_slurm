@@ -12,7 +12,4 @@
 #SBATCH --time=696:24:15
 #SBATCH --output=/home/harichan/logs/calc_pa_%A_%a.out
 
-START=0
-i=$SLURM_ARRAY_TASK_ID 
-
-R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R --args $i
+R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R $SLURM_ARRAY_TASK_ID
