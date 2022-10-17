@@ -4,8 +4,8 @@
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
-#SBATCH -output=/storage/homefs/ch21o450/logs/calc_pa%j.out
-#SBATCH -e=/storage/homefs/ch21o450/logs/calc_pa%j.err
+#SBATCH --output=/storage/homefs/ch21o450/logs/calc_pa%j.out
+#SBATCH --error=/storage/homefs/ch21o450/logs/calc_pa%j.err
 #SBATCH --time=00:01:00
 #SBATCH --output=//storage/homefs/ch21o450/logs/calc_pa_%A_%a.out
 
