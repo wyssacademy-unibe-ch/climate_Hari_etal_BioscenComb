@@ -260,7 +260,7 @@ for (n in 1:length(taxa)){
           },NP=NP,speciesData=speciesData)
           names(allData) <- c("PA1", "PA2", "PA3", "PA4", "PA5", 
                               "PA6", "PA7", "PA8", "PA9", "PA10")
-          save(allData,file=paste0(filedir, filename,"_PA.Rdata"), compress="xz")   
+          save(allData,file=paste0(filedir,"/Mammals_PA/",filename,"_PA.Rdata"), compress="xz")   
         }
       } else {
         wide.range <- c(wide.range, filename)
