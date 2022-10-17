@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#SBATCH -A node
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --qos normal
 #SBATCH --mail-user=chantal.hari@unibe.ch
@@ -16,4 +15,4 @@
 START=0
 i=$SLURM_ARRAY_TASK_ID 
 
-R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R --args $AVAILABLE_FILES
+R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R --args $i
