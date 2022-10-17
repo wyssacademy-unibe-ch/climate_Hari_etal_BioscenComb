@@ -12,7 +12,7 @@ rm(list=ls())
 
 # Automatically install required packages, which are not yet in library
 packages <- c("base", "lattice", "sp", "spatstat", "maptools", "stats", 
-              "SDMTools", "raster", "readr","snowfall","parallel","rgdal","dplyr")
+              "SDMTools", "raster", "readr","snowfall","parallel","rgdal","dplyr","ggplot2")
 
 new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages); rm(new.packages)
@@ -64,18 +64,17 @@ available_files <- list.files( spfilePathWGS)
 # speciesList[[1]] <- mammals$binomial[mammals$binomial %in% available_names]
 
 # Read in the path to result files
+
+for (i in 1:length(taxa)){
 resultspath <- paste0(filedir, "/", taxa[i], "_Distances/")
 
 if(!dir.exists(resultspath)){dir.create(resultspath)}
+}
 
 
 ###### distance function ###########
 # Run code for all three taxa
-for(i in 1:length(taxa)){
-  
-  
-  for (i in c(1:10))
-  {
+for(i in 1:length(available_files)){
     ObDist <- raster(paste0("/storage/homefs/ch21o450/data/SpeciesData/", available_files[[i]]))
     coord <- round(coordinates(ObDist),4)
     presence <- getValues(ObDist)
@@ -151,17 +150,52 @@ for(i in 1:length(taxa)){
       
       removeTmpFiles(h=6)
       
-    } else {
-      print(sp.name)
-    }
-  } else {
-    print(sp.name)
+    } 
   } 
+#########
 
-
-
-
-
+  # 
+  # 
+  # # Load paths of raster files
+  # sp.path <- lapply(speciesList[[i]],function(x){
+  #   species <- paste0(spfilePathWGS, available_files)
+  # })
+  # 
+  # 
+  # sp.path <-  do.call(rbind,sp.path)
+  # sp.path[[1]]
+  # 
+  # 
+  # 
+  # 
+  # 
+  # # Initialise parallel processing
+  # sfInit(parallel=TRUE, cpus=10)
+  # sfLibrary(spatstat); sfLibrary(sp); sfLibrary(raster); 
+  # sfLibrary(maptools); sfLibrary(SDMTools)
+  # 
+  # # Source the distance.calc function
+  # source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/distance_func.R")
+  # 
+  # # Import all the data and data paths needed to each CPU
+  # sfExport(list=c("resultspath", "filetest","sp.path", "distance.calc", 
+  #                 "spfilePathWGS"), local=T) 
+  # 
+  # # Run distance.calc function parallel
+  # system.time(
+  #   sfLapply(sp.path,function(x) distance.calc(x))
+  #   #lapply(sp.path[1:5],function(x) distance.calc(x))
+  # )
+  # # Stop clusters
+  # sfStop()
+  # 
+  # Check output
+  
+  test <- get(load(list.files(resultspath, full.names=TRUE)[1]))
+  head(test)
+  ggplot() + geom_raster(data=test,aes(x=x,y=y,fill=OneOverDist2))
+  
+  
   
   
   ## Select pseudo absences based on the distance to a species' range
@@ -178,12 +212,13 @@ for(i in 1:length(taxa)){
   # Create file dir if necessary
   if(!dir.exists(filetest)){dir.create(filetest)}
   
+  
   # Initialise parallel processing
   sfInit(parallel=TRUE, cpus=detectCores()-1)
-  sfLibrary(base);sfLibrary(lattice);sfLibrary(raster);
+  sfLibrary(base);sfLibrary(lattice);sfLibrary(raster)
   
   # Source the distance.calc function
-   source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/PA_func.R")
+  source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/PA_func.R")
   
   # Import all the data and data paths needed to each CPU
   sfExport(list=c("spDistDir", "spName", "spPresDir", "filetest", "PA.calc")) 
@@ -198,4 +233,5 @@ for(i in 1:length(taxa)){
   head(test[["PA1"]])
   ggplot()+geom_raster(data=test,aes(x=x,y=y,fill=factor(presence)))
 }
+
 
