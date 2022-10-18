@@ -195,9 +195,9 @@ if(!dir.exists(resultspath)){dir.create(resultspath)}
   # 
   # Check output
   
-  test <- get(load(list.files(resultspath, full.names=TRUE)[1]))
-  head(test)
-  ggplot() + geom_raster(data=test,aes(x=x,y=y,fill=OneOverDist2))
+  #test <- get(load(list.files(resultspath, full.names=TRUE)[1]))
+  #head(test)
+  #ggplot() + geom_raster(data=test,aes(x=x,y=y,fill=OneOverDist2))
   
   
   
@@ -279,9 +279,9 @@ for (n in 1:length(taxa)){
 
 
   # Check the output
-  test <- get(load(list.files(filetest, full.names=TRUE)[1]))
-  head(test[["PA1"]])
-  ggplot()+geom_raster(data=test,aes(x=x,y=y,fill=factor(presence)))
+  #test <- get(load(list.files(filetest, full.names=TRUE)[1]))
+  #head(test[["PA1"]])
+  #ggplot()+geom_raster(data=test,aes(x=x,y=y,fill=factor(presence)))
 }
 
 
