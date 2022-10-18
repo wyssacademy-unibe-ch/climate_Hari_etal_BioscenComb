@@ -60,7 +60,7 @@ available_names <- sapply(available_files, FUN=function(x)
 # rm(available_files)
 
 i <- commandArgs(trailingOnly=TRUE)
-
+i <-suppressWarnings(as.numeric(as.character(i)))
 
 
 # Only use species for which raster files exist
