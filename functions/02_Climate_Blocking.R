@@ -146,7 +146,7 @@ sample.area <- getValues(raster.ecoReg.area.l)
 sample.unit.df <- as.data.frame(cbind(coord,sample.id,sample.area))
 sample.unit.df <- na.omit(sample.unit.df)
 names(sample.unit.df)
-plot(y~x, data=sample.unit.df,cex=0.1)
+plot(y~x, data=sample.unit.df,cex=0.2)
 
 ##Create sample units of only a certain size
 max.size <- 250000
@@ -158,7 +158,7 @@ blockingsampleunits <- blockingsampleunits[,c("x","y","blockingsampleunits")]
 colnames(blockingsampleunits) <- c("lon","lat","id.sample")
 
 # Save the sample units for later use (Creating the units everytime takes too long)
-write.csv(blockingsampleunits, "data/blockingsampleunits.csv", row.names=F)
+write.csv(blockingsampleunits, paste0(filedir,"/blockingsampleunits.csv"), row.names=F)
 library(ggplot2)
 blockingsampleunits$id.sample <- as.numeric(blockingsampleunits$id.sample)
 ggplot() + geom_raster(data=blockingsampleunits, aes(x=lon,y=lat, fill=id.sample))##############################
@@ -168,5 +168,17 @@ ggplot() + geom_raster(data=blockingsampleunits, aes(x=lon,y=lat, fill=id.sample
 #' Read in the data
 
 # Read in the csv with the Blocking Samples
+sample.units.id<- read.csv(paste0(filedir,"/blockingsampleunits.csv"))
+colnames(sample.units.id) <- c("x","y","id.sample")
 
 
+# Read in the climate data
+filedir <- "E:/ProcessedData"
+climData <- read.csv(paste0(filedir, "/ClimateData/bioclim_EWEMBI_1995_landonly.csv.gz"))
+names(climData)
+out<-climData
+sample.units.id <- merge(sample.units.id,out,by=c("x","y"),all.x=FALSE)
+names(sample.units.id)
+head(sample.units.id)
+
+#' Do the blocking
