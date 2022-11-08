@@ -56,6 +56,6 @@ VariableCombinations <- as.data.frame(t(apply(VariableCombinations,1,function(x)
 VariableCombinations <- VariableCombinations[!duplicated(VariableCombinations), ] #remove all duplicate rows
 VariableCombinations <- as.data.frame(apply(VariableCombinations, 2, toupper))
 # Need to manually remove correlation combinations!!!
-write.csv(VariableCombinations, paste0(filedir,"/VariableCombinations5_8.csv", row.names=F)
+write.csv(VariableCombinations, paste0(filedir,"/VariableCombinations5_8.csv"), row.names=F)
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
