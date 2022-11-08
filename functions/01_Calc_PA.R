@@ -142,7 +142,7 @@ if(!dir.exists(resultspath)){dir.create(resultspath)}
       # Add another column in which Naiara's distance measure ("One over distance 2") is calculated 
       FinalDist["OneOverDist2"] <- 1/FinalDist$distance^2
       ####line from 02_Climate_Blocking.R is this correct "land" object????
-      land <- read.csv("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/data/realm_coordinates.csv")
+      land <- read.csv(paste0(filedir,"/Realm_Coordinates/realm_coordinates.csv"), header=T, sep=",")
     
       
       #######3
