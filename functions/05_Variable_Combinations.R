@@ -21,7 +21,7 @@ nrow(VariableCombinations)
 VariableCombinations <- as.data.frame(t(apply(VariableCombinations,1,function(x) mixedsort(x)))) #sort each row by number 
 VariableCombinations <- VariableCombinations[!duplicated(VariableCombinations), ] #remove all duplicate rows
 # Need to manually remove correlation combinations!!!
-#write.csv(VariableCombinations, "data/VariableCombinations3_8.csv", row.names=F)
+write.csv(VariableCombinations, paste0(filedir, "/VariableCombinations3_8.csv"), row.names=F)
 
 filedir <- "/storage/homefs/ch21o450/data"
 data("bioclim_gswp3-w5e5_obsclim_2005_landonly")
@@ -38,7 +38,7 @@ nrow(VariableCombinations)
 VariableCombinations <- as.data.frame(t(apply(VariableCombinations,1,function(x) mixedsort(x)))) #sort each row by number 
 VariableCombinations <- VariableCombinations[!duplicated(VariableCombinations), ] #remove all duplicate rows
 # Need to manually remove correlation combinations!!!
-#write.csv(VariableCombinations, "data/VariableCombinations4_8.csv", row.names=F)
+write.csv(VariableCombinations, paste0(filedir, "/VariableCombinations4_8.csv"), row.names=F)
 
 filedir <- "/storage/homefs/ch21o450/data"
 data("bioclim_gswp3-w5e5_obsclim_2005_landonly")
