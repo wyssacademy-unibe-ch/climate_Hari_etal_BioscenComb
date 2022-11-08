@@ -173,8 +173,19 @@ colnames(sample.units.id) <- c("x","y","id.sample")
 
 
 # Read in the climate data
-filedir <- "E:/ProcessedData"
-climData <- read.csv(paste0(filedir, "/ClimateData/bioclim_EWEMBI_1995_landonly.csv.gz"))
+filedir <- "/storage/homefs/ch21o450/data"
+# Install remotes if not previously installed
+if(!"remotes" %in% installed.packages()[,"Package"]) install.packages("remotes")
+
+# Install rISIMIP from Github if not previously installed
+if(!"rISIMIP" %in% installed.packages()[,"Package"]) remotes::install_github("RS-eco/rISIMIP", build_vignettes = TRUE)
+
+# Load rISIMIP package
+library(rISIMIP)
+library(dplyr); library(sf); library(ggplot2)
+
+data("bioclim_gswp3-w5e5_obsclim_2005_landonly")
+climData <- get(paste0("bioclim_gswp3-w5e5_obsclim_1995_landonly"))
 names(climData)
 out<-climData
 sample.units.id <- merge(sample.units.id,out,by=c("x","y"),all.x=FALSE)
@@ -182,3 +193,41 @@ names(sample.units.id)
 head(sample.units.id)
 
 #' Do the blocking
+# !!Choose your climate variables you want to model with and block with those!!
+var_combs <- list(c("bio1", "bio4", "bio12", "bio15"), 
+                  c("bio4", "bio5", "bio12", "bio15"),
+                  c("bio4", "bio5", "bio18", "bio19"))
+
+# Aggregate to sample regions 
+for(i in 1:length(var_combs)){
+  sample.unit.mean <- aggregate(sample.units.id[,unlist(var_combs[i])], by=list(sample.units.id$id.sample), mean)
+  colnames(sample.unit.mean) <- c("id.sample", sapply(var_combs[i], FUN=function(x) paste0(x, "m")))
+  head(sample.unit.mean)
+  sample.unit.var <- aggregate(sample.units.id[,unlist(var_combs[i])], by=list(sample.units.id$id.sample), var)
+  colnames(sample.unit.var) <- c("id.sample", sapply(var_combs[i], FUN=function(x) paste0(x, "v")))
+  head(sample.unit.var)
+  sample.unit.var[is.na(sample.unit.var)] <- 0
+  sample.unit.all <- merge(sample.unit.mean,sample.unit.var,by="id.sample",all.x=TRUE)
+  length(sample.unit.all[,1])
+  # names(sample.unit.all)
+  head(sample.unit.all)
+  
+  #Create blocks, dividing polygons into orthogonal blocks on the basis of the climate data.
+  blocks <- blockTools::block(sample.unit.all, n.tr=10, id.vars='id.sample') ## is this where you decide the number of blockds to use i.e. n.tr=5 or 10
+  blocks <- blockTools::assignment(blocks, namesCol=as.character(1:10))$assg[[1]][1:10] ## assign subpols to one of 10 blocks 
+  blocks <- Reduce(rbind, mapply(function(id.sample, block) data.frame(id.sample, block), id.sample=blocks, block=as.list(1:10),SIMPLIFY=F) )## turn this into a dataframe 
+  blocks <- blocks[!is.na(blocks$id.sample),] ## remove any polygons that haven't been assigned to a block (we deal with this later).
+  head(blocks)
+  clidat <- merge(sample.unit.all, blocks, by=c('id.sample'), all=T) 
+  head(clidat)
+  clidat$block[is.na(clidat$block)] <- sample(1:10,1)
+  clidat <- clidat[,c(1,10)] # id sample and block ## this value will need to change depending on how many variables I have
+  names(clidat)
+  
+  t <- merge(sample.units.id, clidat,by="id.sample",all.x=TRUE)
+  head(t)
+  lattice::levelplot(block~x+y,data=t)
+  names(sample.units.id)
+  write.csv(t, paste0(filedir, "/Blocking_SU_1995_", paste(unlist(var_combs[i]), collapse="_"), ".csv"),
+            row.names=F)
+}
