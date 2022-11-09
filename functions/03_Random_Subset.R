@@ -24,7 +24,7 @@ taxa <- c("Mammals")
 # Get species files
 for(i in 1:length(taxa)){
   
-  spFiles <- list.files(paste0(filedir, "/", taxa[i], "_Pseudoabsences"),pattern = "_PA1.Rdata")
+  spFiles <- list.files(paste0(filedir, "/", taxa[i], "_PA"),pattern = "_PA.Rdata") #beofre spFiles <- list.files(paste0(filedir, "/", taxa[i], "_Pseudoabsences"),pattern = "_PA1.Rdata")
   spList <- unique(unlist(lapply(spFiles,function(x) strsplit(x,split="_PA",fixed=T)[[1]][1])))
   
   AmFiles <- spFiles #sample(spFiles,size=2000,replace=FALSE)
@@ -35,7 +35,7 @@ for(i in 1:length(taxa)){
     print(x)
     name <- strsplit(x,split="_PA",fixed=T)[[1]][1]
     # Prepare species data
-    spFile <- na.omit(get(load(paste0(filedir,  "/", taxa[i], "_Pseudoabsences/", x))))
+    spFile <- na.omit(get(load(paste0(filedir,  "/", taxa[i], "_PA/", x))))#before     spFile <- na.omit(get(load(paste0(filedir,  "/", taxa[i], "_Pseudoabsences/", x))))
     
     # Prevelance ALL
     prevAll <- length(spFile$presence[spFile$presence == 1])
