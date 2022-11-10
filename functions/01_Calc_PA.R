@@ -222,7 +222,7 @@ for (n in 1:length(taxa)){
 
   
   filename <- paste(strsplit(available_names[[i]],".",fixed=TRUE)[[1]][1])
-  if(!file.exists(paste0(filedir,filename,"_PA1.Rdata"))){
+  if(!file.exists(paste0(filetest,filename,"_PA1.Rdata"))){
     spData_alldistance <- get(load(paste0(spDistDir,available_names[[i]],".Rdata")))
     spDistr <- raster(paste0(spPresDir, filename,"_0.5.tif"))
     
@@ -252,7 +252,7 @@ for (n in 1:length(taxa)){
           },NP=NP,speciesData=speciesData)
           names(allData) <- c("PA1", "PA2", "PA3", "PA4", "PA5", 
                               "PA6", "PA7", "PA8", "PA9", "PA10")
-          save(allData,file=paste0(filedir,"/Mammals_PA/",filename,"_PA.Rdata"), compress="xz")   
+          save(allData,file=paste0(filetest,filename,"_PA.Rdata"), compress="xz")   
           
         } else {
           allData <- lapply(seq(1,10,1), function(i,NP,speciesData){
@@ -264,7 +264,7 @@ for (n in 1:length(taxa)){
           },NP=NP,speciesData=speciesData)
           names(allData) <- c("PA1", "PA2", "PA3", "PA4", "PA5", 
                               "PA6", "PA7", "PA8", "PA9", "PA10")
-          save(allData,file=paste0(filedir,"/Mammals_PA/",filename,"_PA.Rdata"), compress="xz")   
+          save(allData,file=paste0(filetest,filename,"_PA.Rdata"), compress="xz")   
         }
       } else {
         wide.range <- c(wide.range, filename)
