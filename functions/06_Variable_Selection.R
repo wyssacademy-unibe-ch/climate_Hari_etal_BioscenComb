@@ -69,7 +69,7 @@ source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/GAM_func.R")
 
 # Specify input and output directory
 
-sourceObs <- paste0(filedir, "/", taxa[i], "_PA") #initially _Pseudoabsences
+sourceObs <- paste0(filedir, "/", taxa[i], "_Pseudoabsences") #initially _Pseudoabsences
 resultsPath <- paste0(filedir, "/", taxa[i], "_VariableSelectionModels_4v/") #initially 5v
 if(!dir.exists(resultsPath)){dir.create(resultsPath)}
 
@@ -83,7 +83,7 @@ spNames <- lapply(spFiles,function(sp){
 spNames <- unlist(spNames)
 
 # Load random subset of names
-species <- read.csv(list.files(paste0(filedir, "/RandomSample/", pattern=paste0("random_sample_", tolower(taxa[i])), full.names=TRUE))
+species <- read.csv(list.files(paste0(filedir, "/RandomSample/","random_sample_", tolower(taxa[i])), full.names=TRUE))
 #########################################################################################################################################################################################################################################################
 # Create subset list
 spList <- spFiles[spNames %in% species$spName]
