@@ -70,7 +70,7 @@ source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/GAM_func.R")
 # Specify input and output directory
 
 sourceObs <- paste0(filedir, "/", taxa[i], "_Pseudoabsences") #initially _Pseudoabsences
-resultsPath <- paste0(filedir, "/", taxa[i], "_VariableSelectionModels_4v/") #initially 5v
+resultsPath <- paste0("/storage/workspaces/wa_climate/climate_trt/chari, "/", taxa[i], "_VariableSelectionModels_4v/") #initially 5v
 if(!dir.exists(resultsPath)){dir.create(resultsPath)}
 
 # Get all species pseudoabsence files
