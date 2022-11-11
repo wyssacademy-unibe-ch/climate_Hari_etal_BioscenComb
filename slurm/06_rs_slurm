@@ -6,9 +6,11 @@
 #SBATCH --mail-type==SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/calc_rs_%j.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/calc_rs_%j.err
-#SBATCH --time=23:59:00
+#SBATCH --time=2-12:00:00
 #SBATCH --output=/storage/homefs/ch21o450/logs/calc_rs_%A_%a.out
-#SBATCH --mem=200G
+
+#SBATCH --cpus-per-task=100
+#SBATCH --mem=5G
 
 module load R/4.1.0-foss-2021a
 
