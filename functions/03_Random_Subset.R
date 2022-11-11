@@ -36,7 +36,9 @@ for(i in 1:length(taxa)){
     name <- strsplit(x,split="_PA",fixed=T)[[1]][1]
     # Prepare species data
     spFile <- na.omit(get(load(paste0(filedir,  "/", taxa[i], "_Pseudoabsences/", x))))    
-    
+    ###########################################
+    spFile <- spFile[[1]]
+    ###########################################
     # Prevelance ALL
     prevAll <- length(spFile$presence[spFile$presence == 1])
     
