@@ -83,8 +83,8 @@ spNames <- lapply(spFiles,function(sp){
 spNames <- unlist(spNames)
 
 # Load random subset of names
-species <- read.csv(list.files(paste0(filedir, "/RandomSample/","random_sample_", tolower(taxa[i])), full.names=TRUE))
-#########################################################################################################################################################################################################################################################
+species <- read.csv(paste0(filedir, "/RandomSample/random_sample_", taxa[i], "_413", ".csv"))
+
 # Create subset list
 spList <- spFiles[spNames %in% species$spName]
 
