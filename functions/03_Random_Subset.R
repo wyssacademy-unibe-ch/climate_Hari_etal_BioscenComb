@@ -64,8 +64,8 @@ for(i in 1:length(taxa)){
   speciesPrevCentroid.B$weights <- 1/(speciesPrevCentroid.B$weights)
   selection <- speciesPrevCentroid.B[sample(row.names(speciesPrevCentroid.B), size=round(length(spList)/10), prob=speciesPrevCentroid.B$weights),] #Select 10 percent of species
   
-  save(selection, file=paste0(filedir,"/RandonSample/random_sample_", taxa[i], "_", round(length(spList)/10), ".Rdata"))
-  write.csv(selection, paste0(filedir,"/RandonSample/random_sample_", taxa[i], "_", round(length(spList)/10), ".csv"))
+  save(selection, file=paste0(filedir,"/RandomSample/random_sample_", taxa[i], "_", round(length(spList)/10), ".Rdata"))
+  write.csv(selection, paste0(filedir,"/RandomSample/random_sample_", taxa[i], "_", round(length(spList)/10), ".csv"))
   
   ggplot() + geom_point(data=selection,aes(x=x,y=y))
   hist(selection$prevAll,breaks=40)
