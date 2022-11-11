@@ -2,7 +2,7 @@
 
 #SBATCH --partition=epyc2
 #SBATCH --nodes=10
-#SBATCH --ntasks=4
+#SBATCH --time=16:00:00
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
