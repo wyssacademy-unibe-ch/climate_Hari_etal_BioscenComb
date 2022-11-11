@@ -24,7 +24,7 @@ taxa <- c("Mammals")
 # Get species files
 for(i in 1:length(taxa)){
   
-  spFiles <- list.files(paste0(filedir, "/", taxa[i], "_Pseudoabsences"),pattern = "_PA1.Rdata")
+  spFiles <- list.files(paste0(filedir, "/", taxa[i], "_Pseudoabsences"),pattern = "_PA.Rdata")
   spList <- unique(unlist(lapply(spFiles,function(x) strsplit(x,split="_PA",fixed=T)[[1]][1])))
   
   AmFiles <- spFiles #sample(spFiles,size=2000,replace=FALSE)
