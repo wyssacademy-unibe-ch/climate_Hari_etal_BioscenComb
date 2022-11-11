@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#SBATCH --partition=gpu
-#SBATCH --qos=job_gpu_preempt
-#SBATCH --gres=gpu:rtx2080ti:4
-
+#SBATCH --partition=epyc2
+#SBATCH --nodes=10
+#SBATCH --ntasks=4
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
