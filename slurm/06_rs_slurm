@@ -2,6 +2,8 @@
 
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:<type>:5
+#SBATCH --qos=job_gpu_preempt
+
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
