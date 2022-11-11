@@ -1,12 +1,13 @@
 #!/bin/bash
 
 #SBATCH --partition=gpu
+#SBATCH --gres=gpu:<type>:5
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/calc_rs_%j.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/calc_rs_%j.err
-#SBATCH --time=2-12:00:00
+#SBATCH --time=18:00:00
 #SBATCH --output=/storage/homefs/ch21o450/logs/calc_rs_%A_%a.out
 
 module load R/4.1.0-foss-2021a
