@@ -13,4 +13,4 @@
 
 module load R/4.1.0-foss-2021a
 
-R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/01_Calc_PA.R --args $SLURM_ARRAY_TASK_ID
+R --vanilla -f /storage/homefs/ch21o450/scripts/project-1/functions/06_randomsample.R
