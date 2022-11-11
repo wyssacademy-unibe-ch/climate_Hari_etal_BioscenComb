@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --partition=GPU
+#SBATCH --partition=gpu
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
