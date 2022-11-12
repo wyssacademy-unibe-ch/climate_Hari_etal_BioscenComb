@@ -178,7 +178,7 @@ sfStop()
 #rm(list=ls())
 
 # List all files
-GAMfiles <- list.files(paste0(filedir, "/", taxa[i], "_VariableSelectionModels/"))
+GAMfiles <- list.files(paste0("/storage/workspaces/wa_climate/climate_trt/chari", "/", taxa[i], "_VariableSelectionModels_4v/"))
 head(GAMfiles)
 
 spList <- lapply(GAMfiles,function(sp){
@@ -188,19 +188,19 @@ spList <- lapply(GAMfiles,function(sp){
 spList <- unlist(unique(spList))
 
 # Try on one output
-GAM1File <- get(load(paste0(filedir, "/", taxa[i], "_VariableSelectionModels/", GAMfiles[1])))
+GAM1File <- get(load(paste0("/storage/workspaces/wa_climate/climate_trt/chari", "/", taxa[i], "_VariableSelectionModels_4v/", GAMfiles[400])))
 head(GAM1File)
 
 ## Look at AUC in first output 
-AUC1 <- GAM1File[[1]]$AUC
+AUC1 <- GAM1File[[6]][[4]]$AUC
 
 # Set path to model files
-mod.path <- paste0(filedir, "/", taxa[i], "_VariableSelectionModels/")
-resultsPath <- paste0(filedir, "/", taxa[i], "_SummarisedModelOutput/")
+mod.path <- paste0("/storage/workspaces/wa_climate/climate_trt/chari", "/", taxa[i], "_VariableSelectionModels_4v/")
+resultsPath <- paste0("/storage/workspaces/wa_climate/climate_trt/chari", "/", taxa[i], "_SummarisedModelOutput/")
 if(!dir.exists(resultsPath)){dir.create(resultsPath)}
 
-#modList <- GAMfiles[10]
-#AUClist <- seq(1, 10, 1) 
+modList <- GAMfiles[400]
+AUClist <- seq(1, 10, 1) 
 
 #' Loop through all model output files to extract AUC and save summarized output
 sfInit(parallel=TRUE, cpus=ceiling(0.55*parallel::detectCores()))
@@ -248,6 +248,8 @@ sfLapply(GAMfiles,function(modList){
     rm(data.list,AUCdata)
   }
 }); sfStop()
+
+filedir <- "/storage/workspaces/wa_climate/climate_trt/chari"
 
 # Read all results back in and save in one dataframe
 All.files <- list.files(paste0(filedir, "/", taxa[i], "_SummarisedModelOutput"), 
