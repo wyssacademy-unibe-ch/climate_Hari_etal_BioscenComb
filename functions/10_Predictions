@@ -30,7 +30,7 @@ taxa <- c("Mammals")
 i <- 1
 
 # Model type
-model_type <- c("GAM", "GBM")[2]
+model_type <- c("GAM")[1]
 
 #-#-# Load in baseline and realm data #-#-#
 
