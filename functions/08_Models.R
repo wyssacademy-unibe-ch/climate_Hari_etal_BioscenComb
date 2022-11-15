@@ -30,7 +30,7 @@ taxa <- c("Mammals")
 i <- 1
 
 # Set model_type
-model_type <- c("GAM", "GBM")[2]
+model_type <- c("GAM")
 
 ########################################
 
@@ -111,16 +111,18 @@ spMissing <- Filter(Negate(is.null), spMissing)
 length(spMissing)
 
 # Read data
-AUC_data <- lapply(c("GAM", "GBM"), function(model_type){
-    read.csv(paste0(fileout, "/AUCvalues_All_", 
-                    model_type, "_", taxa[i], ".csv.xz"))})
+AUC_data <- lapply(c("GAM"), function(model_type){
+    read.csv(paste0(fileout, "/AUCvaluesAllModels",model_type,"_NA.csv"))})
 AUC_data <- do.call(rbind, AUC_data)
 
 # Aggregate the different AUC values from the 10 iterations per species
 # and filter by AUC > 0.7
-AUC_sum <- AUC_data %>% group_by(Species, taxa, model_type) %>% 
-  summarise(mean = mean(AUC, na.rm=T)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
-  group_by(Species, taxa) %>% summarise(n = n()) %>% filter(n == 4)
+for (i in 1:10){
+   AUC_sum <- AUC_data %>% group_by(Species) %>% 
+  summarise(mean = mean(AUC na.rm=T)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
+  group_by(Species) %>% summarise(n = n()) %>% filter(n == 4)
+}
+
 
 spNames <- sub("_PA", "", spMissing)
 spMissing <- unique(spMissing[spNames %in% AUC_sum$Species])
@@ -139,7 +141,7 @@ sfExport(list=c("GAM_split", "GAM_eco","sourceObs", "resultsPath",
                 "plotPath")) 
 
 # Run code
-"source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/model_run.R")
+source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/model_run.R")
 
 ############################################
 model_run <- function(sp){
