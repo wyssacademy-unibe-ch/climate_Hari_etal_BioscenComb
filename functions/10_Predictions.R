@@ -75,7 +75,7 @@ if(!dir.exists(future.data.root)){print("Climate data is missing!")}
 bufferpath <- paste0(filedir, "/", taxa[i], "_Pseudoabsences/")
 
 
-filedir2 <- "/storage/workspaces/wa_climate/climate_trt/chari/"
+filedir2 <- "/storage/workspaces/wa_climate/climate_trt/chari"
 
 #-#-# Load baseline models and project #-#-#
 ## Model location
