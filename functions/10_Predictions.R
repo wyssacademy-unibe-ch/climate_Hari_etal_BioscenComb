@@ -219,6 +219,26 @@ sfLapply(modsMissing, function(mods){
           climAllPeriod <- grep(climAll,pattern=timesteps[period],value=T) # Get all the climate files for the time period 
           
           ## Run through all GCM scenarios (rcps and models)
+          ######################
+          # Load rISIMIP package
+library(rISIMIP)
+
+models <- c("gfdl-esm4","ipsl-cm6a-lr","mpi-esm1-2-hr","mri-esm2-0","ukesm1-0-ll")
+
+ssps <- c("ssp126","ssp370", "ssp585")
+yrs <- c("2080","2050")
+spPredict <- lapply(climAllPeriod,function(clim){
+for (model in models){
+    for (ssp in ssps){
+        for (yr in yrs){
+           climData <- (get(paste0("bioclim_",model,"_",ssp,"_",yr,"_landonly")))[,c("x","y", unlist(climCombs))]
+           #save(set, file=paste0("/storage/homefs/ch21o450/data/ClimateData/bioclim_",model,"_",ssp,"_",yr,"_landonly"))
+        }
+    }
+}
+})
+######################################
+          
           spPredict <- lapply(climAllPeriod,function(clim){
             
             ## Get climate data
