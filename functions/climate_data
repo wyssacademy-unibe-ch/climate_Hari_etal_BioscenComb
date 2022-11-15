@@ -9,10 +9,13 @@ yrs <- c("2080","2050")
 for (model in models){
     for (ssp in ssps){
         for (yr in yrs){
-           set <- (get(paste0("bioclim_",model,"_",ssp,"_",yr,"_landonly")))
-           save(set, file=paste0("/storage/homefs/ch21o450/data/ClimateData/bioclim_",model,"_",ssp,"_",yr,"_landonly"))
+           set <- (get(paste0("bioclim_",model,"_",ssp,"_",yr,"_landonly")))[,c("x","y", unlist(climCombs))]
+           #save(set, file=paste0("/storage/homefs/ch21o450/data/ClimateData/bioclim_",model,"_",ssp,"_",yr,"_landonly"))
         }
     }
 }
 
-
+   spPredict <- lapply(climAllPeriod,function(clim){
+      
+      ## Get climate data
+      climData <- (get(paste0(future.data.root,clim[1])))[,c("x","y", unlist(climCombs))]
