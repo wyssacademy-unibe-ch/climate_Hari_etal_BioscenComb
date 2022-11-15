@@ -117,6 +117,8 @@ AUC_data <- do.call(rbind, AUC_data)
 
 # Aggregate the different AUC values from the 10 iterations per species
 # and filter by AUC > 0.7
+
+AUC_sum <- aggregate(.~Species+Variables+Iteration, data=AUC_data,mean)
 for (i in 1:10){
    AUC_sum <- AUC_data %>% group_by(Species) %>% 
   summarise(mean = mean(AUC na.rm=T)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
@@ -282,7 +284,7 @@ model_run <- function(sp){
   #raster::removeTmpFiles(h=0.1)
 }
 ############################################
-sfLapply(spMissing, model_run)"
+sfLapply(spMissing, model_run)
 sfStop()
 # system('shutdown -s')
 
