@@ -79,7 +79,7 @@ filedir2 <- "/storage/workspaces/wa_climate/climate_trt/chari"
 
 #-#-# Load baseline models and project #-#-#
 ## Model location
-modelObjectLocation <- paste0(filedir2, "/", taxa[i], "_", model_type, "_Output/")
+modelObjectLocation <- paste0(filedir2, "/", taxa[i], "_", model_type, "_Output")
 
 ## Get all climate files (csv with xy and BioClimVar)
 climAll <- list.files(paste0(future.data.root)) #All climate data
@@ -102,7 +102,7 @@ Rneighbours <- read.csv("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/data/re
 #-#-# Set up the function to predict distributions #-#-# 
 ## Predict function
 predict_func <- function(modelObjectLocation, model_type, spName, climData, clim){
-  mod <- get(load(modelObjectLocation))
+  mod <- get(load("/storage/workspaces/wa_climate/climate_trt/chari/Mammals_GAM_Output//Martes_melampus_PA_bio4_bio5_bio18_bio19_model_output_GAM_30_70.RData"))
   lapply(mod, function(model){
     pred.block <- lapply(1:length(model),function(bk){
       if(model_type == "MaxEnt"){
