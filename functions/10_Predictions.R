@@ -151,7 +151,7 @@ if(taxa[i]=="Reptile"){
                     model_type, "_NA.csv"))})
   AUC_data <- do.call(rbind, AUC_data)
   AUC_sum <- AUC_data %>% group_by(Species) %>% 
-    dplyr::summarise(mean = mean(AUC_data, na.rm=T)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
+    dplyr::summarise(mean = mean(as.numeric(AUC_data[,4:13], na.rm=T))) %>% filter(mean >= 0.7) %>% ungroup() %>% 
     group_by(Species) %>% dplyr::summarise(n = n()) %>% filter(n == 4)
 }
 spNames <- unique(spNames[spNames %in% AUC_sum$Species])
