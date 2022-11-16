@@ -214,65 +214,61 @@ sfLapply(modsMissing, function(mods){
       }
       
       ## Run through all time periods
-      lapply(1:length(timesteps), function(period){ # Climate files need to have projection year at the end (eg. 50, 80, 100) 
-        if(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))){
-          climAllPeriod <- grep(climAll,pattern=timesteps[period],value=T) # Get all the climate files for the time period 
-          
-          ## Run through all GCM scenarios (rcps and models)
-          ######################
-          # Load rISIMIP package
-library(rISIMIP)
-
-models <- c("gfdl-esm4","ipsl-cm6a-lr","mpi-esm1-2-hr","mri-esm2-0","ukesm1-0-ll")
-
-ssps <- c("ssp126","ssp370", "ssp585")
-yrs <- c("2080","2050")
-spPredict <- lapply(climAllPeriod,function(clim){
-for (model in models){
-    for (ssp in ssps){
-        for (yr in yrs){
-           climData <- (get(paste0("bioclim_",model,"_",ssp,"_",yr,"_landonly")))[,c("x","y", unlist(climCombs))]
-           #save(set, file=paste0("/storage/homefs/ch21o450/data/ClimateData/bioclim_",model,"_",ssp,"_",yr,"_landonly"))
-        }
-    }
-}
-})
-######################################
-          
-          spPredict <- lapply(climAllPeriod,function(clim){
-            
-            ## Get climate data
-            climData <- read.csv(paste0(future.data.root,clim))[,c("x","y", unlist(climCombs))]
+f(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))){
+    climAllPeriod <- grep(climAll,pattern=period,value=T) # Get all the climate files for the time period 
+    
+    library(rISIMIP)
+    
+    models <- c("gfdl-esm4","ipsl-cm6a-lr","mpi-esm1-2-hr","mri-esm2-0","ukesm1-0-ll")
+    
+    ssps <- c("ssp126","ssp370", "ssp585")
+    yrs <- c("2080","2050")
+    
+    
+    ## Run through all GCM scenarios (rcps and models)
+    spPredict <- lapply(climAllPeriod,function(clim){
+      for (model in models){
+        for (ssp in ssps){
+          for (yr in yrs){
+            climData <- (get(paste0("bioclim_",model,"_",ssp,"_",yr,"_landonly")))[,c("x","y", unlist(climCombs))]
             climData <- merge(RealmPres, climData,all.x=TRUE)
             climName <- paste(strsplit(clim,split="_",fixed=TRUE)[[1]][2:3], collapse="_") # Depends on climate file names
             
-            cat("\n","Starting: ", spName," ", model_type, " ", clim) # Print where I am at
-            
-            ## Run predictions
-            predictData <- predict_func(modelObjectLocation=mods, 
-                                        model_type=model_type, 
-                                        spName=spName, 
-                                        climData=climData, 
-                                        clim=climName) # Predict function
-            
-            # Put predictions into dataframe
-            outDATA <- as.data.frame(cbind(climData[,c("x","y")],predictData))
-            
-            # Define dataframe columns
-            r <- paste0(model_type, "_",climName,"_block_",rep(1:(ncol(outDATA)-2)))
-            colnames(outDATA) <- c("x", "y", r)
-            
-            # Remove data rows where all columns are 0
-            outDATA <- outDATA[!!rowSums(abs(outDATA[-c(1,2)])),]
-            return(outDATA)
-          })
-          all.mod <- Reduce(function(...) merge(...,by=c("x","y"),all.x=T),spPredict)
-          readr::write_csv(all.mod, paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))
-          gc()
-          return(NULL)
+          }
         }
-      })
-    }
+      }
+
+      #save(set, file=paste0("/storage/homefs/ch21o450/data/ClimateData/bioclim_",model,"_",ssp,"_",yr,"_landonly")) 
+      
+      ## Get climate data
+    
+
+      
+      cat("\n","Starting: ", spName," ", model_type, " ", clim) # Print where I am at
+      
+      ## Run predictions
+      predictData <- predict_func(modelObjectLocation=mods, 
+                                  model_type=model_type, 
+                                  spName=spName, 
+                                  climData=climData, 
+                                  clim=climName) # Predict function
+      
+      # Put predictions into dataframe
+      outDATA <- as.data.frame(cbind(climData[,c("x","y")],predictData))
+      
+      # Define dataframe columns
+      r <- paste0(model_type, "_",climName,"_block_",rep(1:(ncol(outDATA)-2)))
+      colnames(outDATA) <- c("x", "y", r)
+      
+      # Remove data rows where all columns are 0
+      outDATA <- outDATA[!!rowSums(abs(outDATA[-c(1,2)])),]
+      return(outDATA)
+    })
+    all.mod <- Reduce(function(...) merge(...,by=c("x","y"),all.x=T),spPredict)
+    readr::write_csv(all.mod, paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))
+    gc()
+    return(NULL)
   }
-}); sfStop()
+})
+ sfStop()
 #q(save="no")
