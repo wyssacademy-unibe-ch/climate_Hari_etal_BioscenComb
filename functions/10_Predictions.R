@@ -212,8 +212,8 @@ if(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv
     
     models <- c("gfdl-esm4","ipsl-cm6a-lr","mpi-esm1-2-hr","mri-esm2-0","ukesm1-0-ll")
     
-    ssps <- c("ssp126","ssp370", "ssp585")
-    yrs <- c("2080","2050")
+    ssps <- c("ssp370")
+    yrs <- c("2050")
     
     
     ## Run through all GCM scenarios (rcps and models)
