@@ -134,26 +134,16 @@ length(spNames)
 
 # Aggregate the different AUC values from the 10 iterations per species
 # and filter by AUC > 0.7
-if(taxa[i]=="Reptile"){
-  # Extract species names 
-  AUC_data <- lapply(c("GAM"), function(model_type){
-    read.csv(paste0(filedir, "/AUCvalues_All_", 
-                    model_type, "_", taxa[i], ".csv.xz"))})
-  AUC_data <- do.call(rbind, AUC_data)
-  
-  AUC_sum <- AUC_data %>% group_by(Species) %>% 
-    dplyr::summarise(mean = mean(AUC_data, na.rm=T)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
-    group_by(Species, taxa) %>% dplyr::summarise(n = n()) %>% filter(n == 2)
-} else{
-  # Extract species names 
-  AUC_data <- lapply(c("GAM"), function(model_type){
-    read.csv(paste0("/storage/workspaces/wa_climate/climate_trt/chari/AUCvaluesAllModels", 
-                    model_type, "_NA.csv"))})
-  AUC_data <- do.call(rbind, AUC_data)
-  AUC_sum <- AUC_data %>% group_by(Species) %>% 
-    dplyr::summarise(mean = mean(as.numeric(AUC_data[,4:13], na.rm=T))) %>% filter(mean >= 0.7) %>% ungroup() %>% 
-    group_by(Species) %>% dplyr::summarise(n = n()) %>% filter(n == 4)
-}
+fileout <- "/storage/workspaces/wa_climate/climate_trt/chari"
+AUC_data <- lapply(c("GAM"), function(model_type){
+    read.csv(paste0(fileout, "/AUCvaluesAllModels",model_type,"_NA.csv"))})
+AUC_data <- do.call(rbind, AUC_data)
+
+# Aggregate the different AUC values from the 10 iterations per species
+# and filter by AUC > 0.7
+
+AUC_sum <- aggregate(.~Species+Variables+Iteration, data=AUC_data,mean)
+
 spNames <- unique(spNames[spNames %in% AUC_sum$Species])
 length(spNames)
 
@@ -188,7 +178,7 @@ sfInit(parallel=TRUE, cpus=n)
 sfLibrary(mgcv); sfLibrary(gbm); sfLibrary(matrixStats); sfLibrary(randomForest); sfLibrary(dismo)#; sfLibrary(rJava)
 sfExport(list=c("predict_func", "climAll", "future.data.root", "modsAll", "modelObjectLocation", "timesteps", "model_type",
                 "climCombs", "predPaths", "bufferpath","realm_coordinates","Rneighbours"))
-sfLapply(modsMissing, function(mods){
+#sfLapply(modsMissing, function(mods){
   spName <- paste(strsplit(basename(mods),split="_")[[1]][1:2],collapse="_") # Extract species name
   pseudoabsrep <- strsplit(basename(mods),split="_",fixed=TRUE)[[1]][3] # Get PA number
   if(any(!file.exists(sapply(predPaths, function(x) paste(x, "/", spName,"_",pseudoabsrep,"_proj.csv.xz", sep=""))))){ # Set to first time period folder
@@ -214,7 +204,8 @@ sfLapply(modsMissing, function(mods){
       }
       
       ## Run through all time periods
-f(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))){
+period=2050
+if(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))){
     climAllPeriod <- grep(climAll,pattern=period,value=T) # Get all the climate files for the time period 
     
     library(rISIMIP)
@@ -268,7 +259,7 @@ f(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.
     readr::write_csv(all.mod, paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))
     gc()
     return(NULL)
-  }
+  #}
 })
  sfStop()
 #q(save="no")
