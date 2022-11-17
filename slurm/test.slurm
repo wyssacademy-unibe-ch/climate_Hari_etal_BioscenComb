@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --partition=epyc2
-#SBATCH --time=4-16:00:00
+#SBATCH --time=2-8:00:00
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type==SUBMIT,END,FAIL
