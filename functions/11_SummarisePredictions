@@ -1,4 +1,4 @@
-#' Code to summarise the model output
+# Code to summarise the model output
 
 # Load dplyr package
 rm(list=ls()); gc()
@@ -9,7 +9,6 @@ library(ggplot2)
 library(snowfall)
 
 # Set file directory
-filedir <- "I:/"
 # Specify file dir
 filedir="/storage/homefs/ch21o450/data"
 
