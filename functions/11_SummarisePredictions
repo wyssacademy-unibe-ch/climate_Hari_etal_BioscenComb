@@ -168,14 +168,7 @@ lapply(names_mis, function(species){
         colnames(data)[2] <- "y"
       }else if(period <= 2080){
         y <- 8
-        colnames(data)[3:length(colnames(data))] <- c(paste0(model_type, "_GFDL-ESM2M_rcp26_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_GFDL-ESM2M_rcp60_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_HadGEM2-ES_rcp26_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_HadGEM2-ES_rcp60_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_IPSL-CM5A-LR_rcp26_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_IPSL-CM5A-LR_rcp60_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_MIROC5_rcp26_block_", seq(1:(n/y))),
-                                                    paste0(model_type, "_MIROC5_rcp60_block_", seq(1:(n/y))))
+        colnames(data)[3:length(colnames(data))] <- c(paste0(model_type, "_gfdl-esm4_ssp126_block_", seq(1:(n/y)))
         colnames(data)[1] <- "x"
         colnames(data)[2] <- "y"
       } else{
@@ -277,9 +270,9 @@ spNames <- spNames[!spNames == "Ursus_maritimus"]
 length(spNames)
 
 # Define model/rcp combinations
-model_type <- "RF" #c("GAM", "GBM", "MaxEnt", "RF")
+model_type <- "GAM" #c("GAM")
 df <- expand.grid(model_type=model_type, 
-                  rcp=c("historical", "piControl", "rcp26", "rcp60"))
+                  rcp=c("ssp126"))
 df <- rbind(expand.grid(model_type=model_type, rcp="1995"), df)
 df <- rbind(df, expand.grid(model_type=model_type, rcp="2100rcp26"))
 df
@@ -296,7 +289,7 @@ if(df$rcp[rcp_mod] == "piControl"){
   year <- 1995
 } else if(df$rcp[rcp_mod] == "historical"){
   year <- 1990
-} else if(df$rcp[rcp_mod] %in% c("rcp26", "rcp60")){
+} else if(df$rcp[rcp_mod] %in% c("ssp126")){
   year <- c(2009, 2010, 2020, 2026, 2032, 2048, 2050, 2052, 2056, 2080)
 } else if(df$rcp[rcp_mod] == "2100rcp26"){
   year <- c(2100, 2150, 2200, 2250)
@@ -321,7 +314,7 @@ if(df$rcp[rcp_mod] == "1995"){
                                                  tolower(taxa[i]), "prob_global_30year-mean_", 
                                                  min(year), "_", max(year),".nc4")})
   } else{
-    model=c("MIROC5", "HadGEM2.ES", "IPSL.CM5A.LR", "GFDL.ESM2M")
+    model=c("gfdl.esm4")
     filename <- sapply(model, function(m){paste0(filedir, "/OutputData/biodiversity/bioscen1.5-sdm-", tolower(df$model_type[rcp_mod]), "_",
                                                  gsub("[.]", "-", tolower(m)), "_ewembi_", 
                                                  tolower(df$rcp[rcp_mod]), "_nosoc_co2_", 
@@ -349,7 +342,7 @@ if(length(which(!file.exists(filename))) > 0){
   lapply(filename, function(x){
     nc <- nc_create(x, vard)
     ncatt_put(nc, varid=0, attname="contact", attval="Matthias Biber <matthias.biber@tum.de>")
-    ncatt_put(nc, varid=0, attname="institution", attval="Technical University Munich (Germany)")
+    ncatt_put(nc, varid=0, attname="institution", attval="University of Bern")
     nc_close(nc)
   })
   
@@ -361,7 +354,7 @@ if(length(which(!file.exists(filename))) > 0){
     files <- lapply(predictsPaths,function(x){list.files(x, pattern=paste0(as.character(spNames[j]), "_"), 
                                                          full.names=T)})
     if(length(files) == 1){
-      data <- readr::read_csv(files[[1]])
+      data <- readr::read_csv(files[[7]])
       data$PA <- 1
       data$year <- year
     } else{
