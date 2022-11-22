@@ -1,0 +1,216 @@
+
+library(tidyverse); library(raster); library(parallel); library(sf); library(Matrix); library(magrittr); library(SpRanger); library(cowplot)
+library(fs); library(stringr)
+
+
+# Land Use Data
+iucndat <- read.csv('/storage/homefs/ch21o450/IUCN/Habitat_Classifications/Martes_melampus.csv')
+convcodes <- read.csv('/storage/homefs/ch21o450/LUH2/IUCN_LUH_converion_table_Carlson.csv')
+
+iucndat %>%
+  left_join(convcodes, by = c("result.code" = "IUCN_hab")) %>%
+  mutate(name = name %>% str_replace(" ", "_")) ->
+  Habitats
+
+
+Species <- raster("/storage/homefs/ch21o450/data/OutputData/biodiversity/Martes_melampus.tif")
+
+HabitatList <- lapply(Species, function(a){
+
+  Habitats %>% filter(name == a) %>% pull("LUH")
+
+})
+
+names(HabitatList) <- Species
+
+LandUseList <-  "/storage/homefs/ch21o450/LUH2/ssp1_rcp2.6/multiple-states_input4MIPs_landState_ScenarioMIP_UofMD-IMAGE-ssp126-2-1-f_gn_2015-2100.nc"
+
+
+names(LandUseList) <- 
+   "/storage/homefs/ch21o450/LUH2/ssp1_rcp2.6/"  %>% 
+  list.files(pattern = "ssp..........grd") %>% 
+  str_remove(".nc") %>% 
+  str_remove("lulc")
+
+  # ToProcess <- Species
+  
+  Files <- paste0("Iceberg Input Files/GretCDF/", "Currents", "/", ToProcess, ".tif")
+  names(Files) <- ToProcess
+  
+  i = 1
+  
+  print(paste0("To process:", length(ToProcess)))
+  
+
+  
+  mclapply(i:length(ToProcess), function(i){
+    
+    Sp <- ToProcess[i]
+    
+    print(Sp)
+    
+    # 02_Resampling rasters ####
+    
+    RasterLista <- lapply(c("presen", PredReps2), function(a){
+      
+      # print(a)
+      
+      SubFiles <- paste0("~/Albersnet/Iceberg Files/", 
+                         "CHELSA/FinalRasters/", a, "/", Sp, ".tif")
+      
+      # if(file.exists(SubFiles)) 
+      
+      raster(SubFiles)
+      
+    })
+    
+    names(RasterLista) <- c("Current", PredReps2)
+    
+    GretCDF <- data.frame(
+      
+      X = seq(from = XMin, to = XMax, length.out = NCol) %>% rep(NRow),
+      Y = seq(from = YMax, to = YMin, length.out = NRow) %>% rep(each = NCol)
+      
+    ) 
+    
+    GretCDF[,paste0("Climate.", c("Current", PredReps2))] <- 
+      RasterLista %>% 
+      lapply(function(a) as.numeric(!is.na(values(a)))) %>% 
+      bind_cols
+    
+    # Land Use filters #####
+    ##################3
+    primf <-  brick(ncfname, varname="primf")
+secdf <-  brick(ncfname, varname="secdf")
+ prifdf <- as.data.frame(primf[[35]], xy=T)
+
+ mydata = ifelse(prifdf$X34>0, 1,0)
+ t <- cbind(prifdf, mydata)
+
+
+
+    ###############333
+    SpHabitat <- HabitatList[[Sp]] %>%
+      as.character %>%
+      str_split("[.]") %>%
+      unlist %>% unique %>%
+      na.omit
+    
+    names(LandUseList) <- PredReps2
+    
+    lapply(PredReps2, function(a){
+      
+      FocalYear <- a %>% substr(5, 6)
+    
+      if(length(SpHabitat)>0){
+        
+        LandUseList[[a]][[SpHabitat]] %>% getValues ->
+          
+          ValueDF
+        
+        if(length(SpHabitat)==1){
+          
+          Habitable <- as.numeric(ValueDF==1)
+          Habitable[is.na(Habitable)] <- 0
+          
+        }else{
+          
+          Habitable <- as.numeric((ValueDF %>% rowSums(na.rm = T))>0)
+          
+        }
+        
+      }else{
+        
+        Habitable <- rep(1, nrow(GretCDF))
+        
+      }
+      
+      Habitable %>% return
+      
+    }) %>% bind_cols ->
+      GretCDF[,paste0("LandUse.", PredReps2)]
+    
+    # GretCDF[,paste0("LandUse.", PredReps)] <- 1
+    
+    # Importing currents grid ####
+    
+    CurrentsGretCDF <- 
+      readRDS(paste0("~/Albersnet/Iceberg Files/", 
+                     "CHELSA/Iceberg Input Files/GretCDF/", 
+                     "Currents", "/",
+                     Sp, ".rds"))
+    
+    GretCDF <- GretCDF %>% slice(-Sea)
+    
+    for(Years in c(20, 50, 80)){
+      
+      GretCDF[,c("Continent", paste0("Buffer", Years, c("Climate","ClimateLandUse")))] <- 
+        
+        CurrentsGretCDF[,c("Continent", paste0("Buffer", Years, c("Climate","ClimateLandUse")))]
+      
+    }
+    
+    GretCDF[GretCDF$Continent == 0, paste0("Climate.", PredReps2)] <- 0
+    
+    GretCDF[,paste0("ClimateLandUse.", PredReps2)] <-
+      
+      lapply(PredReps2, function(a){
+        
+        as.numeric(rowSums(GretCDF[,paste0(c("Climate.", "LandUse."),a)])>1)
+        
+      }) %>% bind_cols
+    
+    PredReps2 %>% lapply(function(a){
+      
+      FocalYear <- a %>% substr(5, 6) %>% as.numeric %>% add(9)
+      
+      List1 <- lapply(paste0("Buffer",
+                             c(paste0(FocalYear, "Climate"),
+                               paste0(FocalYear, "ClimateLandUse"))), 
+                      function(b){
+                        
+                        as.numeric(rowSums(GretCDF[, c(b,
+                                                       paste0(substr(b, 9, # THIS NUMBER NEEDS TO CHANGE
+                                                                     nchar(b)),
+                                                              ".",
+                                                              a))])>1)
+                        
+                      })
+      
+      names(List1) <- paste0(c("BufferClimate", "BufferClimateLandUse"),
+                             ".",
+                             a)
+      
+      # as.numeric((GretCDF[,c(paste0("Climate.", a),
+      #                        paste0("Buffer", FocalYear, "Climate"))] %>% 
+      #               
+      #               rowSums)>1) -> List1
+      
+      return(List1)
+      
+    }) %>% bind_cols() -> FillDF
+    
+    # names(FillDF) <- paste0("BufferClimate.", PredReps2)
+    
+    GretCDF %>% bind_cols(FillDF) ->
+      GretCDF
+    
+    GretCDF %>% 
+      dplyr::select(setdiff(colnames(GretCDF), colnames(CurrentsGretCDF))) %>%
+      dplyr::select(-matches("^LandUse")) %>% 
+      as.matrix %>% as("dgCMatrix") %>% 
+      saveRDS(file = paste0("Iceberg Input Files/GretCDF/", FocalGCM, "/", Sp, ".rds"))
+    
+  }, mc.preschedule = F, mc.cores = CORES)
+  
+  t2 = Sys.time()
+  
+  t2 - t1
+  
+}
+
+setwd(here::here())
+
+# source("~/Albersnet/Iceberg Code/Iceberg Greg ENM Code/02b_CHELSA Futures.R")
+
+
