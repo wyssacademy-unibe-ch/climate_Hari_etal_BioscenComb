@@ -102,8 +102,16 @@ secdf <-  brick(ncfname, varname="secdf")
 t$test_ext <- raster::extract(Species, coordinates(t[,c(1:2)]))
 test_ras <- rasterFromXYZ(t[,c(1:2,5)]) #is now the same as Species but in one dataset!!! 
 
-t2 y- t 
-t2$ref <- ifelse(t2$mydata>0,t2$test_ext>0,t2$refined==1) ####### 
+t2 <- t 
+t2$ref <- ifelse(t2$mydata>0,t2$test_ext>0,t2$ref==1) ####### 
+t2$test[t2$mydata>0 & t2$test_ext>0] <- 1 ####this works!!! 
+
+t2[is.na(t2)] <- 0
+
+if(as.numeric(t2$mydata>0) && as.numeric(t2$test_ext>0)){
+     new <- 1
+ }
+
 ras_new <- rasterFromXYZ(t2[,c(1:2,7)])
 plot(ras_new)
 
@@ -118,7 +126,9 @@ ras_binspec
 plot(ras_binspec)
 plot(coastsCoarse,add=TRUE,col='grey')
 
-points(t_agg2$long,t_agg2$lat,pch = pch1,col = t_agg2$Col,cex=abs(t_agg2$w5e5_bias)*0.2)
+df$diff <- df$bin_spec-df$ref
+df_diff <- rasterFromXYZ(df[,c(1:2,8)])
+
     ###############333
     SpHabitat <- HabitatList[[Sp]] %>%
       as.character %>%
