@@ -82,15 +82,41 @@ names(LandUseList) <-
     ncfname <- LandUseList
     primf <-  brick(ncfname, varname="primf")
 #create blank as in Iceberg
-shp <- rasterToPolyGons(blank)
+shp <- rasterToPolygons(blank)
 shp$primf <- raster::extract(primf[[35]],shp)
 
+#change resolution of primf 
+res(primf)
+primf_0.5 <- aggregate(primf, facto=2)
+
+
+
 secdf <-  brick(ncfname, varname="secdf")
- prifdf <- as.data.frame(primf[[35]], xy=T)
+ prifdf <- as.data.frame(primf_0.5[[35]], xy=T)
 
- mydata = ifelse(prifdf$X34>0, 1,0)
+ mydata = ifelse(prifdf$X34>0, 1,0) #instead of values from 0 to 1 now only binary for primf 
+ spec <- as.data.frame(Species, xy=T)
+
  t <- cbind(prifdf, mydata)
+ mydata_ras <- rasterFromXYZ(t[,c(1:2,4)])
+t$test_ext <- raster::extract(Species, coordinates(t[,c(1:2)]))
+test_ras <- rasterFromXYZ(t[,c(1:2,5)]) #is now the same as Species but in one dataset!!! 
 
+t2 y- t 
+t2$ref <- ifelse(t2$mydata>0,t2$test_ext>0,t2$refined==1) ####### 
+ras_new <- rasterFromXYZ(t2[,c(1:2,7)])
+plot(ras_new)
+
+library(rworldmap)
+data(coastsCoarse)
+plot(coastsCoarse)
+
+bin_spec <- ifelse(t2$test_ext>0,1,0) # making probability of occurrence binary 
+df <- cbind(t2,bin_spec)
+ras_binspec 
+
+plot(ras_binspec)
+plot(coastsCoarse,add=TRUE,col='grey')
 
 
     ###############333
