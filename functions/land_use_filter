@@ -118,7 +118,7 @@ ras_binspec
 plot(ras_binspec)
 plot(coastsCoarse,add=TRUE,col='grey')
 
-
+points(t_agg2$long,t_agg2$lat,pch = pch1,col = t_agg2$Col,cex=abs(t_agg2$w5e5_bias)*0.2)
     ###############333
     SpHabitat <- HabitatList[[Sp]] %>%
       as.character %>%
