@@ -30,7 +30,7 @@ taxa <- c("Mammals")
 i <- 1
 
 # Model type
-model_type <- c("GAM")[1]
+model_type <- c("GAM","GBM")[1]
 
 #-#-# Load in baseline and realm data #-#-#
 
@@ -136,7 +136,7 @@ length(spNames)
 # and filter by AUC > 0.7
 fileout <- "/storage/workspaces/wa_climate/climate_trt/chari"
 AUC_data <- lapply(c("GAM"), function(model_type){
-    read.csv(paste0(fileout, "/AUCvaluesAllModels",model_type,"_NA.csv"))})
+    read.csv(paste0(filedir, "/AUCvaluesAllModels",model_type,"_",taxa[i],".csv"))})
 AUC_data <- do.call(rbind, AUC_data)
 
 # Aggregate the different AUC values from the 10 iterations per species
