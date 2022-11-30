@@ -221,7 +221,7 @@ if(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv
       for (model in models){
         for (ssp in ssps){
           for (yr in yrs){
-            climData <- (get(paste0("bioclim_",model,"_",ssp,"_",yr,"_landonly")))[,c("x","y", unlist(climCombs))]
+            climData <- get(load(paste0("/storage/homefs/ch21o450/data/ClimateData/bioclim_",model,"_",ssp,"_",yr,"_landonly")))[,c("x","y", unlist(climCombs))]
             climData <- merge(RealmPres, climData,all.x=TRUE)
             climName <- paste(strsplit(clim,split="_",fixed=TRUE)[[1]][2:3], collapse="_") # Depends on climate file names
             
@@ -256,7 +256,8 @@ if(!file.exists(paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv
       return(outDATA)
     })
     all.mod <- Reduce(function(...) merge(...,by=c("x","y"),all.x=T),spPredict)
-    readr::write_csv(all.mod, paste0(predPaths[period], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))
+    ###########predPaths[10]=2050
+    readr::write_csv(all.mod, paste0(predPaths[10], "/",spName,"_",pseudoabsrep,"_proj.csv.xz"))
     gc()
     return(NULL)
   #}
