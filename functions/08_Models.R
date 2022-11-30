@@ -30,7 +30,7 @@ taxa <- c("Mammals")
 i <- 1
 
 # Set model_type
-model_type <- c("GAM")
+model_type <- c("GAM","GBM")[2]
 
 ########################################
 
@@ -56,6 +56,7 @@ fileout <- "/storage/workspaces/wa_climate/climate_trt/chari"
 sourceObs <- paste0(filedir, "/", taxa[i], "_Pseudoabsences")
 resultsPath <- paste0(fileout, "/", taxa[i], "_", model_type, "_Output")
 if(!dir.exists(resultsPath)){dir.create(resultsPath)}
+
 if(model_type == "GBM"){
   plotPath <- paste0(filedir, "/", taxa[i], "_", model_type, "_plots")
   if(!dir.exists(plotPath)){dir.create(plotPath)}
@@ -112,18 +113,18 @@ length(spMissing)
 
 # Read data
 AUC_data <- lapply(c("GAM"), function(model_type){
-    read.csv(paste0(fileout, "/AUCvaluesAllModels",model_type,"_NA.csv"))})
+    read.csv(paste0(filedir, "/AUCvaluesAllModels",model_type,"_",taxa[i],".csv"))})
 AUC_data <- do.call(rbind, AUC_data)
 
 # Aggregate the different AUC values from the 10 iterations per species
 # and filter by AUC > 0.7
 
 AUC_sum <- aggregate(.~Species+Variables+Iteration, data=AUC_data,mean)
-for (i in 1:10){
+
+######################not working
    AUC_sum <- AUC_data %>% group_by(Species) %>% 
-  summarise(mean = mean(AUC na.rm=T)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
+  summarize(mean = mean(AUC)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
   group_by(Species) %>% summarise(n = n()) %>% filter(n == 4)
-}
 
 
 spNames <- sub("_PA", "", spMissing)
