@@ -30,7 +30,8 @@ taxa <- c("Mammals")
 i <- 1
 
 # Set model_type
-model_type <- c("GAM","GBM")[2]
+###iterate
+model_type <- c("GAM","GBM")[1]
 
 ########################################
 
