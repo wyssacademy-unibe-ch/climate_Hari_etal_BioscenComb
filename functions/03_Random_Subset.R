@@ -20,6 +20,7 @@ taxa <- c("Mammals")
 
 ########################################
 
+#' ## Stratified random sample of species distribution files, July 2014
 
 # Get species files
 for(i in 1:length(taxa)){
