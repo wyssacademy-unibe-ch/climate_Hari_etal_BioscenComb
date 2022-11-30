@@ -102,7 +102,7 @@ Rneighbours <- read.csv("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/data/re
 #-#-# Set up the function to predict distributions #-#-# 
 ## Predict function
 predict_func <- function(modelObjectLocation, model_type, spName, climData, clim){
-  mod <- get(load("/storage/workspaces/wa_climate/climate_trt/chari/Mammals_GAM_Output//Martes_melampus_PA_bio4_bio5_bio18_bio19_model_output_GAM_30_70.RData"))
+mod <- get(load("/storage/workspaces/wa_climate/climate_trt/chari/Mammals_GAM_Output/Loxodonta_africana_PA_bio4_bio5_bio18_bio19_model_output_GAM_Eco_block.RData"))
   lapply(mod, function(model){
     pred.block <- lapply(1:length(model),function(bk){
       if(model_type == "MaxEnt"){
