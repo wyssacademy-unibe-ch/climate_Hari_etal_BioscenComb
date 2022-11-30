@@ -261,16 +261,16 @@ colnames(all.sp.auc)<-c("Species","Variables","Iteration","AUC.1","AUC.2","AUC.3
 head(all.sp.auc)
 nrow(all.sp.auc)
 ## Save AUC file as csv
-write_csv(all.sp.auc, path=paste0(filedir, "/AUCvaluesAllModelsGAM_", taxa[i], ".csv")) 
+write.csv(all.sp.auc, paste0(filedir, "/AUCvaluesAllModelsGAM_", taxa[i], ".csv")) 
 
 # Aggregate the different AUC values from the 10 iterations per species
 All.AUC <- read.csv(paste0(filedir, "/AUCvaluesAllModelsGAM_", taxa[i], ".csv"))
 head(All.AUC)
 
-AUCdata <- All.AUC[c(4:13)]
+AUCdata <- All.AUC[c(5:14)]
 AUCdata <- rowMeans(AUCdata)
 All.AUC$MeanAUCblocks <- AUCdata
-All.Sub <- All.AUC[c(1,2,14)]
+All.Sub <- All.AUC[c(2,3,15)]
 
 All.Sub.M <- tidyr::unite(All.Sub, newcol, c(Species, Variables),remove=FALSE)
 All.Sub.M <- All.Sub.M[c(1,4)]
@@ -282,7 +282,7 @@ All.AUC.MeanPerSp <- aggregate(.~Models, data=All.Sub.M, mean)
 head(All.AUC.MeanPerSp)
 nrow(All.AUC.MeanPerSp)
 
-readr::write_csv(All.AUC.MeanPerSp, path=paste0(filedir,"/AUCvaluesAllModelsGAM_Sum_", taxa[i], ".csv"))
+write.csv(All.AUC.MeanPerSp, paste0(filedir,"/AUCvaluesAllModelsGAM_Sum_", taxa[i], ".csv"))
 
 # Rank combinations from aggregated file
 All.AUC <- read.csv(paste0(filedir, "/AUCvaluesAllModelsGAM_Sum_", taxa[i], ".csv"))
@@ -307,5 +307,5 @@ AUCdata <- lapply(spList,function(x){
 FinalRank <- do.call(rbind,AUCdata)
 head(FinalRank)
 
-readr::write_csv(FinalRank, path=paste0(filedir, "/FinalRank_", taxa[i], ".csv"))
+write.csv(FinalRank, paste0(filedir, "/FinalRank_", taxa[i], ".csv"))
 
