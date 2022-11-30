@@ -41,7 +41,7 @@ Modelfiles <- lapply(predictsPaths, function(x) list.files(x, full.names=TRUE))
 Modelfiles <- do.call("c", Modelfiles)
 
 # Check one output
-Model1File <- read.csv(list.files(predictsPaths[[1]], full.names=TRUE)[1])
+Model1File <- read.csv(list.files(predictsPaths[1], full.names=TRUE)[1])
 #head(Model1File)
 
 
