@@ -222,7 +222,7 @@ for (n in 1:length(taxa)){
 
   
   filename <- paste(strsplit(available_names[[i]],".",fixed=TRUE)[[1]][1])
-  if(!file.exists(paste0(filetest,filename,"_PA1.Rdata"))){
+  if(!file.exists(paste0(filetest,filename,"_PA.Rdata"))){
     spData_alldistance <- get(load(paste0(spDistDir,available_names[[i]],".Rdata")))
     spDistr <- raster(paste0(spPresDir, filename,"_0.5.tif"))
     
