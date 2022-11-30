@@ -207,7 +207,7 @@ options(warn=2)
 
 #check if length GAMfiles = length spMissing above, otherwhise make two scripts for parallelization
 
-modlist <- GAMfiles[[k]]
+modList <- GAMfiles[[k]]
   print(modList)
   
   ##Get species name 
@@ -233,7 +233,7 @@ modlist <- GAMfiles[[k]]
       
       for(i in 1:length(data.list)){
         blk <- data.list[i]
-        AUC <- blk[[1]]$AUC
+        AUC <- blk[[1]][[i]]$AUC
         print(AUC)
         AUCdata <- rbind(AUCdata,AUC)
       }
