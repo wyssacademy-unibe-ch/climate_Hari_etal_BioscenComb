@@ -168,7 +168,7 @@ lapply(names_mis, function(species){
         colnames(data)[2] <- "y"
       }else if(period <= 2080){
         y <- 8
-        colnames(data)[3:length(colnames(data))] <- c(paste0(model_type, "_gfdl-esm4_ssp126_block_", seq(1:(n/y)))
+        colnames(data)[3:length(colnames(data))] <- c(paste0(model_type, "_gfdl-esm4_ssp370_block_", seq(1:(n/y))))
         colnames(data)[1] <- "x"
         colnames(data)[2] <- "y"
       } else{
@@ -179,7 +179,7 @@ lapply(names_mis, function(species){
         colnames(data)[1] <- "x"
         colnames(data)[2] <- "y"
       }
-      readr::write_csv(x=data, path=Files)
+      readr::write_csv(x=data, file=Files)
     }
     
     ## Select all data for one model_rcp combination
