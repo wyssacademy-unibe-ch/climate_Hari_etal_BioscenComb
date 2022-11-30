@@ -28,6 +28,10 @@ taxa <- c("Mammals")
 
 i <- 1
 
+k <- commandArgs(trailingOnly=TRUE)
+k <-suppressWarnings(as.numeric(as.character(k)))
+
+
 ########################################
 
 #' ## Code to run GAMS for all species 
@@ -106,15 +110,11 @@ length(spMissing)
 #than giving a warning
 options(warn=2)
 
-# Set up snowfall to run parallel
-sfInit(parallel=TRUE, cpus=ceiling(0.75*parallel::detectCores()))
-sfLibrary(PresenceAbsence);sfLibrary(mgcv)
-sfExport(list=c("GAM_eco","sourceObs","resultsPath","baseline","climCombs","spList")) 
-#Import all the data, file path and model function needed to each CPU
 
 # Run code for list
-sfLapply(spMissing,function(sp){
-  
+
+
+sp <- spMissing[[k]]
   spname <- basename(sp)
   print(spname)
   
@@ -167,8 +167,7 @@ sfLapply(spMissing,function(sp){
                            "_model_output_GAM.RData",sep=""), compress="xz")
     }
   })  
-})
-sfStop()
+
 
 ########################################
 
@@ -196,21 +195,19 @@ AUC1 <- GAM1File[[6]][[4]]$AUC
 
 # Set path to model files
 mod.path <- paste0("/storage/homefs/ch21o450/data/", taxa[i], "_VariableSelectionModels_4v/")
-resultsPath <- paste0("/storage/workspaces/wa_climate/climate_trt/chari", "/", taxa[i], "_SummarisedModelOutput/")
+resultsPath <- paste0("/storage/homefs/ch21o450/data", "/", taxa[i], "_SummarisedModelOutput/")
 if(!dir.exists(resultsPath)){dir.create(resultsPath)}
 
-modList <- GAMfiles[500]
-AUClist <- seq(1, 10, 1) 
+#modList <- GAMfiles[500]
+#AUClist <- seq(1, 10, 1) 
 
-#' Loop through all model output files to extract AUC and save summarized output
-sfInit(parallel=TRUE, cpus=ceiling(0.55*parallel::detectCores()))
-sfExport(list=c("GAMfiles","mod.path","resultsPath")) #Import all the data, file path and model function needed to each CPU
 
 #Turn warning into error - if the model does not convert the code should stop rather than giving a warning
 options(warn=2)
 
-sfLapply(GAMfiles,function(modList){
-  
+#check if length GAMfiles = length spMissing above, otherwhise make two scripts for parallelization
+
+modlist <- GAMfiles[[k]]
   print(modList)
   
   ##Get species name 
@@ -247,9 +244,7 @@ sfLapply(GAMfiles,function(modList){
     }
     rm(data.list,AUCdata)
   }
-}); sfStop()
 
-filedir <- "/storage/workspaces/wa_climate/climate_trt/chari"
 
 # Read all results back in and save in one dataframe
 All.files <- list.files(paste0(filedir, "/", taxa[i], "_SummarisedModelOutput"), 
