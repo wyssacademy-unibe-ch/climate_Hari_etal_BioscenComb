@@ -271,7 +271,7 @@ length(spNames)
 # Define model/rcp combinations
 model_type <- "GAM" #c("GAM")
 df <- expand.grid(model_type=model_type, 
-                  rcp=c("ssp126"))
+                  rcp=c("ssp370"))
 df <- rbind(expand.grid(model_type=model_type, rcp="1995"), df)
 df <- rbind(df, expand.grid(model_type=model_type, rcp="2100rcp26"))
 df
@@ -288,7 +288,7 @@ if(df$rcp[rcp_mod] == "piControl"){
   year <- 1995
 } else if(df$rcp[rcp_mod] == "historical"){
   year <- 1990
-} else if(df$rcp[rcp_mod] %in% c("ssp126")){
+} else if(df$rcp[rcp_mod] %in% c("ssp370")){
   year <- c(2009, 2010, 2020, 2026, 2032, 2048, 2050, 2052, 2056, 2080)
 } else if(df$rcp[rcp_mod] == "2100rcp26"){
   year <- c(2100, 2150, 2200, 2250)
