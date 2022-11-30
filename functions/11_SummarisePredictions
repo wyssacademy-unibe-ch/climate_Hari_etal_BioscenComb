@@ -49,7 +49,7 @@ Model1File <- read.csv(list.files(predictsPaths[[1]], full.names=TRUE)[1])
 # and filter by AUC > 0.7
 fileout <- "/storage/workspaces/wa_climate/climate_trt/chari"
 AUC_data <- lapply(c("GAM"), function(model_type){
-    read.csv(paste0(fileout, "/AUCvaluesAllModels",model_type,"_NA.csv"))})
+    read.csv(paste0(filedir, "/AUCvaluesAllModels",model_type,"_",taxa[i],".csv"))})
 AUC_data <- do.call(rbind, AUC_data)
 AUC_sum <- aggregate(.~Species+Variables+Iteration, data=AUC_data,mean)
 
