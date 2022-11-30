@@ -143,7 +143,6 @@ lapply(names_mis, function(species){
     }
     
     period <- z
-    if(colnames(data)[1]!="x"){
       n <- ncol(data)-2
       if(period == 1995){
         y <- 1
@@ -180,7 +179,7 @@ lapply(names_mis, function(species){
         colnames(data)[2] <- "y"
       }
       readr::write_csv(x=data, file=Files)
-    }
+
     
     ## Select all data for one model_rcp combination
     ## And calculate average among blocks and PAs
