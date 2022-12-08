@@ -26,8 +26,8 @@ filedir="/storage/homefs/ch21o450/data"
 ########################################
 
 # Set taxa
-taxa <- c("Mammals")
-i <- 1
+taxa <- c("Amphibians","Mammals")
+i <- 2
 
 # Set model_type
 ###iterate
@@ -37,6 +37,7 @@ model_type <- c("GAM","GBM")[1]
 
 #-#-# Load the baseline climate #-#-#
 # Load climate predictor combs
+#each line belonging to one taxa
 climCombs <- list(c("bio4", "bio5", "bio18", "bio19"),
                   c("bio4","bio5","bio12","bio15"),
                   c("bio4", "bio5", "bio12", "bio15")) # Climate variables for the models make sure its the right combination
@@ -58,6 +59,7 @@ sourceObs <- paste0(filedir, "/", taxa[i], "_Pseudoabsences")
 resultsPath <- paste0(fileout, "/", taxa[i], "_", model_type, "_Output")
 if(!dir.exists(resultsPath)){dir.create(resultsPath)}
 
+#GBM creates plots for validation in the function, that's why there's an extra directory crated here
 if(model_type == "GBM"){
   plotPath <- paste0(filedir, "/", taxa[i], "_", model_type, "_plots")
   if(!dir.exists(plotPath)){dir.create(plotPath)}
@@ -112,22 +114,6 @@ spMissing <- lapply(spFiles, function(sp){
 spMissing <- Filter(Negate(is.null), spMissing)
 length(spMissing)
 
-# Read data
-AUC_data <- lapply(c("GAM"), function(model_type){
-    read.csv(paste0(filedir, "/AUCvaluesAllModels",model_type,"_",taxa[i],".csv"))})
-AUC_data <- do.call(rbind, AUC_data)
-
-# Aggregate the different AUC values from the 10 iterations per species
-# and filter by AUC > 0.7
-
-AUC_sum <- aggregate(.~Species+Variables+Iteration, data=AUC_data,mean)
-
-######################not working
-   AUC_sum <- AUC_data %>% group_by(Species) %>% 
-  summarize(mean = mean(AUC)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
-  group_by(Species) %>% summarise(n = n()) %>% filter(n == 4)
-
-
 spNames <- sub("_PA", "", spMissing)
 spMissing <- unique(spMissing[spNames %in% AUC_sum$Species])
 length(spMissing)
@@ -146,6 +132,9 @@ sfExport(list=c("GAM_split", "GAM_eco","sourceObs", "resultsPath",
 
 # Run code
 source("/storage/homefs/ch21o450/scripts/BioScen1.5_SDM/R/model_run.R")
+sfLapply(spMissing, model_run)
+sfStop()
+
 
 ############################################
 model_run <- function(sp){
@@ -294,3 +283,23 @@ sfStop()
 #sp <- "Spinomantis_peraccae_PA"
 #mod <- get(load(paste(resultsPath, "/", sp, "_",paste(unlist(climCombs),collapse="_"),
 #               "_model_output_", model_type, "_Eco_block.RData",sep="")))
+
+
+#############################################################
+#this part shouldn't really be here, run after the model run, and after script 9 (need this output)
+# Read data
+AUC_data <- lapply(c("GAM"), function(model_type){
+    read.csv(paste0(filedir, "/AUCvaluesAllModels",model_type,"_",taxa[i],".csv"))})
+AUC_data <- do.call(rbind, AUC_data)
+
+# Aggregate the different AUC values from the 10 iterations per species
+# and filter by AUC > 0.7
+
+AUC_sum <- aggregate(.~Species+Variables+Iteration, data=AUC_data,mean)
+
+######################not working
+   AUC_sum <- AUC_data %>% group_by(Species) %>% 
+  summarize(mean = mean(AUC)) %>% filter(mean >= 0.7) %>% ungroup() %>% 
+  group_by(Species) %>% summarise(n = n()) %>% filter(n == 4)
+
+#################################################################
