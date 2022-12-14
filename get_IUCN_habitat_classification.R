@@ -25,9 +25,7 @@ basename <- lapply(spFiles,function(sp){
 })
 basename <- unlist(basename)
 
-
-
-output_list=list()
+#output_list=list()
 
 for(i in 1:length(spNames)){
   tryCatch({
@@ -39,5 +37,5 @@ write.csv(hab, paste0(resultsPath, basename[i],".csv"))}, error=function(e){cat(
 }
 #save text file with habitat classification ifnormation per species 
 
-habitats <- do.call("rbind", output_list)
+#habitats <- do.call("rbind", output_list)
 
