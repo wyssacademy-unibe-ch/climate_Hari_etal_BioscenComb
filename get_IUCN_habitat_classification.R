@@ -30,9 +30,12 @@ basename <- unlist(basename)
 output_list=list()
 
 for(i in 1:length(spNames)){
+  tryCatch({
+    print(i)
 ind_hab <- rl_habitats(name=paste0(spNames[i]),key=IUCN_REDLIST_KEY, region="global",parse=T)
 hab <-  as.data.frame(ind_hab)
-write.csv(hab, paste0(resultsPath, basename[i],".csv"))
+write.csv(hab, paste0(resultsPath, basename[i],".csv"))}, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+
 }
 #save text file with habitat classification ifnormation per species 
 
