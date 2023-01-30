@@ -1,11 +1,11 @@
-library(tidyverse); library(raster); library(parallel); library(sf); library(Matrix); library(magrittr); library(SpRanger); library(cowplot)
+library(tidyverse); library(raster); library(parallel); library(sf); library(Matrix); library(magrittr); library(cowplot)
 library(fs); library(stringr)
 library(rworldmap)
 data(coastsCoarse)
 
 # Land Use Data
 iucndat <- read.csv('/storage/homefs/ch21o450/IUCN/Habitat_Classifications/Martes_melampus.csv')
-convcodes <- read.csv('/storage/homefs/ch21o450/LUH2/IUCN_LUH_converion_table_Carlson.csv')
+convcodes <- read.csv('/storage/homefs/ch21o450/scripts/BioScenComb/data/IUCN_LUH_converion_table_Carlson.csv')
 
 iucndat %>%
   left_join(convcodes, by = c("result.code" = "IUCN_hab")) %>%
@@ -19,12 +19,14 @@ spec$bin_spec <- ifelse(spec$Martes_melampus>0,1,0)
 spec[is.na(spec)] <- 0
 Spec_binary <- rasterFromXYZ(spec[,c(1:2,4)])
 projection(Spec_binary) <- CRS("+proj=longlat +datum=WGS84")
+
 Species_bioscen <-  read.csv("/storage/homefs/ch21o450/data/BioScen15/Martes_melampus_GAM_dispersal.csv.xz")
 bioscen.z <- Species_bioscen$GFDL.ESM2M_rcp85_2050
 bioscen.x <- Species_bioscen$x
 bioscen.y <- Species_bioscen$y
 bioscen.xyz <- data.frame(bioscen.x, bioscen.y, bioscen.z)
 bioscen.xyz$bin_spec <- ifelse(bioscen.xyz$bioscen.z>0,1,0) 
+
 bioscen_ras_binary <- rasterFromXYZ(bioscen.xyz[,c(1:2,4)])
 projection(bioscen_ras_binary) <- CRS("+proj=longlat +datum=WGS84")
 bioscen_ras <- rasterFromXYZ(bioscen.xyz[,c(1:3)])
@@ -38,7 +40,7 @@ plot(bioscen_ras_binary)
 plot(coastsCoarse,add=TRUE,col='grey')
 
 
-HabitatList <- lapply(Species, function(a){
+HabitatList <- lapply(Species_bioscen, function(a){
 
   Habitats %>% filter(name == a) %>% pull("LUH")
 
@@ -69,10 +71,10 @@ primf_0.5 <- aggregate(primf, fact=2)
 secdf <-  brick(ncfname, varname="secdf")
  prifdf <- as.data.frame(primf_0.5[[35]], xy=T)
 
- primf_binary = ifelse(prifdf$X34>0, 1,0) #instead of values from 0 to 1 now only binary for primf
-t$prim_bin[t$X34>0] <- 1
- t <- cbind(prifdf, primf_binary)
- primf_ras <- rasterFromXYZ(t[,c(1:2,3)])
+primf_binary = ifelse(prifdf$X34>0, 1,0) #instead of values from 0 to 1 now only binary for primf
+t <- cbind(prifdf, primf_binary)
+t$prim_binary[t$X34>0] <- 1
+primf_ras <- rasterFromXYZ(t[,c(1:2,3)])
 projection(primf_ras) <- CRS("+proj=longlat +datum=WGS84")
 plot(primf_ras)
 plot(coastsCoarse,add=TRUE,col='grey')
