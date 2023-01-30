@@ -48,7 +48,7 @@ HabitatList <- lapply(Species_bioscen, function(a){
 
 names(HabitatList) <- Species
 
-LandUseList <-  "/storage/homefs/ch21o450/LUH2/ssp1_rcp2.6/multiple-states_input4MIPs_landState_ScenarioMIP_UofMD-IMAGE-ssp126-2-1-f_gn_2015-2100.nc"
+LandUseList = "/storage/workspaces/wa_climate/climate_trt/data/LUH2/ssp1_rcp2.6/multiple-states_input4MIPs_landState_ScenarioMIP_UofMD-IMAGE-ssp126-2-1-f_gn_2015-2100.nc"
 
 ncfname <- LandUseList
 primf <-  brick(ncfname, varname="primf")
