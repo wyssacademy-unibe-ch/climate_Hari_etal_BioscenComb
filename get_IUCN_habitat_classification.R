@@ -35,7 +35,7 @@ hab <-  as.data.frame(ind_hab)
 write.csv(hab, paste0(resultsPath, basename[i],".csv"))}, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
 
 }
-#save text file with habitat classification ifnormation per species 
+#save text file with habitat classification information per species 
 
 #habitats <- do.call("rbind", output_list)
 
