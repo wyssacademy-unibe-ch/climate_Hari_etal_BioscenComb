@@ -91,11 +91,11 @@ for (taxa in taxas) {
       print(i)
       if (taxa == "Reptile") {
         if (spNames[i] %in% gamNames) {
-          sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptile_GAM_results_climate/"
+          sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptiles_GAM_results_climate/"
         } else {
-          sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptile_GBM_results_climate/"
+          sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptiles_GBM_results_climate/"
         }
-        resultsPath <- "/storage/homefs/ch21o450/IUCN/Habitat_Classifications/new/Reptile/"
+        resultsPath <- "/storage/homefs/ch21o450/IUCN/Habitat_Classifications/new/Reptiles/"
         basename[i] <- paste0(strsplit(spNames[i], " ")[[1]][1], "_", strsplit(spNames[i], " ")[[1]][2])
       }
       
