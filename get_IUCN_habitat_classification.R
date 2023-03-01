@@ -71,7 +71,7 @@ for (taxa in taxas) {
     spNames <- unique(c(gamNames, gbmNames))
   } else {
     sourceObs <- paste0("/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/", taxa, "_GAM_results_climate/")
-    resultsPath <- paste0("/storage/homefs/ch21o450/IUCN/Habitat_Classifications/new/", taxa, "/")
+    resultsPath <- paste0("/storage/homefs/ch21o450/IUCN/Habitat_Classifications/", taxa, "/")
     
     spFiles <- list.files(sourceObs, pattern=".csv.xz", full.names=TRUE)
     
