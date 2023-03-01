@@ -31,6 +31,25 @@ for (taxa in taxas) {
   }
 }
 
+taxa <- "Reptiles"
+
+gamObs <- list.files(paste0("/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/", taxa, "_GAM_results_climate/"), pattern=".csv.xz", full.names=TRUE)
+gbmObs <- list.files(paste0("/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/", taxa, "_GBM_results_climate/"), pattern=".csv.xz", full.names=TRUE)
+
+gamNames <- lapply(gamObs, function(obs) {
+  strsplit(basename(obs),"_",fixed=TRUE)[[1]][1:2]
+})
+gamNames <- unlist(lapply(gamNames, function(name) paste(name, collapse=" ")))
+
+gbmNames <- lapply(gbmObs, function(obs) {
+  strsplit(basename(obs),"_",fixed=TRUE)[[1]][1:2]
+})
+gbmNames <- unlist(lapply(gbmNames, function(name) paste(name, collapse=" ")))
+
+diffNames <- setdiff(gamNames, gbmNames)
+
+print(paste0("Reptile species names different between GAM and GBM folders: ", paste(diffNames, collapse=", ")))
+
 
 for (taxa in taxas) {
   sourceObs <- paste0("/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/", taxa, "_", model, "_results_climate/")
