@@ -7,7 +7,7 @@ IUCN_REDLIST_KEY='3e50039bd95a0de7b3e8c4a470d9dfb78c15c104aae186169131e7ed356aa4
 
 
 sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Mammals_GAM_results_climate/"
-resultsPath <- paste0("/storage/homefs/ch21o450/IUCN/Habitat_Classifications/new/")
+resultsPath <- paste0("/storage/homefs/ch21o450/IUCN/Habitat_Classifications/new/Mammals/")
 
 
 # Get all species pseudoabsence files
