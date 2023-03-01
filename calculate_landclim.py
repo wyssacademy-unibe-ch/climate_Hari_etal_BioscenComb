@@ -168,6 +168,6 @@ def calculate_landclim(taxas, models, model_names, bioscen_model_names, scenario
 
                                         da_landclim = da_landclim.assign_attrs(da_landuse)
 
-                                        da_landuse.to_netcdf("/storage/homefs/ch21o450/scripts/BioScenComb/data/LandClim_Output/" + taxa + "_" + model + "/" + model_name + "/" + scenario + "/" + formatted_species_name + str(time)+ ".nc")
+                                        da_landuse.to_netcdf("/storage/homefs/ch21o450/scripts/BioScenComb/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + str(time)+ ".nc")
 
                                         #da_landclim.to_netcdf("/storage/homefs/ch21o450/scripts/BioScenComb/data/LandClim_Output/" + taxa[0] + "_" + model[0] + "/" + model_names[0] + "/" + scenarios[0] + "/" + formatted_species_name +".nc")       
