@@ -4,11 +4,11 @@ library("rredlist")
 #
 #My IUCN-API token
 IUCN_REDLIST_KEY='3e50039bd95a0de7b3e8c4a470d9dfb78c15c104aae186169131e7ed356aa42a'
-taxas = ["Mammals","Reptiles","Amphibians"]
-models =["GAM","GBM"] 
+
+models =("GAM","GBM)
 
 
-taxas <- c("Mammals", "Reptile", "Amphibians")
+taxas <- c("Mammals", "Reptiles", "Amphibians")
 
 for (taxa in taxas) {
   gamObs <- list.files(paste0("/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/", taxa, "_GAM_results_climate/"), pattern=".csv.xz", full.names=TRUE)
