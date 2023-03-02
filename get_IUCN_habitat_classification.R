@@ -95,7 +95,7 @@ for (taxa in taxas) {
         } else {
           sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptiles_GBM_results_climate/"
         }
-        resultsPath <- "/storage/homefs/ch21o450/IUCN/Habitat_Classifications/new/Reptiles/"
+        resultsPath <- "/storage/homefs/ch21o450/IUCN/Habitat_Classifications/Reptiles/"
         basename[i] <- paste0(strsplit(spNames[i], " ")[[1]][1], "_", strsplit(spNames[i], " ")[[1]][2])
       }
       
