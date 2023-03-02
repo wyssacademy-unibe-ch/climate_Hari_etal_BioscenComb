@@ -89,7 +89,7 @@ for (taxa in taxas) {
   for(i in 1:length(spNames)){
     tryCatch({
       print(i)
-      if (taxa == "Reptile") {
+      if (taxa == "Reptiles") {
         if (spNames[i] %in% gamNames) {
           sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptiles_GAM_results_climate/"
         } else {
