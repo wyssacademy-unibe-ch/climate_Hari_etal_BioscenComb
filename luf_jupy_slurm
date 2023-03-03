@@ -14,4 +14,4 @@ module load Anaconda3
 chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/landuse_filter.ipynb 
 
 # Pass the arguments to luf.py
-jupyter-compute 15051:localhost:15051 /storage/homefs/ch21o450/scripts/BioScenComb/landuse_filter.ipynb 
+jupyter-compute port=15051 /storage/homefs/ch21o450/scripts/BioScenComb/landuse_filter.ipynb 
