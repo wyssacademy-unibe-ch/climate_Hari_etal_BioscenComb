@@ -104,4 +104,4 @@ for(i in 1:length(spNames)) {
     write.csv(hab, paste0(resultsPath, spBaseName, ".csv"))
   }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
 }
-
+}
