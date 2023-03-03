@@ -28,4 +28,4 @@ TIME=$(date -d "$STARTDATE ${TIME_OFFSETS[$SLURM_ARRAY_TASK_ID]} days" +%Y)
 TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
 MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
 
-srun python3 luf.py -b $TIME -a $TAXA -m $MODEL
+srun python3 /storage/homefs/ch21o450/scripts/BioScenComb/luf.py -b $TIME -a $TAXA -m $MODEL
