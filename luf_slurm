@@ -14,17 +14,9 @@ module load Anaconda3
 # Define arrays of taxas and models
 TAXAS=("Amphibians" "Reptiles" "Mammals")
 MODELS=("GAM" "GBM")
+TIME=(35 65 85)
 
-# Define the start date as January 1, 2021
-STARTDATE="2021-01-01"
-
-# Define an array of offsets in days for each time value
-TIME_OFFSETS=(35 65 85)
-
-# Calculate the time values corresponding to this task ID
-TIME=$(date -d "$STARTDATE ${TIME_OFFSETS[$SLURM_ARRAY_TASK_ID]} days" +%Y)
-
-# Calculate the taxa and model values corresponding to this task ID
+TIME=${TIME[$SLURM_ARRAY_TASK_ID]}
 TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
 MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
 
