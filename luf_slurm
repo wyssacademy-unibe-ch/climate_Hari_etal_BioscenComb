@@ -21,4 +21,4 @@ TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
 MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
 
 # Pass the arguments to luf.py
-srun python3 /storage/homefs/ch21o450/scripts/BioScenComb/luf.py -t $TIME -m $MODEL -a $TAXA
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/luf.py -t $TIME -m $MODEL -a $TAXA
