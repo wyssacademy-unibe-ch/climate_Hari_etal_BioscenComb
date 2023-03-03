@@ -28,4 +28,4 @@ TIME=$(date -d "$STARTDATE ${TIME_OFFSETS[$SLURM_ARRAY_TASK_ID]} days" +%Y)
 TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
 MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
 
-jupyter-compute 15051 landuse_filter.ipynb -b $TIME -a $TAXA -m $MODEL
+srun python3 luf.py -b $TIME -a $TAXA -m $MODEL
