@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --partition=epyc2
+#SBATCH --chdir=/storage/homefs/ch21o450/
+#SBATCH --mail-user=chantal.hari@unibe.ch
+#SBATCH --mail-type==SUBMIT,END,FAIL
+#SBATCH --output=/storage/homefs/ch21o450/logs/luf_%j.out
+#SBATCH --error=/storage/homefs/ch21o450/logs/luf_%j.err
+#SBATCH --time=24:00:00
+#SBATCH --cpus-per-task=10
+#SBATCH --mem=10G
+
+module load Anaconda3
+
+# Define arrays of taxas and models
+TAXAS=("Amphibians" "Reptiles" "Mammals")
+MODELS=("GAM" "GBM" )
+
+# Define the start date as January 1, 2021
+STARTDATE="2021-01-01"
+
+# Define an array of offsets in days for each time value
+TIME_OFFSETS=(35 65 85)
+
+# Calculate the time value corresponding to this task ID
+TIME=$(date -d "$STARTDATE ${TIME_OFFSETS[$SLURM_ARRAY_TASK_ID]} days" +%Y)
+
+# Calculate the taxa and model values corresponding to this task ID
+TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
+MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
+
+jupyter-compute 15051 landuse_filter.ipynb -b $TIME -a $TAXA -m $MODEL
