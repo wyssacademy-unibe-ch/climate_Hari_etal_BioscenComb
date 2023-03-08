@@ -46,13 +46,14 @@ selected_year = years[year_indices[time[0]]]
 if time[0] == 35 or time[0] == 65:
     model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
     bioscen_model_names = ['GFDL.ESM2M', 'IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
+    scenarios = ["rcp26","rcp60"]
+    ssprcps_shorts = ["ssp126","ssp460"]
 elif time[0] == 85:
     model_names = ['IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
     bioscen_model_names = ['IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
+    scenarios = ["rcp26"]
+    ssprcps_shorts = ["ssp126"]
     
-scenarios = ["rcp26","rcp60"]
-ssprcps_shorts = ["ssp126","ssp460"]
-ssprcps_longs = ["ssp1_rcp2.6","ssp4_rcp6.0"]
 combinations = list(itertools.product(models, model_names))
     # Load necessary data
 convcodes = pd.read_csv("/storage/homefs/ch21o450/scripts/BioScenComb/data/IUCN_LUH_converion_table_Carlson.csv")
