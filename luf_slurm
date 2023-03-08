@@ -11,16 +11,22 @@
 
 module load Anaconda3
 
-# Define arrays of taxas and models
+# Define arrays of taxas, models and times
 TAXAS=("Amphibians" "Reptiles" "Mammals")
 MODELS=("GAM" "GBM")
 TIME=(35 65 85)
 
-TIME=${TIME[$SLURM_ARRAY_TASK_ID]}
-TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
-MODEL=${MODELS[$SLURM_ARRAY_TASK_ID]}
-
-chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/luf.py
-
-# Pass the arguments to luf.py
-srun python3 /storage/homefs/ch21o450/scripts/BioScenComb/luf.py -t $TIME -m $MODEL -a $TAXA
+# Loop over taxas
+for taxa in "${TAXAS[@]}"
+do
+    # Loop over models
+    for model in "${MODELS[@]}"
+    do
+        # Loop over times
+        for time in "${TIME[@]}"
+        do
+            # Pass the arguments to luf.py
+            python3 /storage/homefs/ch21o450/scripts/BioScenComb/luf.py -t "$time" -m "$model" -a "$taxa"
+        done
+    done
+done
