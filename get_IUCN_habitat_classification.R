@@ -96,12 +96,12 @@ for (taxa in taxas) {
           sourceObs <- "/storage/workspaces/wa_climate/climate_trt/data/BioScen15/individual_projections/Reptiles_GBM_results_climate/"
         }
         resultsPath <- "/storage/homefs/ch21o450/IUCN/Habitat_Classifications/Reptiles/"
-        spBaseName <- paste0(strsplit(spNames[i], " ")[[1]][1], "_", strsplit(spNames[i], " ")[[1]][2])
+        
       }
-      
+      spBaseName <- paste0(strsplit(spNames[i], " ")[[1]][1], "_", strsplit(spNames[i], " ")[[1]][2])
       ind_hab <- rl_habitats(name=paste0(spNames[i]),key=IUCN_REDLIST_KEY, region="global",parse=T)
       hab <-  as.data.frame(ind_hab)
-      write.csv(hab, paste0(resultsPath, spNames[i], ".csv"))
+      write.csv(hab, paste0(resultsPath, spBaseName, ".csv"))
     }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
   }
 }
