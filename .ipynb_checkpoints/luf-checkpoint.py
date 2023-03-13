@@ -184,7 +184,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             for code in keys: 
                                 # Check if the code is "MARINE" and skip land-use filter if it is
                                 if code == "MARINE":
-                                    da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
+                                    da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/marine/" + model+ "_" + taxa + "_" + model_name + "_" + scenario + "_" + formatted_species_name + "_" + str(time)+ ".nc")
                                 else:
                                     # Compute the product with the LUH code and the "newvalue" column, and assign it to a new column in the merged DataFrame
                                     np_empty = np.zeros_like(da_landuse[code].values, dtype=float)
