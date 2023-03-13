@@ -16,9 +16,6 @@ import xarray
 import itertools
 
 
-taxas = ["Amphibians"]
-models =["GAM","GBM"] 
-time=[35,65,85]
 
 
 #def calculate_landclim(taxas, models, model_names, bioscen_model_names, scenarios, ssprcps_longs, ssprcps_shorts, time):
@@ -28,11 +25,11 @@ def calculate_landclim(taxas, models, time):
     year_indices = {35: 9, 65: 12, 85: 13}
     selected_year = years[year_indices[time[0]]]
     if time[0] == 35 or time[0] == 65:
-        model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
-        bioscen_model_names = ['GFDL.ESM2M', 'IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
+        model_names = [ 'HadGEM2-ES']
+        bioscen_model_names = [ 'HadGEM2.ES']
     elif time[0] == 85:
-        model_names = ['IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
-        bioscen_model_names = ['IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
+        model_names = ['HadGEM2-ES']
+        bioscen_model_names = [ 'HadGEM2.ES']
     scenarios = ["rcp26","rcp60"]
     ssprcps_shorts = ["ssp126","ssp460"]
     ssprcps_longs = ["ssp1_rcp2.6","ssp4_rcp6.0"]

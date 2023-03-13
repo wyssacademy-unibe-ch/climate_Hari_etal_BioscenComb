@@ -80,7 +80,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             formatted_names.append(formatted_species_name)
 
                         results = []
-                        for i, species_name in enumerate(formatted_names[:2]):
+                        for i, species_name in enumerate(formatted_names[:10]):
                             formatted_species_name = species_name.replace(" ", "_")
 
                             for file_name in available_file:
@@ -196,7 +196,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
 
                                 da_landclim = da_landclim.assign_attrs(da_landuse)
 
-                                da_landuse.to_netcdf("/storage/homefs/ch21o450/scripts/BioScenComb/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
+                                da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
 
 
 
