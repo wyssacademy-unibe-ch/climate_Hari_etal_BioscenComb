@@ -80,7 +80,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             formatted_names.append(formatted_species_name)
 
                         results = []
-                        for i, species_name in enumerate(formatted_names[:10]):
+                        for i, species_name in enumerate(formatted_names):
                             formatted_species_name = species_name.replace(" ", "_")
 
                             for file_name in available_file:
@@ -179,6 +179,31 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             # Add the interpolated values to the A DataArray
                             da_landuse['newvalue'] = interpolated_values
                             da_landuse['newvalue'] = interpolated_values.fillna(0)
+                            
+                            
+                            for code in keys: 
+                                # Check if the code is "MARINE" and skip land-use filter if it is
+                                if code == "MARINE":
+                                    da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
+                                else:
+                                    # Compute the product with the LUH code and the "newvalue" column, and assign it to a new column in the merged DataFrame
+                                    np_empty = np.zeros_like(da_landuse[code].values, dtype=float)
+                                    da_landuse[f"{code}_bin"] = da_landuse[code] * da_landuse["newvalue"]
+                                    # Select the DataArrays ending in "_bin"
+                                    bin_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_bin")]
+
+                                    # Multiply all the arrays together
+                                    sum_bin = reduce(lambda x, y: x + y, bin_arrays)
+                                    # Assign the "product_bin" attribute to the da_landuse DataArray
+                                    da_landuse["sum_bin"] = sum_bin
+                                    difference = da_landuse["sum_bin"] - da_landuse["newvalue"]
+                                    da_landuse["difference_filter"] = difference
+
+                                    da_landclim = da_landclim.assign_attrs(da_landuse)
+                                    da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
+
+                            
+                            
                             for code in keys: 
                                 # Compute the product with the LUH code and the "newvalue" column, and assign it to a new column in the merged DataFrame
                                 np_empty = np.zeros_like(da_landuse[code].values, dtype=float)
