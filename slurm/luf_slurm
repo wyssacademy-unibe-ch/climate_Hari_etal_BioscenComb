@@ -7,7 +7,7 @@
 #SBATCH --error=/storage/homefs/ch21o450/logs/luf_%A_%a.err
 #SBATCH --time=95:59:00
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=10G
+#SBATCH --mem=100G
 
 module load Anaconda3
 
