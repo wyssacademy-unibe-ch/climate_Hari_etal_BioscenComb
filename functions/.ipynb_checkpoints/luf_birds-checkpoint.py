@@ -30,7 +30,6 @@ ap.add_argument('-m', '--model', type=str, help="model, string", nargs="+", requ
 args = ap.parse_args()
 
 # *************************************************
-# Get arguments
 # *************************************************
 print(args)
 

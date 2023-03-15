@@ -12,14 +12,17 @@
 module load Anaconda3
 
 # Define arrays of taxas and models
+TAXAS=("Amphibians" "Mammals")
 MODELS=("GAM" "GBM")
 TIME=(35 65 85)
 
 TIME=${TIME[$SLURM_ARRAY_TASK_ID % ${#TIME[@]}]}
+TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID / (${#TIME[@]} * ${#MODELS[@]})]}
 MODEL=${MODELS[($SLURM_ARRAY_TASK_ID / ${#TIME[@]}) % ${#MODELS[@]}]}
+
 
 chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/luf.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf_birds.py -t $TIME -m $MODEL
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf.py -t $TIME -m $MODEL -a $TAXA
 
