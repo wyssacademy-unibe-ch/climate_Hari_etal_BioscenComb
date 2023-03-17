@@ -23,7 +23,6 @@ import argparse
 ap = argparse.ArgumentParser()
 
 # collect the function arguments
-ap.add_argument('-t', '--time', type=int, help="time, integer", nargs="+", required=True)
 ap.add_argument('-m', '--model', type=str, help="model, string", nargs="+", required=True)
 ap.add_argument('-a', '--taxa', type=str, help="taxa, string", nargs="+", required=True)
 
@@ -35,25 +34,18 @@ args = ap.parse_args()
 # *************************************************
 print(args)
 
-time = args.time
 models = args.model
 taxas = args.taxa
 
 
+time=[1146]
 years= ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050','2052', '2056', '2080', '2100', '2150', '2200', '2250']
-year_indices = {35: 9, 65: 12, 85: 13}
+year_indices = {1146:2,35: 9, 65: 12, 85: 13}
 selected_year = years[year_indices[time[0]]]
-if time[0] == 35 or time[0] == 65:
-    model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
-    bioscen_model_names = ['GFDL.ESM2M', 'IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
-    scenarios = ["rcp26","rcp60"]
-    ssprcps_shorts = ["ssp126","ssp460"]
-elif time[0] == 85:
-    model_names = ['IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
-    bioscen_model_names = ['IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
-    scenarios = ["rcp26"]
-    ssprcps_shorts = ["ssp126"]
-    
+if time[0] == 1146:
+    model_names = ['EWEMBI']
+    bioscen_model_names = ['EWEMBI']
+       
 combinations = list(itertools.product(models, model_names))
     # Load necessary data
 convcodes = pd.read_csv("/storage/homefs/ch21o450/scripts/BioScenComb/data/IUCN_LUH_converion_table_Carlson.csv")
