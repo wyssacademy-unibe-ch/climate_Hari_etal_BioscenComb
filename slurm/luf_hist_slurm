@@ -16,11 +16,11 @@ module load Anaconda3
 TAXAS=("Amphibians" "Mammals")
 MODELS=("GAM" "GBM")
 
-TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID / (${#TIME[@]} * ${#MODELS[@]})]}
-MODEL=${MODELS[($SLURM_ARRAY_TASK_ID / ${#TIME[@]}) % ${#MODELS[@]}]}
+TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID % ${#TAXA[@]}]}
+MODEL=${MODELS[($SLURM_ARRAY_TASK_ID / ${#TAXA[@]}) % ${#MODELS[@]}]}
+
 
 chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf_hist.py
 
 # Pass the arguments to luf.py
 python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf_hist.py -m $MODEL -a $TAXA
-
