@@ -11,16 +11,15 @@
 
 module load Anaconda3
 
-# Define arrays of taxas and models
-
+# Define arrays of time and models
 MODELS=("GAM")
 TIME=(35 65 85)
 
+# Calculate values of TIME and MODEL based on SLURM_ARRAY_TASK_ID
 TIME=${TIME[$SLURM_ARRAY_TASK_ID % ${#TIME[@]}]}
-MODEL=${MODELS[($SLURM_ARRAY_TASK_ID / ${#TIME[@]}) % ${#MODELS[@]}]}
+MODEL=${MODELS[$SLURM_ARRAY_TASK_ID / ${#TIME[@]}]}
 
-chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf.py
+chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf_birds.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf_birds.py -t $TIME -m $MODEL 
-
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/luf_birds.py -t $TIME -m $MODEL
