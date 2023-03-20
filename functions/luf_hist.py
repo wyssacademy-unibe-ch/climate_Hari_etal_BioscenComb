@@ -71,7 +71,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                     formatted_names.append(formatted_species_name)
 
                 results = []
-                for i, species_name in enumerate(formatted_names[:10]):
+                for i, species_name in enumerate(formatted_names):
                     formatted_species_name = species_name.replace(" ", "_")
 
                     for file_name in available_file:
