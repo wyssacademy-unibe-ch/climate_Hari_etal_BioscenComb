@@ -86,7 +86,9 @@ mean_hist = calculate_mean(historical_time, model, netcdf_path_format_hist, is_h
 fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(26, 24), subplot_kw={'projection': ccrs.PlateCarree()})
 
 cmap = matplotlib.colors.ListedColormap(['white', 'green'])
-
+countries = gpd.read_file(
+              gpd.datasets.get_path("naturalearth_lowres"))
+              
 plot_idx = 0
 year_indices = {1146: '1995', 35: '2050', 65: '2080', 85: '2100'}
 for future_time in future_times:
