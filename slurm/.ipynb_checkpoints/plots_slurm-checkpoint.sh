@@ -6,8 +6,8 @@
 #SBATCH --output=/storage/homefs/ch21o450/logs/plots%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/plots%A_%a.err
 #SBATCH --time=24:00:00
-#SBATCH --cpus-per-task=5
-#SBATCH --mem=200G
+#SBATCH --cpus-per-task=10
+#SBATCH --mem=50G
 
 module load Anaconda3
 

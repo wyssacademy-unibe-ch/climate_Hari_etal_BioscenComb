@@ -17,20 +17,7 @@ import xarray
 import itertools
 
 model="GAM" 
-model_names  = ['GFDL-ESM2M','IPSL-CM5A-LR','HadGEM2-ES',  'MIROC5'] # 
-bioscen_model_names  = ['GFDL.ESM2M','IPSL.CM5A-LR','HadGEM2.ES',  'MIROC5']# 
-#model_names  = ['IPSL-CM5A-LR','HadGEM2-ES',  'MIROC5'] # 
-#bioscen_model_names  = ['IPSL.CM5A-LR','HadGEM2.ES',  'MIROC5']# 
-scenarios = ["rcp26"]
-ssprcps_shorts = ["ssp126"]
-ssprcps_longs = ["ssp1_rcp2.6"]
-combinations = list(itertools.product(model, model_names))
-
-taxas = ["Amphibians"]
-taxa_val = ["Amphibians"]
-
-
-
+model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
 
 years= ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050', 
                  '2052', '2056', '2080', '2100', '2150', '2200', '2250']
@@ -79,7 +66,7 @@ def calculate_mean(time, model, netcdf_path_format, is_historical=False, scenari
 #sum_bin
 historical_time = 1146
 future_times = [35, 65, 85]
-scenarios = ["rcp26", "rcp60"]
+
 
 netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/Amphibians/{}/{}/{}_[{}].nc"
 netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/Amphibians/EWEMBI/{}_[{}].nc"
@@ -88,14 +75,23 @@ mean_hist = calculate_mean(historical_time, model, netcdf_path_format_hist, is_h
 fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(26, 24), subplot_kw={'projection': ccrs.PlateCarree()})
 
 cmap = matplotlib.colors.ListedColormap(['white', 'green'])
+countries = gpd.read_file(
+              gpd.datasets.get_path("naturalearth_lowres"))
 
 plot_idx = 0
 year_indices = {1146: '1995', 35: '2050', 65: '2080', 85: '2100'}
 for future_time in future_times:
+    if future_time == 35 or future_time == 65:
+        model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
+        scenarios = ["rcp26", "rcp60"]
+    elif future_time == 85:
+        model_names = ['IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
+        scenarios = ["rcp26"]
+
     for scenario in scenarios:
         if future_time == 85 and scenario == "rcp60":
             continue
-
+            
         mean_future = calculate_mean(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
 
         # Select the 0th time slice in mean_future and mean_hist data arrays
@@ -119,7 +115,6 @@ axes.flatten()[-1].set_visible(False)
 plt.suptitle('Amphibians mean_sum_bin GAM', size=16)
 
 plt.tight_layout()
-plt.show()
 
 
 fig.savefig("/storage/homefs/ch21o450/figures/amphibians_gam")
