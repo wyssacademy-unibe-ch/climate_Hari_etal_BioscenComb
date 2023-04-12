@@ -13,18 +13,18 @@ module load Anaconda3
 
 # Define arrays of taxas and models
 TAXAS=("Amphibians" "Mammals")
-MODELS=("GAM" "GBM")
+SCENARIOS=("rcp26" "rcp60")
 
 # Calculate indices based on SLURM_ARRAY_TASK_ID
 taxa_idx=$(($SLURM_ARRAY_TASK_ID % ${#TAXAS[@]}))
-model_idx=$(($SLURM_ARRAY_TASK_ID / ${#TAXAS[@]}))
+scenario_idx=$(($SLURM_ARRAY_TASK_ID / ${#TAXAS[@]}))
 
 TAXA=${TAXAS[$taxa_idx]}
-MODEL=${MODELS[$model_idx]}
+SCENARIO=${SCENARIOS[$scenario_idx]}
 
 
 
-chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/plots_looped.py
+chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/plots_GAM_vs_GCM.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/plots_looped.py -a $TAXA -m $MODEL
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/plots_GAM_vs_GCM.py -a $TAXA -m $SCENARIO

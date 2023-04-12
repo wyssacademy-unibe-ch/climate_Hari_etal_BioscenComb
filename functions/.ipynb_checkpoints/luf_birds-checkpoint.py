@@ -35,6 +35,7 @@ print(args)
 
 time = args.time
 models = args.model
+
 years= ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050','2052', '2056', '2080', '2100', '2150', '2200', '2250']
 year_indices = {35: 9, 65: 12, 85: 13}
 selected_year = years[year_indices[time[0]]]
@@ -53,6 +54,7 @@ combinations = list(itertools.product(models, model_names))
     # Load necessary data
 convcodes = pd.read_csv("/storage/homefs/ch21o450/scripts/BioScenComb/data/IUCN_LUH_converion_table_Carlson.csv")
 taxas=["Bird"]
+
 
 for taxa in taxas:# Get all possible combinations of models and model_names    
     for model in models :
@@ -76,7 +78,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             formatted_names.append(formatted_species_name)
 
                         results = []
-                        for i, species_name in enumerate(formatted_names[:10]):
+                        for i, species_name in enumerate(formatted_names):
                             formatted_species_name = species_name.replace(" ", "_")
 
                             for file_name in available_file:
@@ -103,6 +105,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             df = pd.DataFrame({"lon": lon, "lat": lat, "vals": z})
                             df = df.fillna(0)
                             convcodes_renamed = convcodes.rename(columns={'IUCN_hab':'result.code'})
+                            IUCN['result.code'] = pd.to_numeric(IUCN['result.code'], errors='coerce')
                             Habitats = IUCN.merge(convcodes_renamed, left_on='result.code', right_on='result.code')
 
                             keys = ['LUH1', 'LUH2', 'LUH3', 'LUH4', 'LUH5', 'LUH6', 'LUH7', 'LUH8','LUH9','LUH10', 'LUH11', 'LUH12']
@@ -176,22 +179,43 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                             da_landuse['newvalue'] = interpolated_values
                             da_landuse['newvalue'] = interpolated_values.fillna(0)
                             
-                            
+                               
+                            keys = [row[f"LUH{i}"] for _, row in Habitats_suitable.iterrows() for i in range(1, 5) if pd.notna(row[f"LUH{i}"])]
+
+                            keys = list(set(keys))
+
+                            num_codes = 0
                             for code in keys: 
                                 # Check if the code is "MARINE" and skip land-use filter if it is
                                 if code == "MARINE":
                                     pass
                                 else:
+                                    num_codes += 1
                                     # Compute the product with the LUH code and the "newvalue" column, and assign it to a new column in the merged DataFrame
                                     np_empty = np.zeros_like(da_landuse[code].values, dtype=float)
                                     da_landuse[f"{code}_bin"] = da_landuse[code] * da_landuse["newvalue"]
+                                    
+                                    da_landuse[f"{code}_binary"] = (da_landuse[code] > 0).astype(float)
+                                    da_landuse[f"{code}_lu_binary"] = da_landuse[f"{code}_binary"] * da_landuse["newvalue"]
+                                    
+                                    da_landuse["newvalue_binary"] = (da_landuse["newvalue"] >0).astype(float)
+                                    da_landuse[f"{code}_poo_lu_binary"] = da_landuse[f"{code}_binary"] * da_landuse["newvalue_binary"]
                                     # Select the DataArrays ending in "_bin"
-                                    bin_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_bin")]
+                                    bin_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_bin") and var != "sum_bin"]
+                                    binary_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_lu_binary") and var != "sum_lu_binary"]
+                                    binary_poo_lu_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_poo_lu_binary") and var != "sum_poo_lu_binary"]
 
                                     # Multiply all the arrays together
                                     sum_bin = reduce(lambda x, y: x + y, bin_arrays)
+                                    sum_lu_binary = reduce(lambda x, y: x + y, binary_arrays)
+                                    sum_poo_lu_binary = reduce(lambda x, y: x + y, binary_poo_lu_arrays)
+                                    
                                     # Assign the "product_bin" attribute to the da_landuse DataArray
                                     da_landuse["sum_bin"] = sum_bin
+                                    da_landuse["sum_lu_binary"] = sum_lu_binary
+                                    da_landuse["sum_poo_lu_binary"] = sum_poo_lu_binary
+                                    da_landuse["sum_poo_lu_binary_norm"] = da_landuse["sum_poo_lu_binary"] / num_codes
+                                    
                                     difference = da_landuse["sum_bin"] - da_landuse["newvalue"]
                                     da_landuse["difference_filter"] = difference
 

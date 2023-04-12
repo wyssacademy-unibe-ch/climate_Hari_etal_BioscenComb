@@ -46,7 +46,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
     for model in models :
                 
                 
-        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/GAM/" +taxa+ "/EWEMBI/"
+        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" +taxa+ "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
 
