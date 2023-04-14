@@ -122,13 +122,13 @@ for taxa in taxas:# Get all possible combinations of models and model_names
 
                 difference = mean_future_slice - mean_hist_slice
                 ax = axes.flatten()[plot_idx]
-                im = difference.plot(ax=ax, transform=ccrs.PlateCarree(), cmap="RdBu_r", add_colorbar=False, vmin=-0.2, vmax=0.2)
+                im = difference.plot(ax=ax, transform=ccrs.PlateCarree(), cmap="RdBu_r", add_colorbar=False)
 
                 countries.plot(ax=ax, color="lightgray", zorder=1, alpha=0.3)
                 ax.set_title(f"Difference between {year_indices[future_time]} and {year_indices[historical_time]} for {scenario}")
 
                 cbar = plt.colorbar(im, ax=ax, fraction=0.024, pad=0.04)
-                cbar.set_ticks([-0.2, 0, 0.2])
+                #cbar.set_ticks([-0.2, 0, 0.2])
 
                 plot_idx += 1
 

@@ -132,5 +132,5 @@ for taxa in taxas:
     plt.suptitle(taxa+ ' mean_sum_bin_count GAM and GBM', size=16)
 
     plt.tight_layout()
-    plt.show()
+    fig.savefig("/storage/homefs/ch21o450/scripts/BioScenComb/plots/species_count" + taxa + "_" + model )
      
