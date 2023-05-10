@@ -16,7 +16,7 @@
 #' getIUCN(group="Chameleons")
 #' }
 #' @export
-password=fjz8cdm2VJV2mjk.vch
+password="fjz8cdm2VJV2mjk.vch"
 getIUCN <- function(taxa, group, user, password, path=getwd()){
   if(taxa == "Birds"){
     print("Please check ouf the getBirdLife function or 
@@ -55,3 +55,12 @@ getIUCN <- function(taxa, group, user, password, path=getwd()){
     print("Please provide a valid taxa or group!")
   }
 }
+
+
+filedir <- "/storage/homefs/ch21o450/data"
+      
+# Convert shape files into rasters and save to file
+rasterizeRange(dsn=paste0(filedir, "/MAMMALS.shp"), 
+               resolution=0.5, save=TRUE, touches=T,
+               seasonal=c(1,2), origin=1, presence=c(1,2), 
+               path=paste0(filedir, "/SpeciesData/"))

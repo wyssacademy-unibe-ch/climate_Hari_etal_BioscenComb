@@ -5,14 +5,14 @@
 #SBATCH --mail-type=SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/luf_%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/luf_%A_%a.err
-#SBATCH --time=239:59:00
+#SBATCH --time=336:59:00
 #SBATCH --cpus-per-task=5
 #SBATCH --mem=100G
 
 module load Anaconda3
 
 # Define arrays of taxas and models
-TAXAS=("Amphibians" "Mammals")
+TAXAS=("Bird")
 MODELS=("GAM" "GBM")
 TIME=(35 65 85)
 

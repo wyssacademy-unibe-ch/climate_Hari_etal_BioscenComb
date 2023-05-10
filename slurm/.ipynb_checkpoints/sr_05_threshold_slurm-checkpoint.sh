@@ -24,7 +24,7 @@ MODEL=${MODELS[$model_idx]}
 
 
 
-chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/sr_05_threshold.py
+chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/code_figures/sr_05_threshold.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/sr_05_threshold.py -a $TAXA -m $MODEL
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/code_figures/sr_05_threshold.py -a $TAXA -m $MODEL
