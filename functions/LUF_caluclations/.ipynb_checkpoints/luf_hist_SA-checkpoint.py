@@ -221,11 +221,11 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                         else:
 
 
-                            output_directory = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivtiy_Analysis/" + model+ "/" + taxa + "/" + model_name + "/"
+                            output_directory = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/" + model+ "/" + taxa + "/" + model_name + "/"
                             os.makedirs(output_directory, exist_ok=True)
 
 
-                            da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivtiy_Analysis/" + model+ "/" + taxa + "/" + model_name + "/"  + formatted_species_name + "_" + str(time)+ ".nc")
+                            da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/" + model+ "/" + taxa + "/" + model_name + "/"  + formatted_species_name + "_" + str(time)+ ".nc")
 
 
 

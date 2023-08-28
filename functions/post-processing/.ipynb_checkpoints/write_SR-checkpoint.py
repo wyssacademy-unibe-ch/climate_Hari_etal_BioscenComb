@@ -45,7 +45,7 @@ years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048',
 
 for taxa in taxas:
     for model in models:
-        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivtiy_Analysis/" + model + "/" + taxa + "/EWEMBI/"
+        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
 
@@ -126,8 +126,8 @@ for taxa in taxas:
     future_times = [35, 65]
    # scenarios = ["rcp26"]
 
-    netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/{}/{}/{}/{}/{}_[{}].nc"
-    netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/{}/{}/EWEMBI/{}_[{}].nc"
+    netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
+    netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
 
     mean_value_bin_hist = newvalue_fun(historical_time, model, netcdf_path_format_hist, is_historical=True)
     mean_sum_bin_hist = calculate_mean(historical_time, model, netcdf_path_format_hist, is_historical=True)
@@ -143,18 +143,18 @@ for taxa in taxas:
             elif future_time == 85:
                 model_names = ['IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
 
-            filename = f"/storage/scratch/users/ch21o450/data/intermediate_results/SA_{taxa}_{model}_{historical_time}_{scenario}_summedprobs_newvalue.nc"
+            filename = f"/storage/scratch/users/ch21o450/data/intermediate_results/{taxa}_{model}_{historical_time}_{scenario}_summedprobs_newvalue.nc"
             mean_value_bin_hist.to_netcdf(filename)
 
-            filename2 = f"/storage/scratch/users/ch21o450/data/intermediate_results/SA_{taxa}_{model}_{historical_time}_{scenario}_summedprobs_sum.nc"
+            filename2 = f"/storage/scratch/users/ch21o450/data/intermediate_results/{taxa}_{model}_{historical_time}_{scenario}_summedprobs_sum.nc"
             mean_sum_bin_hist.to_netcdf(filename2)
 
             mean_value_bin_future = newvalue_fun(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
             mean_sum_bin_future = calculate_mean(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
             mean_sum_bin_future = mean_sum_bin_future.isel(time=0)
 
-            filename = f"/storage/scratch/users/ch21o450/data/intermediate_results/SA_{taxa}_{model}_{future_time}_{scenario}_summedprobs_newvalue.nc"
+            filename = f"/storage/scratch/users/ch21o450/data/intermediate_results/{taxa}_{model}_{future_time}_{scenario}_summedprobs_newvalue.nc"
             mean_value_bin_future.to_netcdf(filename)
 
-            filename2 = f"/storage/scratch/users/ch21o450/data/intermediate_results/SA_{taxa}_{model}_{future_time}_{scenario}_summedprobs_sum.nc"
+            filename2 = f"/storage/scratch/users/ch21o450/data/intermediate_results/{taxa}_{model}_{future_time}_{scenario}_summedprobs_sum.nc"
             mean_sum_bin_future.to_netcdf(filename2)
