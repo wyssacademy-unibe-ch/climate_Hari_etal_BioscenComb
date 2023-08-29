@@ -131,8 +131,9 @@ for sdm in newvalue_dict_fut:
                 climate_land_change = (sum_bin_future - sum_bin_hist)
                 land_use_change = (climate_land_change - climate_change) 
                 
-                climate_change_loss = climate_change.where(climate_change < 0)
+                #climate_change_loss = climate_change.where(climate_change < 0)
                 climate_land_change_loss = climate_land_change.where(climate_land_change<0)
+                climate_change_loss = climate_change.where((climate_land_change < 0) & (climate_change < 0))
 
                   
                 land_use_change = (climate_land_change - climate_change) 
@@ -226,4 +227,4 @@ plt.tight_layout()
 plt.show()
 
 # Save the plot to the specified filename
-plt.savefig(f"/storage/homefs/ch21o450/scripts/BioScenComb/plots/barplot_combined_impcats_SR_{year_indices[time]}{scenario}.png")
+plt.savefig(f"/storage/homefs/ch21o450/scripts/BioScenComb/main_figures/barplot_combined_impcats_SR_{year_indices[time]}{scenario}.png")
