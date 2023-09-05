@@ -12,7 +12,7 @@
 module load Anaconda3
 
 # Define arrays of taxas and models
-TAXAS=("Amphibians" "Mammals")
+TAXAS=("Mammals")
 MODELS=("GAM" "GBM")
 TIME=(35 65)
 

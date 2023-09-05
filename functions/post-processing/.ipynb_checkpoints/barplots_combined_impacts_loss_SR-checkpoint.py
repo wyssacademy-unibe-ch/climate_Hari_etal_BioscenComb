@@ -206,7 +206,8 @@ for i, taxa in enumerate(taxa_list):
         ax.errorbar(x_shift + bar_width - error_bar_shift,np.mean(mean_sum_bin_change_taxa[taxa]), yerr= np.mean(uncertainties_sdm_taxa[taxa]), fmt='none', capsize=3, color=color_sdm_uncertainty)
         ax.errorbar(x_shift + bar_width + error_bar_shift, np.mean(mean_sum_bin_change_taxa[taxa]), yerr= np.mean(uncertainties_gcm_taxa[taxa]), fmt='none', capsize=3, color=color_gcm_uncertainty)
 
-
+ax.set_yticks([ -45,-40, -35, -30, -25, -20, -15, -10, -5, 0])
+ax.set_yticklabels(['-45','-40', '-35', '-30', '-25', '-20', '-15', '-10', '-5', '0'])
 # Set up the x-axis labels and ticks
 ax.set_xticks(x_positions + bar_width*0.5)
 ax.set_xticklabels(taxa_list)
@@ -227,4 +228,11 @@ plt.tight_layout()
 plt.show()
 
 # Save the plot to the specified filename
-plt.savefig(f"/storage/homefs/ch21o450/scripts/BioScenComb/main_figures/barplot_combined_impcats_SR_{year_indices[time]}{scenario}.png")
+plt.savefig(f"/storage/homefs/ch21o450/scripts/BioScenComb/main_figures/Fig_4_{year_indices[time]}{scenario}.png")
+
+print(time)
+print(scenario)
+print(f'mean_values {mean_values}')
+print(f'mean_sum_bin_change_taxa {mean_sum_bin_change_taxa}')
+print(f'uncertainties_sdm_taxa {uncertainties_sdm_taxa}')
+print(f'uncertainties_gcm_taxa {uncertainties_gcm_taxa}')

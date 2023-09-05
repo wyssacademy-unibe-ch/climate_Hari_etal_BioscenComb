@@ -45,7 +45,7 @@ years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048',
 
 for taxa in taxas:
     for model in models:
-        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" + taxa + "/EWEMBI/"
+        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivtiy_Analysis/" + model + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
 

@@ -228,7 +228,7 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                                 
 
                         for variable in list(da_landuse.keys()):
-                            if variable != "newvalue" and variable != "sum_bin" and variable != "sum_lu_binary":
+                            if variable != "newvalue" and variable != "sum_bin":
                                 del da_landuse[variable]
 
 
