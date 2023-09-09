@@ -45,7 +45,7 @@ years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048',
 model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
 years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050',
          '2052', '2056', '2080', '2100', '2150', '2200', '2250']
-habitats=["forest"]
+habitats=["forest","pasture","cropland","natural_land"]
 
 
 for habitat in habitats:
