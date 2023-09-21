@@ -11,7 +11,7 @@
 
 module load Anaconda3
 
-TAXAS=("Amphibians" "Mammals")
+TAXAS=("Amphibians" "Mammals" "Bird")
 MODELS=("GAM" "GBM")
 SCENARIOS=("rcp26" "rcp60")
 

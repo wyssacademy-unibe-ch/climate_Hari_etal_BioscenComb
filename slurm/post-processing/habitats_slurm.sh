@@ -6,17 +6,15 @@
 #SBATCH --output=/storage/homefs/ch21o450/logs/habitats%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/habitats%A_%a.err
 #SBATCH --time=336:00:00
-#SBATCH --cpus-per-task=10
-#SBATCH --mem=300G
+#SBATCH --cpus-per-task=20
+#SBATCH --mem=500G
 
 # Define arrays of taxas and models
-TAXAS=("Amphibians" "Mammals" "Bird")
-MODELS=("GAM" "GBM")
-TIME=(35 65)
+TAXAS=("Mammals" "Amphibians" "Bird")
 
-TIME=${TIME[$SLURM_ARRAY_TASK_ID % ${#TIME[@]}]}
-TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID / (${#TIME[@]} * ${#MODELS[@]})]}
-MODEL=${MODELS[($SLURM_ARRAY_TASK_ID / ${#TIME[@]}) % ${#MODELS[@]}]}
+
+TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID]}
+
 
 
 module load Anaconda3
@@ -26,4 +24,4 @@ module load Anaconda3
 chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/habitats.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/habitats.py -t $TIME -m $MODEL -a $TAXA
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/habitats.py  -a $TAXA
