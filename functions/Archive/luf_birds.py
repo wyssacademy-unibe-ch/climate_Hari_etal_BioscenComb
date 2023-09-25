@@ -198,29 +198,29 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                                     da_landuse[f"{code}_binary"] = (da_landuse[code] > 0).astype(float)
                                     da_landuse[f"{code}_lu_binary"] = da_landuse[f"{code}_binary"] * da_landuse["newvalue"]
                                     
-                                    da_landuse["newvalue_binary"] = (da_landuse["newvalue"] >0).astype(float)
-                                    da_landuse[f"{code}_poo_lu_binary"] = da_landuse[f"{code}_binary"] * da_landuse["newvalue_binary"]
+                                    #da_landuse["newvalue_binary"] = (da_landuse["newvalue"] >0).astype(float)
+                                    #da_landuse[f"{code}_poo_lu_binary"] = da_landuse[f"{code}_binary"] * da_landuse["newvalue_binary"]
                                     # Select the DataArrays ending in "_bin"
                                     bin_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_bin") and var != "sum_bin"]
-                                    binary_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_lu_binary") and var != "sum_lu_binary"]
-                                    binary_poo_lu_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_poo_lu_binary") and var != "sum_poo_lu_binary"]
+                                    #binary_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_lu_binary") and var != "sum_lu_binary"]
+                                    #binary_poo_lu_arrays = [da_landuse[var] for var in da_landuse.data_vars if var.endswith("_poo_lu_binary") and var != "sum_poo_lu_binary"]
 
                                     # Multiply all the arrays together
                                     sum_bin = reduce(lambda x, y: x + y, bin_arrays)
-                                    sum_lu_binary = reduce(lambda x, y: x + y, binary_arrays)
-                                    sum_poo_lu_binary = reduce(lambda x, y: x + y, binary_poo_lu_arrays)
+                                    #sum_lu_binary = reduce(lambda x, y: x + y, binary_arrays)
+                                    #sum_poo_lu_binary = reduce(lambda x, y: x + y, binary_poo_lu_arrays)
                                     
                                     # Assign the "product_bin" attribute to the da_landuse DataArray
                                     da_landuse["sum_bin"] = sum_bin
-                                    da_landuse["sum_lu_binary"] = sum_lu_binary
-                                    da_landuse["sum_poo_lu_binary"] = sum_poo_lu_binary
-                                    da_landuse["sum_poo_lu_binary_norm"] = da_landuse["sum_poo_lu_binary"] / num_codes
+                                    #da_landuse["sum_lu_binary"] = sum_lu_binary
+                                    #da_landuse["sum_poo_lu_binary"] = sum_poo_lu_binary
+                                    #da_landuse["sum_poo_lu_binary_norm"] = da_landuse["sum_poo_lu_binary"] / num_codes
                                     
-                                    difference = da_landuse["sum_bin"] - da_landuse["newvalue"]
-                                    da_landuse["difference_filter"] = difference
+                                    #difference = da_landuse["sum_bin"] - da_landuse["newvalue"]
+                                    #da_landuse["difference_filter"] = difference
 
                                     da_landclim = da_landclim.assign_attrs(da_landuse)
-                                    da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
+                                    da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/new/" + model+ "/" + taxa + "/" + model_name + "/" + scenario + "/" + formatted_species_name + "_" + str(time)+ ".nc")
 
                             
                          
