@@ -12,7 +12,7 @@
 module load Anaconda3
 
 # Define arrays of taxas and models
-TAXAS=("Amphibians" "Mammals")
+TAXAS=("Bird")
 MODELS=("GAM" "GBM")
 
 # Calculate indices based on SLURM_ARRAY_TASK_ID
@@ -24,7 +24,7 @@ MODEL=${MODELS[$model_idx]}
 
 
 
-chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/code_figures/plot_SDM_output.py
+chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/global_plots/plot_SDM_output.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/code_figures/plot_SDM_output.py -a $TAXA -m $MODEL
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/global_plots/plot_SDM_output.py -a $TAXA -m $MODEL
