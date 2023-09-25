@@ -124,7 +124,7 @@ for taxa in taxas:
 
     historical_time = 1146
     future_times = [35, 65]
-   # scenarios = ["rcp26"]
+    scenarios = ["rcp26"]
 
     netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
     netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"

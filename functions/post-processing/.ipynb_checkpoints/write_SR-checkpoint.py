@@ -45,7 +45,7 @@ years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048',
 
 for taxa in taxas:
     for model in models:
-        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivtiy_Analysis/" + model + "/" + taxa + "/EWEMBI/"
+        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
 
@@ -124,7 +124,7 @@ for taxa in taxas:
 
     historical_time = 1146
     future_times = [35, 65]
-   # scenarios = ["rcp26"]
+    scenarios = ["rcp26"]
 
     netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
     netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"

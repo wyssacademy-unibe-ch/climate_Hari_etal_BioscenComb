@@ -24,7 +24,7 @@ ap = argparse.ArgumentParser()
 
 ap.add_argument('-m', '--model', type=str, help="model, string", nargs="+", required=True)
 ap.add_argument('-a', '--taxa', type=str, help="taxa, string", nargs="+", required=True)
-ap.add_argument('-s', '--scenario',type=str, help="scenario, string", nargs="+", required=True)
+
 
 # parse the arguments to the args object
 args = ap.parse_args()
@@ -36,7 +36,8 @@ print(args)
 
 models = args.model
 taxas = args.taxa
-scenarios = args.scenario
+
+
 
 
 model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
@@ -45,7 +46,7 @@ years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048',
 
 for taxa in taxas:
     for model in models:
-        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" + taxa + "/EWEMBI/"
+        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/" + model + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
 
@@ -124,10 +125,10 @@ for taxa in taxas:
 
     historical_time = 1146
     future_times = [35, 65]
-   # scenarios = ["rcp26"]
+    scenarios = ["rcp60"]
 
     netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/{}/{}/{}/{}/{}_[{}].nc"
-    netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivtiy_Analysis/{}/{}/EWEMBI/{}_[{}].nc"
+    netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/Sensitivity_Analysis/{}/{}/EWEMBI/{}_[{}].nc"
 
     mean_value_bin_hist = newvalue_fun(historical_time, model, netcdf_path_format_hist, is_historical=True)
     mean_sum_bin_hist = calculate_mean(historical_time, model, netcdf_path_format_hist, is_historical=True)

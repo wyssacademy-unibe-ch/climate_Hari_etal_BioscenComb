@@ -5,8 +5,8 @@
 #SBATCH --mail-type=SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/calculate_sr_habitats%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/calculate_sr_habitats%A_%a.err
-#SBATCH --time=36:00:00
-#SBATCH --cpus-per-task=10
+#SBATCH --time=95:59:00
+#SBATCH --cpus-per-task=20
 #SBATCH --mem=250G
 
 module load Anaconda3
