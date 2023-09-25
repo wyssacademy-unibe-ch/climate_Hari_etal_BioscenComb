@@ -7,12 +7,12 @@
 #SBATCH --error=/storage/homefs/ch21o450/logs/calculate_newSRsb%A_%a.err
 #SBATCH --time=48:00:00
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=100G
+#SBATCH --mem=300G
 
 module load Anaconda3
 
 # Define arrays of taxas and models
-TAXAS=("Amphibians" "Mammals" "Bird")
+TAXAS=("Bird")
 MODELS=("GAM" "GBM")
 
 # Calculate indices based on SLURM_ARRAY_TASK_ID
