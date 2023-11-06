@@ -42,9 +42,9 @@ taxas = args.taxa
 
 
 years= ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050','2052', '2056', '2080', '2100', '2150', '2200', '2250']
-year_indices = {5:6,35: 9, 65: 12, 85: 13}
+year_indices = {35: 9, 65: 12, 85: 13}
 selected_year = years[year_indices[time[0]]]
-if time[0] == 35 or time[0] == 65 or time[0]==5:
+if time[0] == 35 or time[0] == 65:
     GCMs = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
     bioscen_GCMs = ['GFDL.ESM2M', 'IPSL.CM5A-LR', 'HadGEM2.ES', 'MIROC5']
     scenarios = ["rcp26","rcp60"]
@@ -57,18 +57,17 @@ elif time[0] == 85:
     
 #combinations = list(itertools.product(models, model_names))
 
-for taxa in taxas:# Get all possible combinations of models and model_names    
-    for model in models :
+for model in models:
+    for taxa in taxas:
         print("Taxa", taxa)
         print("Model", model)
         print("Time", time[0])
-        for i in range(len(GCMs)):  # Iterate over the range of GCMs length
-            GCM = GCMs[i]
-            bioscen_GCM = bioscen_GCMs[i]
-            print("GCM", GCM)
+        for GCM, bioscen_GCM in zip(GCMs, bioscen_GCMs):
+            print("GCM", GCM, "bioscen_GCM", bioscen_GCM)
             for scenario in scenarios:
-                print ("Scneario", scenario)
+                print("Scenario", scenario)
                 for l, ssprcp_short in enumerate(ssprcps_shorts):
+                    # Your code here
 
                     convcodes = pd.read_csv("/storage/homefs/ch21o450/scripts/BioScenComb/data/IUCN_LUH_converion_table_Carlson.csv")
                     dir_habclass = "/storage/homefs/ch21o450/IUCN/Habitat_Classifications/" + taxa + "/"
@@ -187,11 +186,6 @@ for taxa in taxas:# Get all possible combinations of models and model_names
                         keys = [row[f"LUH{i}"] for _, row in Habitats_suitable.iterrows() for i in range(1, 5) if pd.notna(row[f"LUH{i}"])]
 
                         keys = list(set(keys))
-                        
-                        for variable in list(da_landuse.keys()):
-                            if variable not in keys and variable != "newvalue":
-                                del da_landuse[variable]
-                                
 
                         num_codes = 0
                         for code in keys: 

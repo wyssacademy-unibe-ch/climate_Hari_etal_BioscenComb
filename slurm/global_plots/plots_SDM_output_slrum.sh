@@ -12,7 +12,7 @@
 module load Anaconda3
 
 # Define arrays of taxas and models
-TAXAS=("Bird")
+TAXAS=("Mammals")
 MODELS=("GAM" "GBM")
 
 # Calculate indices based on SLURM_ARRAY_TASK_ID

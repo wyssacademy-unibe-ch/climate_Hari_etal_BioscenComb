@@ -73,7 +73,7 @@ for taxa in taxas:
             for model_name in model_names:
                 value_bin = newvalue_dict[model_name][species_name]
                 #value_bin = value_bin.where(value_bin > 0, 1)
-                value_bin = (value_bin > 0.00)
+                value_bin = (value_bin > 0)
 
                 value_list.append(value_bin)
             value_bin_concat = xr.concat(value_list, dim="model_name")
@@ -82,7 +82,7 @@ for taxa in taxas:
 
         value_bin_list = list(projections_dict.values())
         mean_value_bin = xr.concat(value_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
-        mean_value_bin = mean_value_bin.where(mean_value_bin > 0, 0)
+        #mean_value_bin = mean_value_bin.where(mean_value_bin > 0, 0)
         return mean_value_bin
 
     def calculate_mean(time, model, netcdf_path_format, is_historical=False, scenario=None):
@@ -98,7 +98,7 @@ for taxa in taxas:
                     ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
                 sum_bin = ds["sum_bin"]
                 #lu_sum_bin = ds["sum_lu_binary"]
-                sum_bin = (sum_bin > 0.00)
+                sum_bin = (sum_bin > 0)
 
                 sum_bin_dict[model_name][species_name] = sum_bin
                 #lu_sum_bin_dict[model_name][species_name] = lu_sum_bin
@@ -116,7 +116,7 @@ for taxa in taxas:
 
         mean_sum_bin_list = list(projections_dict.values())
         mean_sum_bin = xr.concat(mean_sum_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
-        mean_sum_bin = mean_sum_bin.where(mean_sum_bin > 0, 0)
+        #mean_sum_bin = mean_sum_bin.where(mean_sum_bin > 0, 0)
 
         return mean_sum_bin
 

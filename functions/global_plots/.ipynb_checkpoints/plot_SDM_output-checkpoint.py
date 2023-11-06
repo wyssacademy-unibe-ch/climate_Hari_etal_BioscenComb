@@ -86,12 +86,12 @@ for taxa in taxas:
 
             return mean_value_bin
 
-future_times = [35, 65, 85]
+future_times = [35, 65]
 
 netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
 
 
-fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(26, 24), subplot_kw={'projection': ccrs.PlateCarree()})
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(26, 24), subplot_kw={'projection': ccrs.PlateCarree()})
 
 
 cmap = matplotlib.colors.ListedColormap(['white', 'green'])
