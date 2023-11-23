@@ -20,6 +20,9 @@ import matplotlib.colors as mcolors
 
 ap = argparse.ArgumentParser()
 
+import sys
+print("Command-line arguments:", sys.argv)
+
 # collect the function arguments
 
 ap.add_argument('-m', '--model', type=str, help="model, string", nargs="+", required=True)

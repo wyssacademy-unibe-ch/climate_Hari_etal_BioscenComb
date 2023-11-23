@@ -5,7 +5,7 @@
 #SBATCH --mail-type=SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/habitats%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/habitats%A_%a.err
-#SBATCH --time=336:00:00
+#SBATCH --time=95:00:00
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=500G
 

@@ -14,10 +14,8 @@ module load Anaconda3
 TAXAS=("Mammals" "Amphibians" "Bird")
 MODELS=("GAM" "GBM")
 
-
 TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID % ${#TAXAS[@]}]}
-MODEL=${MODELS[$SLURM_ARRAY_TASK_ID / ${#TAXAS[@]}]}
-
+MODEL=${MODELS[$(($SLURM_ARRAY_TASK_ID / ${#TAXAS[@]}))]}
 
 echo "TAXA: $TAXA"
 echo "MODEL: $MODEL"
