@@ -2,29 +2,24 @@
 #pip install  rioxarray==0.3.1
 import pandas as pd
 import xarray as xr
+import os
 import matplotlib.pyplot as plt
-import rioxarray
 import numpy as np
 import geopandas as gpd
-import cartopy.crs as ccrs
-import rasterio
-import os
 import matplotlib.colors
 scriptsdir = os.getcwd()
 from scipy.interpolate import griddata
 from functools import reduce
-import xarray
 import itertools
 import argparse
-import matplotlib.colors as mcolors
+import pickle
 
 ap = argparse.ArgumentParser()
 
 # collect the function arguments
 
-ap.add_argument('-m', '--model', type=str, help="model, string", nargs="+", required=True)
-ap.add_argument('-a', '--taxa', type=str, help="taxa, string", nargs="+", required=True)
-ap.add_argument('-s', '--scenario',type=str, help="scenario, string", nargs="+", required=True)
+ap.add_argument('-m', '--scenario', type=str, help="scenario, string", nargs="+", required=True)
+ap.add_argument('-a', '--time', type=str, help="time, string", nargs="+", required=True)
 
 # parse the arguments to the args object
 args = ap.parse_args()
@@ -34,128 +29,165 @@ args = ap.parse_args()
 # *************************************************
 print(args)
 
-models = args.model
-taxas = args.taxa
-scenarios = args.scenario
+scenario = args.scenario
+time = args.time
 
 
-model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
+sdms = ["GAM", "GBM"]
+gcms = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
+habitats = ["forest", "pasture", "cropland", "natural_land"]
+#scenario = "rcp26"
+#time=35
+historical_time=1146
+
 years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050',
          '2052', '2056', '2080', '2100', '2150', '2200', '2250']
-habitats=["forest","pasture","cropland","natural_land","nonforest"]
 
+# Create the dictionaries
+newvalue_dict_fut = {}
+newvalue_dict_hist = {}
+sumbin_dict_future = {}
+sumbin_dict_hist = {}
 
+# Initialize the dictionaries with SDM, GCM, and habitat keys
+mean_newvalue_change = {}
+mean_sum_bin_change = {}
+mean_land_use_change = {}
 
+for sdm in sdms:
+    newvalue_dict_fut[sdm] = {}
+    newvalue_dict_hist[sdm] = {}
+    sumbin_dict_future[sdm] = {}
+    sumbin_dict_hist[sdm] = {}
+    mean_newvalue_change[sdm] = {}
+    mean_sum_bin_change[sdm] = {}
+    mean_land_use_change[sdm] = {}
 
-def newvalue_fun(time, model, netcdf_path_format, is_historical=False, scenario=None):
-    newvalue_dict = {model_name: {} for model_name in model_names}
-    sum_bin_dict = {model_name: {} for model_name in model_names}
+    for gcm in gcms:
+        newvalue_dict_fut[sdm][gcm] = {}
+        newvalue_dict_hist[sdm][gcm] = {}
+        sumbin_dict_future[sdm][gcm] = {}
+        sumbin_dict_hist[sdm][gcm] = {}
+        mean_newvalue_change[sdm][gcm] = {}
+        mean_sum_bin_change[sdm][gcm] = {}
+        mean_land_use_change[sdm][gcm] = {}
 
-    for model_name in model_names:
-        for species_name in species_names:
-            if is_historical:
-                ds = xr.open_dataset(netcdf_path_format.format(model, taxa, species_name, time), decode_times=False)
-            else:
-                ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
+        for habitat in habitats:
+            newvalue_dict_fut[sdm][gcm][habitat] = []
+            newvalue_dict_hist[sdm][gcm][habitat] = []
+            sumbin_dict_future[sdm][gcm][habitat] = []
+            sumbin_dict_hist[sdm][gcm][habitat] = []
 
-            newvalue = ds["newvalue"]
-            sum_bin = ds["sum_bin"]
+# Loop over all habitats
+for habitat in habitats:
+    for sdm in sdms:
+        for taxa in gcms:  # Use the variable name 'taxa' for simplicity; it represents habitats in this context
+            dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + sdm + "/" + taxa + "/EWEMBI/"
+            available_file = os.listdir(dir_species)
+            available_names = [x.split("_[1146].nc")[0] for x in available_file]
 
-            newvalue_dict[model_name][species_name] = newvalue
-            sum_bin_dict[model_name][species_name] = sum_bin
+            species_names = available_names
+            # Define the netCDF file path
+            netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
+            netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
 
-    projections_dict = {}
+            # Loop over all species
+            for species_name in species_names:
+                # Loop over all models
+                for gcm in gcms:
+                    # Open the netCDF files
+                    ds_newvalue_fut = xr.open_dataset(
+                        netcdf_path_format_future.format(sdm, taxa, gcm, scenario[0], species_name, time[0]),
+                        decode_times=False
+                    )
+                    ds_newvalue_hist = xr.open_dataset(
+                        netcdf_path_format_hist.format(sdm, taxa, species_name, historical_time),
+                        decode_times=False
+                    )
 
-    for species_name in species_names:
-        value_list = []
-        for model_name in model_names:
-            value_bin = newvalue_dict[model_name][species_name]
-            #value_bin = value_bin.where(value_bin > 0, 1)
-            #value_bin = (value_bin > 0.00)
+                    # Get the newvalue and sum_bin
+                    newvalue_fut = ds_newvalue_fut["newvalue"]
+                    newvalue_hist = ds_newvalue_hist["newvalue"]
+                    sum_bin_future = ds_newvalue_fut["sum_bin"].isel(time=0)
+                    sum_bin_hist = ds_newvalue_hist["sum_bin"].isel(time=0)
 
-            value_list.append(value_bin)
-        value_bin_concat = xr.concat(value_list, dim="model_name")
-        mean_value_bin = value_bin_concat.mean(dim="model_name")
-        projections_dict[species_name] = mean_value_bin
+                    # Append the newvalue to the dictionaries
+                    newvalue_dict_fut[sdm][gcm][habitat].append(newvalue_fut)
+                    newvalue_dict_hist[sdm][gcm][habitat].append(newvalue_hist)
+                    sumbin_dict_future[sdm][gcm][habitat].append(sum_bin_future)
+                    sumbin_dict_hist[sdm][gcm][habitat].append(sum_bin_hist)
 
-    value_bin_list = list(projections_dict.values())
-    mean_value_bin = xr.concat(value_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
-    mean_value_bin = mean_value_bin.where(mean_value_bin > 0, 0)
-    return mean_value_bin
+# Calculate the mean change from historical to future per sdm, per gcm, per habitat
+for sdm in newvalue_dict_fut:
+    for gcm in newvalue_dict_fut[sdm]:
+        for habitat in newvalue_dict_fut[sdm][gcm]:
+            if len(newvalue_dict_hist[sdm][gcm][habitat]) > 0 and len(newvalue_dict_fut[sdm][gcm][habitat]) > 0:
+                newvalue_hist = xr.concat(newvalue_dict_hist[sdm][gcm][habitat], dim="species").sum(dim="species")
+                newvalue_future = xr.concat(newvalue_dict_fut[sdm][gcm][habitat], dim="species").sum(dim="species")
+                sum_bin_hist = xr.concat(sumbin_dict_hist[sdm][gcm][habitat], dim="species").sum(dim="species")
+                sum_bin_future = xr.concat(sumbin_dict_future[sdm][gcm][habitat], dim="species").sum(dim="species")
 
-def calculate_mean(time, model, netcdf_path_format, is_historical=False, scenario=None):
-    newvalue_dict = {model_name: {} for model_name in model_names}
-    sum_bin_dict = {model_name: {} for model_name in model_names}
-    lu_sum_bin_dict = {model_name: {} for model_name in model_names}
+                climate_change = (newvalue_future - newvalue_hist) / newvalue_hist  # Calculate change as percentage
+                climate_land_change = (sum_bin_future - sum_bin_hist) / sum_bin_hist
+                land_use_change = (climate_land_change - climate_change)
 
-    for model_name in model_names:
-        for species_name in species_names:
-            if is_historical:
-                ds = xr.open_dataset(netcdf_path_format.format(model, taxa, species_name, time), decode_times=False)
-            else:
-                ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
-            sum_bin = ds["sum_bin"]
-            #lu_sum_bin = ds["sum_lu_binary"]
-            #sum_bin = (sum_bin > 0.00)
+                climate_change_loss = climate_change.where((climate_land_change < 0) & (climate_change < 0))
+                climate_land_change_loss = climate_land_change.where(climate_land_change < 0)
 
-            sum_bin_dict[model_name][species_name] = sum_bin
-            #lu_sum_bin_dict[model_name][species_name] = lu_sum_bin
+                mean_newvalue_change[sdm][gcm][habitat] = climate_change_loss
+                mean_sum_bin_change[sdm][gcm][habitat] = climate_land_change_loss
+                mean_land_use_change[sdm][gcm][habitat] = land_use_change
 
-    projections_dict = {}
-
-    for species_name in species_names:
-        sum_bin_list = []
-        for model_name in model_names:
-            sum_bin = sum_bin_dict[model_name][species_name]
-            sum_bin_list.append(sum_bin)
-        sum_bin_concat = xr.concat(sum_bin_list, dim="model_name")
-        mean_sum_bin = sum_bin_concat.mean(dim="model_name")
-        projections_dict[species_name] = mean_sum_bin
-
-    mean_sum_bin_list = list(projections_dict.values())
-    mean_sum_bin = xr.concat(mean_sum_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
-    mean_sum_bin = mean_sum_bin.where(mean_sum_bin > 0, 0)
-
-    return mean_sum_bin
+# Calculate the mean change and uncertainties for each habitat
+mean_values = {}
+mean_sum_bin_change_habitat = {}  # Rename this to avoid conflicts
+uncertainties_sdm_habitat = {}     # Rename this to avoid conflicts
+uncertainties_gcm_habitat = {}     # Rename this to avoid conflicts
 
 for habitat in habitats:
-    for taxa in taxas:
-        for model in models:
-            df = pd.read_csv('/storage/homefs/ch21o450/scripts/BioScenComb/habitat_counts/habitat_'+ habitat + '_' + taxa + '.csv')
-           # Remove specific species from the list
-            species_list = df['Species'].tolist()
-            species_to_exclude = ["Physalaemus_henselii"]
-            species_names = [species for species in species_list if species not in species_to_exclude]
+    mean_values[habitat] = []
+    mean_sum_bin_change_habitat[habitat] = []  # Update the dictionary name
+    uncertainties_sdm_habitat[habitat] = []     # Update the dictionary name
+    uncertainties_gcm_habitat[habitat] = []     # Update the dictionary name
 
+    for sdm in sdms:
+        sdm_values = []
+        sdm_land_use_values = []
+        for gcm in gcms:
+            sdm_values.append(mean_newvalue_change[sdm][gcm][habitat].mean().item())
+            sdm_land_use_values.append(mean_sum_bin_change[sdm][gcm][habitat].mean().item())
+        mean_values[habitat].append(np.mean(sdm_values))
+        mean_sum_bin_change_habitat[habitat].append(np.mean(sdm_land_use_values))
+        uncertainties_sdm_habitat[habitat].append(np.std(sdm_values))
+    for gcm in gcms:
+        gcm_values = []  # Moved this block inside the 'habitat' loop
+        gcm_land_use_values = []  # Moved this block inside the 'habitat' loop
+        for sdm in sdms:
+            gcm_values.append(mean_newvalue_change[sdm][gcm][habitat].mean().item())
+            gcm_land_use_values.append(mean_sum_bin_change[sdm][gcm][habitat].mean().item())
+        uncertainties_gcm_habitat[habitat].append(np.std(gcm_values))
 
-    historical_time = 1146
-    future_times = [35, 65]
-   # scenarios = ["rcp26"]
+# Save the results
+output_dir = "/storage/scratch/users/ch21o450/data/intermediate_results/"
+os.makedirs(output_dir, exist_ok=True)
 
-    netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
-    netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
+with open(os.path.join(output_dir, f"mean_newvalue_change_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(mean_newvalue_change, f)
 
-    mean_value_bin_hist = newvalue_fun(historical_time, model, netcdf_path_format_hist, is_historical=True)
-    mean_sum_bin_hist = calculate_mean(historical_time, model, netcdf_path_format_hist, is_historical=True)
+with open(os.path.join(output_dir, f"mean_sum_bin_change_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(mean_sum_bin_change, f)
 
-    mean_sum_bin_hist = mean_sum_bin_hist.isel(time=0)
+with open(os.path.join(output_dir, f"mean_land_use_change_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(mean_land_use_change, f)
 
-    year_indices = {1146: '1995', 35: '2050', 65: '2080', 85: '2100'}
+with open(os.path.join(output_dir, f"mean_values_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(mean_values, f)
 
-    for future_time in future_times:
-        for scenario in scenarios:
-            filename = f"/storage/scratch/users/ch21o450/data/SR/{taxa}_{model}_{historical_time}_{scenario}_summedprobs_newvalue_{habitat}_test.nc"
-            mean_value_bin_hist.to_netcdf(filename)
+with open(os.path.join(output_dir, f"mean_sum_bin_change_habitat_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(mean_sum_bin_change_habitat, f)
 
-            filename2 = f"/storage/scratch/users/ch21o450/data/SR/{taxa}_{model}_{historical_time}_{scenario}_summedprobs_sum_{habitat}_test.nc"
-            mean_sum_bin_hist.to_netcdf(filename2)
+with open(os.path.join(output_dir, f"uncertainties_sdm_habitat_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(uncertainties_sdm_habitat, f)
 
-            mean_value_bin_future = newvalue_fun(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
-            mean_sum_bin_future = calculate_mean(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
-            mean_sum_bin_future = mean_sum_bin_future.isel(time=0)
-
-            filename = f"/storage/scratch/users/ch21o450/data/SR/{taxa}_{model}_{future_time}_{scenario}_summedprobs_newvalue_{habitat}_test.nc"
-            mean_value_bin_future.to_netcdf(filename)
-
-            filename2 = f"/storage/scratch/users/ch21o450/data/SR/{taxa}_{model}_{future_time}_{scenario}_summedprobs_sum_{habitat}_test.nc"
-            mean_sum_bin_future.to_netcdf(filename2)
+with open(os.path.join(output_dir, f"uncertainties_gcm_habitat_{scenario}_{time}.pkl"), "wb") as f:
+    pickle.dump(uncertainties_gcm_habitat, f)

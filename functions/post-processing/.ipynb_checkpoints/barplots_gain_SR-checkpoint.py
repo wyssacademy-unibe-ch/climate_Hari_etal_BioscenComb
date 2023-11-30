@@ -12,6 +12,7 @@ from scipy.interpolate import griddata
 from functools import reduce
 import itertools
 import argparse
+import pickle
 
 ap = argparse.ArgumentParser()
 
@@ -169,70 +170,28 @@ for taxa in taxas:
             gcm_values.append(mean_newvalue_change[sdm][gcm][taxa].mean().item())
             gcm_land_use_values.append(mean_sum_bin_change[sdm][gcm][taxa].mean().item())
         uncertainties_gcm_taxa[taxa].append(np.std(gcm_values))
-        
-# Set up the bar plot
-indices = [(1,2,3,4,5)]
-x_labels = taxas
+ 
 
-fig, ax = plt.subplots()
+output_dir = "/storage/scratch/users/ch21o450/data/intermediate_results/"
+os.makedirs(output_dir, exist_ok=True)
 
-taxa_list = ["Mammals", "Amphibians", "Bird"]
-color_change = "#2a6a99"  # A shade of orange
-color_land_use_change = "#d88546"  # A shade of blue
-color_sdm_uncertainty = "navy"  # A shade of green
-color_gcm_uncertainty = "orange"  # A shade of purple
+with open(os.path.join(output_dir, f"mean_newvalue_change_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(mean_newvalue_change, f)
 
+with open(os.path.join(output_dir, f"mean_sum_bin_change_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(mean_sum_bin_change, f)
 
-bar_width = 0.4
-error_bar_shift = 0.1
+with open(os.path.join(output_dir, f"mean_land_use_change_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(mean_land_use_change, f)
 
-x_positions = np.arange(len(taxa_list)) * (2 * bar_width + 0.5)
+with open(os.path.join(output_dir, f"mean_values_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(mean_values, f)
 
-for i, taxa in enumerate(taxa_list):
-    x_shift = x_positions[i]
+with open(os.path.join(output_dir, f"mean_sum_bin_change_taxa_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(mean_sum_bin_change_taxa, f)
 
-    if not i:
-        ax.bar(x_shift, np.mean(mean_values[taxa]), width=bar_width, color=color_change, label='Climate Change')
-        ax.bar(x_shift + bar_width,  np.mean(mean_sum_bin_change_taxa[taxa]), width=bar_width, alpha=1, color=color_land_use_change, label='Climate and Land-Use Change')    
-        ax.errorbar(x_shift - error_bar_shift, np.mean(mean_values[taxa]), yerr= np.mean(uncertainties_sdm_taxa[taxa]), fmt='none', capsize=3, color=color_sdm_uncertainty, label='SDM Uncertainty')
-        ax.errorbar(x_shift + error_bar_shift, np.mean(mean_values[taxa]), yerr= np.mean(uncertainties_gcm_taxa[taxa]), fmt='none', capsize=3, color=color_gcm_uncertainty, label='GCM Uncertainty')
-        ax.errorbar(x_shift + bar_width - error_bar_shift, np.mean(mean_sum_bin_change_taxa[taxa]), yerr= np.mean(uncertainties_sdm_taxa[taxa]), fmt='none', capsize=3, color=color_sdm_uncertainty)
-        ax.errorbar(x_shift + bar_width + error_bar_shift, np.mean(mean_sum_bin_change_taxa[taxa]), yerr= np.mean(uncertainties_gcm_taxa[taxa]), fmt='none', capsize=3, color=color_gcm_uncertainty)
-    else:
-        ax.bar(x_shift,  np.mean(mean_values[taxa]), width=bar_width, color=color_change)
-        ax.bar(x_shift + bar_width, np.mean(mean_sum_bin_change_taxa[taxa]), width=bar_width, alpha=1, color=color_land_use_change)  
-        ax.errorbar(x_shift - error_bar_shift,np.mean(mean_values[taxa]), yerr= np.mean(uncertainties_sdm_taxa[taxa]), fmt='none', capsize=3, color=color_sdm_uncertainty)
-        ax.errorbar(x_shift + error_bar_shift,np.mean(mean_values[taxa]), yerr= np.mean(uncertainties_gcm_taxa[taxa]), fmt='none', capsize=3, color=color_gcm_uncertainty)
-        ax.errorbar(x_shift + bar_width - error_bar_shift,np.mean(mean_sum_bin_change_taxa[taxa]), yerr= np.mean(uncertainties_sdm_taxa[taxa]), fmt='none', capsize=3, color=color_sdm_uncertainty)
-        ax.errorbar(x_shift + bar_width + error_bar_shift, np.mean(mean_sum_bin_change_taxa[taxa]), yerr= np.mean(uncertainties_gcm_taxa[taxa]), fmt='none', capsize=3, color=color_gcm_uncertainty)
+with open(os.path.join(output_dir, f"uncertainties_sdm_taxa_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(uncertainties_sdm_taxa, f)
 
-ax.set_yticks([ 45,40, 35,30, 25, 20, 15, 10, 5, 0])
-ax.set_yticklabels(['45','40', '35', '30', '25', '20', '15', '10', '5', '0'])
-# Set up the x-axis labels and ticks
-ax.set_xticks(x_positions + bar_width*0.5)
-ax.set_xticklabels(taxa_list)
-
-year_indices = {1146: '1995', 35: '2050', 65: '2080', 85: '2100'}
-
-# Convert the first element of the 'time' list to an integer
-time = int(args.time[0])
-
-# Set labels, ticks, and title
-ax.set_xlabel('Taxa')
-ax.set_ylabel('Mean Change in Species Richness Gain')
-ax.set_title(f'Mean Change from Historical to {year_indices[time]} {scenario}')
-
-ax.legend()
-plt.legend()
-plt.tight_layout()
-plt.show()
-
-# Save the plot to the specified filename
-plt.savefig(f"/storage/homefs/ch21o450/scripts/BioScenComb/main_figures/Fig_4_{year_indices[time]}{scenario}_gain.png")
-
-print(time)
-print(scenario)
-print(f'mean_values {mean_values}')
-print(f'mean_sum_bin_change_taxa {mean_sum_bin_change_taxa}')
-print(f'uncertainties_sdm_taxa {uncertainties_sdm_taxa}')
-print(f'uncertainties_gcm_taxa {uncertainties_gcm_taxa}')
+with open(os.path.join(output_dir, f"uncertainties_gcm_taxa_{scenario}_{time}_gain.pkl"), "wb") as f:
+    pickle.dump(uncertainties_gcm_taxa, f)

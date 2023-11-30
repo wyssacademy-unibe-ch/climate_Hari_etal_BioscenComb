@@ -40,11 +40,12 @@ scenarios = args.scenario
 
 
 model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
+
 years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050',
          '2052', '2056', '2080', '2100', '2150', '2200', '2250']
 
-for taxa in taxas:
-    for model in models:
+for model in models:
+    for taxa in taxas:
         dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
@@ -117,7 +118,7 @@ for taxa in taxas:
             projections_dict[species_name] = mean_sum_bin
 
         mean_sum_bin_list = list(projections_dict.values())
-        mean_sum_bin = xr.concat(mean_sum_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
+        mean_sum_bin = xr.concat(mean_sum_bin_list, dim="species").sum(dim="species")  
         mean_sum_bin = mean_sum_bin.where(mean_sum_bin > 0, 0)
 
         return mean_sum_bin
@@ -125,6 +126,7 @@ for taxa in taxas:
     historical_time = 1146
     future_times = [35, 65]
     #scenarios = ["rcp60"]
+
 
     netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/PA/{}/{}/{}/{}/{}_[{}].nc"
     netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
@@ -153,8 +155,8 @@ for taxa in taxas:
             mean_sum_bin_future = calculate_mean(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
             mean_sum_bin_future = mean_sum_bin_future.isel(time=0)
 
-            filename = f"/storage/scratch/users/ch21o450/data/intermediate_results/PA_{taxa}_{model}_{future_time}_{scenario}_summedprobs_newvalue.nc"
+            filename = f"/storage/scratch/users/ch21o450/data/SR/PA_{taxa}_{model}_{future_time}_{scenario}_summedprobs_newvalue.nc"
             mean_value_bin_future.to_netcdf(filename)
 
-            filename2 = f"/storage/scratch/users/ch21o450/data/intermediate_results/PA_{taxa}_{model}_{future_time}_{scenario}_summedprobs_sum.nc"
+            filename2 = f"/storage/scratch/users/ch21o450/data/SR/PA_{taxa}_{model}_{future_time}_{scenario}_summedprobs_sum.nc"
             mean_sum_bin_future.to_netcdf(filename2)

@@ -5,8 +5,8 @@
 #SBATCH --mail-type=SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/barplotsSR_loss%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/barplotsSR_loss%A_%a.err
-#SBATCH --time=95:59:00
-#SBATCH --cpus-per-task=10
+#SBATCH --time=12:59:00
+#SBATCH --cpus-per-task=5
 #SBATCH --mem=300G
 
 module load Anaconda3

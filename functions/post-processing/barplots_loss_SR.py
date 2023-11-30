@@ -128,8 +128,8 @@ for sdm in newvalue_dict_fut:
                 sum_bin_hist =  xr.concat(sumbin_dict_hist[sdm][gcm][taxa], dim="species").sum(dim="species")
                 sum_bin_future = xr.concat(sumbin_dict_future[sdm][gcm][taxa], dim="species").sum(dim="species")
                                 
-                climate_change = (newvalue_future - newvalue_hist)  # Calculate change as percentage
-                climate_land_change = (sum_bin_future - sum_bin_hist)
+                climate_change = (newvalue_future - newvalue_hist)/newvalue_hist  # Calculate change as percentage
+                climate_land_change = (sum_bin_future - sum_bin_hist)/sum_bin_hist
                 land_use_change = (climate_land_change - climate_change) 
                 
                 #climate_change_loss = climate_change.where(climate_change < 0)
@@ -175,24 +175,23 @@ for taxa in taxas:
 output_dir = "/storage/scratch/users/ch21o450/data/intermediate_results/"
 os.makedirs(output_dir, exist_ok=True)
 
-# Save the results using pickle
-with open(os.path.join(output_dir, "mean_newvalue_change.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"mean_newvalue_change_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(mean_newvalue_change, f)
 
-with open(os.path.join(output_dir, "mean_sum_bin_change.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"mean_sum_bin_change_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(mean_sum_bin_change, f)
 
-with open(os.path.join(output_dir, "mean_land_use_change.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"mean_land_use_change_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(mean_land_use_change, f)
 
-with open(os.path.join(output_dir, "mean_values.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"mean_values_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(mean_values, f)
 
-with open(os.path.join(output_dir, "mean_sum_bin_change_taxa.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"mean_sum_bin_change_taxa_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(mean_sum_bin_change_taxa, f)
 
-with open(os.path.join(output_dir, "uncertainties_sdm_taxa.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"uncertainties_sdm_taxa_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(uncertainties_sdm_taxa, f)
 
-with open(os.path.join(output_dir, "uncertainties_gcm_taxa.pkl"), "wb") as f:
+with open(os.path.join(output_dir, f"uncertainties_gcm_taxa_{scenario}_{time}.pkl"), "wb") as f:
     pickle.dump(uncertainties_gcm_taxa, f)
