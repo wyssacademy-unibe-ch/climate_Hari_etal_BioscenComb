@@ -168,6 +168,7 @@ for taxa in taxas:
 
 
 
+
 # Assume you already have the necessary data loaded into these dictionaries
 # mean_newvalue_change, mean_sum_bin_change, mean_land_use_change, uncertainties_sdm_taxa, uncertainties_gcm_taxa
 

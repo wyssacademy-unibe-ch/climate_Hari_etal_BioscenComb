@@ -84,11 +84,10 @@ for habitat in habitats:
     for sdm in sdms:
         for gcm in gcms: 
             for taxa in taxas:# Use the variable name 'taxa' for simplicity; it represents habitats in this context
-                dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + sdm + "/" + taxa + "/EWEMBI/"
-                available_file = os.listdir(dir_species)
-                available_names = [x.split("_[1146].nc")[0] for x in available_file]
+                df = pd.read_csv('/storage/homefs/ch21o450/scripts/BioScenComb/habitat_counts/habitat_'+ habitat + '_' + taxa + '.csv')
+                species_list = df['Species'].tolist()  # Replace with the actual column name
+                species_names = species_list
 
-                species_names = available_names
                 # Define the netCDF file path
                 netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
                 netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"

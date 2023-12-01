@@ -84,11 +84,10 @@ for habitat in habitats:
     for sdm in sdms:
         for gcm in gcms: 
             for taxa in taxas:# Use the variable name 'taxa' for simplicity; it represents habitats in this context
-                dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + sdm + "/" + taxa + "/EWEMBI/"
-                available_file = os.listdir(dir_species)
-                available_names = [x.split("_[1146].nc")[0] for x in available_file]
+                df = pd.read_csv('/storage/homefs/ch21o450/scripts/BioScenComb/habitat_counts/habitat_'+ habitat + '_' + taxa + '.csv')
+                species_list = df['Species'].tolist()  # Replace with the actual column name
+                species_names = species_list
 
-                species_names = available_names
                 # Define the netCDF file path
                 netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/{}/{}/{}_[{}].nc"
                 netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
@@ -97,28 +96,37 @@ for habitat in habitats:
                 for species_name in species_names:
                     # Loop over all models
                     for gcm in gcms:
+                        try:
                         # Open the netCDF files
-                        ds_newvalue_fut = xr.open_dataset(
-                            netcdf_path_format_future.format(sdm, taxa, gcm, scenario[0], species_name, time[0]),
-                            decode_times=False
-                        )
-                        ds_newvalue_hist = xr.open_dataset(
-                            netcdf_path_format_hist.format(sdm, taxa, species_name, historical_time),
-                            decode_times=False
-                        )
+                            ds_newvalue_fut = xr.open_dataset(
+                                netcdf_path_format_future.format(sdm, taxa, gcm, scenario[0], species_name, time[0]),
+                                decode_times=False
+                            )
+                            ds_newvalue_hist = xr.open_dataset(
+                                netcdf_path_format_hist.format(sdm, taxa, species_name, historical_time),
+                                decode_times=False
+                            )
 
-                        # Get the newvalue and sum_bin
-                        newvalue_fut = ds_newvalue_fut["newvalue"]
-                        newvalue_hist = ds_newvalue_hist["newvalue"]
-                        sum_bin_future = ds_newvalue_fut["sum_bin"].isel(time=0)
-                        sum_bin_hist = ds_newvalue_hist["sum_bin"].isel(time=0)
+                            # Get the newvalue and sum_bin
+                            newvalue_fut = ds_newvalue_fut["newvalue"]
+                            newvalue_hist = ds_newvalue_hist["newvalue"]
+                            sum_bin_future = ds_newvalue_fut["sum_bin"].isel(time=0)
+                            sum_bin_hist = ds_newvalue_hist["sum_bin"].isel(time=0)
 
-                        # Append the newvalue to the dictionaries
-                        newvalue_dict_fut[sdm][gcm][habitat].append(newvalue_fut)
-                        newvalue_dict_hist[sdm][gcm][habitat].append(newvalue_hist)
-                        sumbin_dict_future[sdm][gcm][habitat].append(sum_bin_future)
-                        sumbin_dict_hist[sdm][gcm][habitat].append(sum_bin_hist)
+                            # Append the newvalue to the dictionaries
+                            newvalue_dict_fut[sdm][gcm][habitat].append(newvalue_fut)
+                            newvalue_dict_hist[sdm][gcm][habitat].append(newvalue_hist)
+                            sumbin_dict_future[sdm][gcm][habitat].append(sum_bin_future)
+                            sumbin_dict_hist[sdm][gcm][habitat].append(sum_bin_hist)
 
+                        except FileNotFoundError:
+                            # Handle the case where the file is not found
+                            print(f"File not found for species {species_name}. Continuing to the next species.")
+                            continue
+                        except Exception as e:
+                            # Handle other exceptions if needed
+                            print(f"An error occurred for species {species_name}: {e}")
+                            continue
 # Calculate the mean change from historical to future per sdm, per gcm, per habitat
 for sdm in newvalue_dict_fut:
     for gcm in newvalue_dict_fut[sdm]:
