@@ -11,7 +11,7 @@
 
 module load Anaconda3
 
-TIMES=(35 65)
+TIMES=(65)
 SCENARIOS=("rcp26" "rcp60")
 
 # Calculate indices based on SLURM_ARRAY_TASK_ID
@@ -19,8 +19,8 @@ TIME=${TIMES[$SLURM_ARRAY_TASK_ID / ${#SCENARIOS[@]}]}
 SCENARIO=${SCENARIOS[$SLURM_ARRAY_TASK_ID % ${#SCENARIOS[@]}]}
 
 
-chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/barplot_output_sep.py
+chmod +x /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/barplot_output_sep_rev.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/barplot_output_sep.py  -m $SCENARIO -a $TIME
+python3 /storage/homefs/ch21o450/scripts/BioScenComb/functions/post-processing/barplot_output_sep_rev.py  -m $SCENARIO -a $TIME
 

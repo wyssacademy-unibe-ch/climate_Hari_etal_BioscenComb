@@ -148,10 +148,10 @@ for habitat in habitats:
             sum_bin_future_sum_habitat = xr.concat(sumbin_future_sum[sdm][gcm][habitat], dim="species").sum(dim="species")
 
             # Output file paths
-            newvalue_hist_sum_path = os.path.join(output_dir, f"newvalue_hist_sum_{sdm}_{gcm}_{habitat}.pkl")
-            newvalue_future_sum_path = os.path.join(output_dir, f"newvalue_future_sum_{sdm}_{gcm}_{habitat}.pkl")
-            sum_bin_hist_sum_path = os.path.join(output_dir, f"sum_bin_hist_sum_{sdm}_{gcm}_{habitat}.pkl")
-            sum_bin_future_sum_path = os.path.join(output_dir, f"sum_bin_future_sum_{sdm}_{gcm}_{habitat}.pkl")
+            newvalue_hist_sum_path = os.path.join(output_dir, f"newvalue_hist_sum_{sdm}_{gcm}_{habitat}_{scenario}_{time}.pkl")
+            newvalue_future_sum_path = os.path.join(output_dir, f"newvalue_future_sum_{sdm}_{gcm}_{habitat}_{scenario}_{time}.pkl")
+            sum_bin_hist_sum_path = os.path.join(output_dir, f"sum_bin_hist_sum_{sdm}_{gcm}_{habitat}_{scenario}_{time}.pkl")
+            sum_bin_future_sum_path = os.path.join(output_dir, f"sum_bin_future_sum_{sdm}_{gcm}_{habitat}_{scenario}_{time}.pkl")
 
             # Write to pickle files
             with open(newvalue_hist_sum_path, "wb") as f:

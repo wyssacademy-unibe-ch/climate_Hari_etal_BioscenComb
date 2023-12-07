@@ -5,9 +5,9 @@
 #SBATCH --mail-type=SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/hab_barplot_output_sep%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/hab_barplot_output_sep%A_%a.err
-#SBATCH --time=12:59:00
+#SBATCH --time=95:59:00
 #SBATCH --cpus-per-task=5
-#SBATCH --mem=300G
+#SBATCH --mem=700G
 
 module load Anaconda3
 

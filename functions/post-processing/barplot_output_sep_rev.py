@@ -138,9 +138,9 @@ output_dir = "/storage/scratch/users/ch21o450/data/intermediate_results/"
 os.makedirs(output_dir, exist_ok=True)
 
 # Loop over all taxa
-for taxa in taxas:
-    for sdm in sdms:
-        for gcm in gcms:
+for sdm in sdms:
+    for gcm in gcms:
+        for taxa in taxas:
             # Concatenate and sum values
             newvalue_hist_sum_taxa = xr.concat(newvalue_hist_sum[sdm][gcm][taxa], dim="species").sum(dim="species")
             newvalue_future_sum_taxa = xr.concat(newvalue_future_sum[sdm][gcm][taxa], dim="species").sum(dim="species")
@@ -148,10 +148,10 @@ for taxa in taxas:
             sum_bin_future_sum_taxa = xr.concat(sumbin_future_sum[sdm][gcm][taxa], dim="species").sum(dim="species")
 
             # Output file paths
-            newvalue_hist_sum_path = os.path.join(output_dir, f"newvalue_hist_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}.pkl")
-            newvalue_future_sum_path = os.path.join(output_dir, f"newvalue_future_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}.pkl")
-            sum_bin_hist_sum_path = os.path.join(output_dir, f"sum_bin_hist_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}.pkl")
-            sum_bin_future_sum_path = os.path.join(output_dir, f"sum_bin_future_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}.pkl")
+            newvalue_hist_sum_path = os.path.join(output_dir, f"newvalue_hist_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}_rev.pkl")
+            newvalue_future_sum_path = os.path.join(output_dir, f"newvalue_future_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}_rev.pkl")
+            sum_bin_hist_sum_path = os.path.join(output_dir, f"sum_bin_hist_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}_rev.pkl")
+            sum_bin_future_sum_path = os.path.join(output_dir, f"sum_bin_future_sum_{sdm}_{gcm}_{taxa}_{scenario}_{time}_rev.pkl")
 
             # Write to pickle files
             with open(newvalue_hist_sum_path, "wb") as f:

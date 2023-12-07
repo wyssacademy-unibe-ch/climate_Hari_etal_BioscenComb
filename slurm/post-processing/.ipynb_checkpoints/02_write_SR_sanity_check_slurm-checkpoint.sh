@@ -5,7 +5,7 @@
 #SBATCH --mail-type=SUBMIT,END,FAIL
 #SBATCH --output=/storage/homefs/ch21o450/logs/02_sanity_sr00%A_%a.out
 #SBATCH --error=/storage/homefs/ch21o450/logs/02_sanity_sr00%A_%a.err
-#SBATCH --time=36:00:00
+#SBATCH --time=95:00:00
 #SBATCH --cpus-per-task=10
 #SBATCH --mem=250G
 

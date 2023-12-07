@@ -7,7 +7,7 @@
 #SBATCH --error=/storage/homefs/ch21o450/logs/habitat_barplots%A_%a.err
 #SBATCH --time=95:59:00
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=300G
+#SBATCH --mem=700G
 
 module load Anaconda3
 
