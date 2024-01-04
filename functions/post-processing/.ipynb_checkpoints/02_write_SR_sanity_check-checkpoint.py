@@ -44,114 +44,97 @@ model_names = ['GFDL-ESM2M', 'IPSL-CM5A-LR', 'HadGEM2-ES', 'MIROC5']
 years = ['1845', '1990', '1995', '2009', '2010', '2020', '2026', '2032', '2048', '2050',
          '2052', '2056', '2080', '2100', '2150', '2200', '2250']
 
-def newvalue_fun(time, model, netcdf_path_format, is_historical=False, scenario=None):
-    newvalue_dict = {model_name: {} for model_name in model_names}
-    sum_bin_dict = {model_name: {} for model_name in model_names}
-
-    for model_name in model_names:
-        for species_name in species_names:
-            if is_historical:
-                ds = xr.open_dataset(netcdf_path_format_hist.format(model, taxa, species_name, time), decode_times=False)
-            else:
-                ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
-
-            newvalue = ds["newvalue"]
-            sum_bin = ds["sum_bin"]
-
-            newvalue_dict[model_name][species_name] = newvalue
-            sum_bin_dict[model_name][species_name] = sum_bin
-
-    projections_dict = {}
-
-    for species_name in species_names:
-        value_list = []
-        for model_name in model_names:
-            value_bin = newvalue_dict[model_name][species_name]
-            #value_bin = value_bin.where(value_bin > 0, 1)
-            #value_bin = (value_bin > 0.00)
-
-            value_list.append(value_bin)
-        value_bin_concat = xr.concat(value_list, dim="model_name")
-        mean_value_bin = value_bin_concat.mean(dim="model_name")
-        projections_dict[species_name] = mean_value_bin
-
-    value_bin_list = list(projections_dict.values())
-    mean_value_bin = xr.concat(value_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
-    mean_value_bin = mean_value_bin.where(mean_value_bin > 0, 0)
-    return mean_value_bin
-
-def calculate_mean(time, model, netcdf_path_format, is_historical=False, scenario=None):
-    newvalue_dict = {model_name: {} for model_name in model_names}
-    sum_bin_dict = {model_name: {} for model_name in model_names}
-    lu_sum_bin_dict = {model_name: {} for model_name in model_names}
-
-    for model_name in model_names:
-        for species_name in species_names:
-            if is_historical:
-                ds = xr.open_dataset(netcdf_path_format_hist.format(model, taxa, species_name, time), decode_times=False)
-            else:
-                ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
-            sum_bin = ds["sum_bin"]
-            #lu_sum_bin = ds["sum_lu_binary"]
-            #sum_bin = (sum_bin > 0.00)
-
-            sum_bin_dict[model_name][species_name] = sum_bin
-            #lu_sum_bin_dict[model_name][species_name] = lu_sum_bin
-
-    projections_dict = {}
-
-    for species_name in species_names:
-        sum_bin_list = []
-        for model_name in model_names:
-            sum_bin = sum_bin_dict[model_name][species_name]
-            sum_bin_list.append(sum_bin)
-        sum_bin_concat = xr.concat(sum_bin_list, dim="model_name")
-        mean_sum_bin = sum_bin_concat.mean(dim="model_name")
-        projections_dict[species_name] = mean_sum_bin
-
-    mean_sum_bin_list = list(projections_dict.values())
-    mean_sum_bin = xr.concat(mean_sum_bin_list, dim="species").sum(dim="species")  
-    mean_sum_bin = mean_sum_bin.where(mean_sum_bin > 0, 0)
-
-    return mean_sum_bin
-
 for model in models:
     for taxa in taxas:
         dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + model + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
-        
+
     species_names = available_names
-for species_name in species_names:
+
+    def newvalue_fun(time, model, netcdf_path_format, is_historical=False, scenario=None):
+        newvalue_dict = {model_name: {} for model_name in model_names}
+        sum_bin_dict = {model_name: {} for model_name in model_names}
+
+        for model_name in model_names:
+            for species_name in species_names:
+                if is_historical:
+                    ds = xr.open_dataset(netcdf_path_format.format(model, taxa, species_name, time), decode_times=False)
+                else:
+                    ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
+
+                newvalue = ds["newvalue"]
+                sum_bin = ds["sum_bin"]
+
+                newvalue_dict[model_name][species_name] = newvalue
+                sum_bin_dict[model_name][species_name] = sum_bin
+
+        projections_dict = {}
+
+        for species_name in species_names:
+            value_list = []
+            for model_name in model_names:
+                value_bin = newvalue_dict[model_name][species_name]
+                #value_bin = value_bin.where(value_bin > 0, 1)
+                #value_bin = (value_bin > 0.00)
+
+                value_list.append(value_bin)
+            value_bin_concat = xr.concat(value_list, dim="model_name")
+            mean_value_bin = value_bin_concat.mean(dim="model_name")
+            projections_dict[species_name] = mean_value_bin
+
+        value_bin_list = list(projections_dict.values())
+        mean_value_bin = xr.concat(value_bin_list, dim="species").sum(dim="species")  # Ensemble mean over species
+        mean_value_bin = mean_value_bin.where(mean_value_bin > 0, 0)
+        return mean_value_bin
+
+    def calculate_mean(time, model, netcdf_path_format, is_historical=False, scenario=None):
+        newvalue_dict = {model_name: {} for model_name in model_names}
+        sum_bin_dict = {model_name: {} for model_name in model_names}
+        lu_sum_bin_dict = {model_name: {} for model_name in model_names}
+
+        for model_name in model_names:
+            for species_name in species_names:
+                if is_historical:
+                    ds = xr.open_dataset(netcdf_path_format.format(model, taxa, species_name, time), decode_times=False)
+                else:
+                    ds = xr.open_dataset(netcdf_path_format.format(model, taxa, model_name, scenario, species_name, time), decode_times=False)
+                sum_bin = ds["sum_bin"]
+                #lu_sum_bin = ds["sum_lu_binary"]
+                #sum_bin = (sum_bin > 0.00)
+
+                sum_bin_dict[model_name][species_name] = sum_bin
+                #lu_sum_bin_dict[model_name][species_name] = lu_sum_bin
+
+        projections_dict = {}
+
+        for species_name in species_names:
+            sum_bin_list = []
+            for model_name in model_names:
+                sum_bin = sum_bin_dict[model_name][species_name]
+                sum_bin_list.append(sum_bin)
+            sum_bin_concat = xr.concat(sum_bin_list, dim="model_name")
+            mean_sum_bin = sum_bin_concat.mean(dim="model_name")
+            projections_dict[species_name] = mean_sum_bin
+
+        mean_sum_bin_list = list(projections_dict.values())
+        mean_sum_bin = xr.concat(mean_sum_bin_list, dim="species").sum(dim="species")  
+        mean_sum_bin = mean_sum_bin.where(mean_sum_bin > 0, 0)
+
+        return mean_sum_bin
 
     historical_time = 1146
-    future_times = [65]
-    #scenarios = ["rcp60"]y
+    future_times = [35, 65]
+    #scenarios = ["rcp60"]
 
     netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output_sanity/{}/{}/{}/{}/{}_[{}].nc"
-    #netcdf_path_format_hist = f"/storage/scratch/users/ch21o450/data/LandClim_Output/{model}/{taxa}/EWEMBI/{species_name}_[{historical_time}].nc"
-    #netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
-    # Loop over available files
-
-
-    year_indices = {1146: '1995', 35: '2050', 65: '2080', 85: '2100'}
-
-
-    #mean_value_bin_hist = newvalue_fun(historical_time, model, netcdf_path_format_hist, is_historical=True)
-    #mean_sum_bin_hist = calculate_mean(historical_time, model, netcdf_path_format_hist, is_historical=True)
-
-#        mean_sum_bin_hist = mean_sum_bin_hist.isel(time=0)
-
-    #filename = f"/storage/scratch/users/ch21o450/data/LandClim_Output_sanity/{taxa}_{model}_{historical_time}_summedprobs_newvalue.nc"
-    #mean_value_bin_hist.to_netcdf(filename)
-
-#       filename2 = f"/storage/scratch/users/ch21o450/data/LandClim_Output_sanity/{taxa}_{model}_{historical_time}_summedprobs_sum.nc"
-#     mean_sum_bin_hist.to_netcdf(filename2)
-
 
     for future_time in future_times:
         for scenario in scenarios:
             try:
+                # Your existing code that might raise KeyError
+                year_indices = {1146: '1995', 35: '2050', 65: '2080', 85: '2100'}
+
                 mean_value_bin_future = newvalue_fun(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
                 mean_sum_bin_future = calculate_mean(future_time, model, netcdf_path_format_future, is_historical=False, scenario=scenario)
                 mean_sum_bin_future = mean_sum_bin_future.isel(time=0)
@@ -165,4 +148,7 @@ for species_name in species_names:
             except KeyError as e:
                 # Print a message
                 print(f"Variable 'sum_bin' not found in file. Skipping: {e}")
+                continue
+            except FileNotFoundError as e:
+                print(f"FileNotFoundError: No such file or directory. Skipping: {e}")
                 continue
