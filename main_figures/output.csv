@@ -1,0 +1,721 @@
+Region,Habitat,Scenario,Mean Relative Difference,Mean Land Use Change,Standard Deviation
+"West, Central, East & South Africa",forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(1.29460391)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.19239803)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.169847282103587
+Central and Western Europe,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(5.40339463)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(6.28443763)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.5688569591529755
+North Africa & Western Asia,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-2.46493189)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.29116461)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.569122107342823
+South America,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-1.35877582)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-3.16891472)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.5933227397321785
+Eastern Europe,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(11.77004775)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.56305767)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.49744694374001
+Oceania,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-4.90373437)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(7.55368349)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.9780505002627604
+Caribbean & Mesoamerica,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-4.15615855)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(3.44003461)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.076429648093427
+South-East Asia,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(0.59262115)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-3.43766644)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",0.9534005066220278
+North America,forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(7.07306816)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.62965541)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.884088084610378
+"Central, North-East & South Asia",forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.12353499)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.79773385)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.8352684318257009
+"West, Central, East & South Africa",forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-0.42945995)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-26.33662863)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.563365503162901
+Central and Western Europe,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(5.74722608)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(4.38201421)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.00371989739948
+North Africa & Western Asia,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.77511701)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.71599553)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",8.132964382139278
+South America,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-3.80310353)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(0.61558595)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.1337058977687047
+Eastern Europe,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(18.09589701)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.68317761)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.411750065139269
+Oceania,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-3.16513867)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(4.83126177)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.5135017331422125
+Caribbean & Mesoamerica,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-8.37594764)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-3.05467651)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.215266944329623
+South-East Asia,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(0.50888938)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-4.27472)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.064090903373458
+North America,forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(11.26182718)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.36667571)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.452631817411012
+"Central, North-East & South Asia",forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.48140216)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.43724917)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.7182910880849467
+"West, Central, East & South Africa",non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(0.50776594)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.56940619)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.3524881867284495
+Central and Western Europe,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(3.9516268)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(7.98585343)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.3289285028246594
+North Africa & Western Asia,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-3.7681292)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.64288945)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.782989015595454
+South America,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.90578436)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-3.4062685)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.7770810118158633
+Eastern Europe,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(10.54596981)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.41045613)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.2656603874397225
+Oceania,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-3.18475787)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(8.80854805)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.6691369259742062
+Caribbean & Mesoamerica,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-4.00196374)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.99599061)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.4516141696638885
+South-East Asia,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.29002812)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.61291402)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.2106182816637767
+North America,non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(5.57330367)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.75638881)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.6244384427116227
+"Central, North-East & South Asia",non-forested land,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.82926653)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(3.60898843)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.0294596866850543
+"West, Central, East & South Africa",non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.83717171)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-26.2946869)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.6155878201328622
+Central and Western Europe,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(4.7609277)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(5.67501535)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.0599580637811314
+North Africa & Western Asia,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-3.7818452)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-4.18063784)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.6694563749264466
+South America,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.15334635)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.05022254)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.3033593265166012
+Eastern Europe,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(15.84375324)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.66888766)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.4777059390360017
+Oceania,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.04718011)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(5.99030116)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.1582257248118757
+Caribbean & Mesoamerica,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-7.23328145)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-3.39244738)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.643456290814531
+South-East Asia,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-0.09807579)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.77590619)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",0.9639310018563463
+North America,non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(8.57088252)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.25721641)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.0959648074662995
+"Central, North-East & South Asia",non-forested land,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.50909912)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.26055086)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.497044750921105
+"West, Central, East & South Africa",cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(0.31765235)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(4.30053112)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.2075863256144006
+Central and Western Europe,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(5.08977233)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(3.30959116)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.9489893386499235
+North Africa & Western Asia,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-2.57176602)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.8599556)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.7978857033464353
+South America,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(1.52038524)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(0.35450846)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.678614142799853
+Eastern Europe,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(12.90765535)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.13802613)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.410638856321578
+Oceania,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-3.49963186)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(5.25514107)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.125096866776637
+Caribbean & Mesoamerica,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-4.70569332)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.12275765)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.4577537366406752
+South-East Asia,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.80823377)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.18559763)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.2937528441557826
+North America,cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(5.94381404)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.70379852)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.9378598616008098
+"Central, North-East & South Asia",cropland,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.24967874)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.52464752)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.076400362399376
+"West, Central, East & South Africa",cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.41669709)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-11.47824079)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.6048895029345733
+Central and Western Europe,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(6.70740854)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(3.52027633)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.5264939502672035
+North Africa & Western Asia,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.43588932)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.0182262)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",5.511196039858392
+South America,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-0.46456874)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.15195992)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.627094664592964
+Eastern Europe,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(20.64200643)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.03547167)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.6256740097783164
+Oceania,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.34976761)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(3.15473564)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.837441070183016
+Caribbean & Mesoamerica,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-9.08428375)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(0.03900098)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.5652652894526646
+South-East Asia,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-0.12707103)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(0.14396716)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.1234895380533874
+North America,cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(10.139197)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.10916041)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.6450603136607014
+"Central, North-East & South Asia",cropland,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.97276741)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.74494021)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.6508003953787216
+"West, Central, East & South Africa",pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-0.43226916)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.18444399)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",0.8574289501716671
+Central and Western Europe,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(5.93737325)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(0.34413869)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.682727546002828
+North Africa & Western Asia,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-3.42858662)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.26833615)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.6603153392820922
+South America,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(0.06404789)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-4.52620551)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.662424212983384
+Eastern Europe,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(15.41909224)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.44018343)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",6.358000843597498
+Oceania,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-3.69681012)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.54461087)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.8821163019792657
+Caribbean & Mesoamerica,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-4.08844693)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.55530259)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.364299848055754
+South-East Asia,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-1.13421062)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.62219929)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.39576295304728
+North America,pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(7.44264096)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.01608116)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.6696315140622815
+"Central, North-East & South Asia",pasture,RCP2.6/SSP1-RCP2.6,"<xarray.DataArray 'newvalue' ()>
+array(-1.02316377)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.61190576)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.1423990117457756
+"West, Central, East & South Africa",pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.11982137)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.10504239)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.1139421474625781
+Central and Western Europe,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(8.55921696)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(0.86426852)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.5024875821527774
+North Africa & Western Asia,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-3.71723)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.2528756)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.093878335564825
+South America,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.17513276)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.35866471)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.9194694820494385
+Eastern Europe,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(24.81078413)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.3913923)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",5.120817445018765
+Oceania,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.8007162)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.56368795)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.874900502512543
+Caribbean & Mesoamerica,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-8.55033385)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.22909985)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.157823448836168
+South-East Asia,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-0.20719099)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.98480628)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",1.3950516692642103
+North America,pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(12.56640466)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.09573923)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.6614726705776803
+"Central, North-East & South Asia",pasture,RCP6.0/SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-3.1486389)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.82950478)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.9701177797922207
