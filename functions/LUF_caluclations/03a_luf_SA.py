@@ -1,4 +1,21 @@
-
+#!/usr/bin/env python3
+#pip install  rioxarray==0.3.1
+import pandas as pd
+import xarray as xr
+import matplotlib.pyplot as plt
+import rioxarray
+import numpy as np
+import geopandas as gpd
+import cartopy.crs as ccrs
+import rasterio
+import os
+import matplotlib.colors
+scriptsdir = os.getcwd()
+from scipy.interpolate import griddata
+from functools import reduce
+import xarray
+import itertools
+import argparse
 
 # *************************************************
 # Get the command line arguments
