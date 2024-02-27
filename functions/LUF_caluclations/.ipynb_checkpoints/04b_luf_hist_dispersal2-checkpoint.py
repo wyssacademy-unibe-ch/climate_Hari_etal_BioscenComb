@@ -205,11 +205,11 @@ for model in models:# Get all possible combinations of models and model_names
                     if variable != "newvalue" and variable != "sum_bin" and variable != "sum_lu_binary":
                         del da_landuse[variable]
 
-                        output_directory = "/storage/scratch/users/ch21o450/data/Dispersal2/" + model+ "/" + taxa + "/" + model_name + "/"
+                        output_directory = "/storage/scratch/users/ch21o450/data/LandClim_Output/Dispersal2/" + model+ "/" + taxa + "/" + model_name + "/"
                         os.makedirs(output_directory, exist_ok=True)
 
 
-                        da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/Dispersal2/" + model+ "/" + taxa + "/" + model_name + "/"  + formatted_species_name + "_" + str(time)+ ".nc")
+                        da_landuse.to_netcdf("/storage/scratch/users/ch21o450/data/LandClim_Output/Dispersal2/" + model+ "/" + taxa + "/" + model_name + "/"  + formatted_species_name + "_" + str(time)+ ".nc")
 
 
 

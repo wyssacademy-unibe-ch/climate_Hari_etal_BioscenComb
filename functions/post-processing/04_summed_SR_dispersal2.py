@@ -82,14 +82,14 @@ for sdm in sdms:
 # Loop over all taxa
 for taxa in taxas:
     for sdm in sdms:
-        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/" + sdm + "/" + taxa + "/EWEMBI/"
+        dir_species = "/storage/scratch/users/ch21o450/data/LandClim_Output/Dispersal2/" + sdm + "/" + taxa + "/EWEMBI/"
         available_file = os.listdir(dir_species)
         available_names = [x.split("_[1146].nc")[0] for x in available_file]
 
         species_names = available_names
         # Define the netCDF file path
-        netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/Dispersal2/{}/{}/{}/{}/{}_[{}].nc"
-        netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/{}/{}/EWEMBI/{}_[{}].nc"
+        netcdf_path_format_future = "/storage/scratch/users/ch21o450/data/LandClim_Output/Dispersal2/{}/{}/{}/{}/{}_[{}].nc"
+        netcdf_path_format_hist = "/storage/scratch/users/ch21o450/data/LandClim_Output/Dispersal2/{}/{}/EWEMBI/{}_[{}].nc"
 
         # Loop over all species
         for species_name in species_names:

@@ -215,7 +215,7 @@ for model in models:
                             del da_landuse[variable]
 
 
-                            output_directory = "/storage/scratch/users/ch21o450/data/Dispersal2/" + model+ "/" + taxa + "/" + GCM + "/" + scenario + "/"
+                            output_directory = "/storage/scratch/users/ch21o450/data/LandClim_Output/Dispersal2/" + model+ "/" + taxa + "/" + GCM + "/" + scenario + "/"
                             os.makedirs(output_directory, exist_ok=True)
 
                             da_landuse.to_netcdf(output_directory + formatted_species_name + "_" + str(time) + ".nc")
