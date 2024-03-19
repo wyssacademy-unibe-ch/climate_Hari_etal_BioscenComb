@@ -1,3 +1,12 @@
 data/
+habitat_counts/
+intermediate_results/
+plots/
+mask_first_timestep.ipynb
 functions/figures/main_figures/Figure_2.eps
+functions/Archive/
+functions/figures/Archive/
+functions/figures/old_versions/
+functions/LUF_calculations/Archive/
+functions/post-processing/Archive/
 
