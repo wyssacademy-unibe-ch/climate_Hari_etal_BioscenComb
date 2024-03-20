@@ -3,8 +3,8 @@
 #SBATCH --chdir=/storage/homefs/ch21o450/
 #SBATCH --mail-user=chantal.hari@unibe.ch
 #SBATCH --mail-type=SUBMIT,END,FAIL
-#SBATCH --output=/storage/homefs/ch21o450/logs/05a_luf_disp0%A_%a.out
-#SBATCH --error=/storage/homefs/ch21o450/logs/05a_luf_disp0%A_%a.err
+#SBATCH --output=/storage/homefs/ch21o450/logs/05a_luf_disp4%A_%a.out
+#SBATCH --error=/storage/homefs/ch21o450/logs/05a_luf_disp4%A_%a.err
 #SBATCH --time=95:59:00
 #SBATCH --cpus-per-task=5
 #SBATCH --mem=100G
@@ -21,8 +21,8 @@ TAXA=${TAXAS[$SLURM_ARRAY_TASK_ID / (${#TIME[@]} * ${#MODELS[@]})]}
 MODEL=${MODELS[($SLURM_ARRAY_TASK_ID / ${#TIME[@]}) % ${#MODELS[@]}]}
 
 
-chmod +x /storage/homefs/ch21o450/scripts/climate_Hari_etal_inprep/functions/LUF_caluclations/05a_luf_dispersal4.py
+chmod +x /storage/homefs/ch21o450/scripts/climate_Hari_etal_inprep/functions/LUF_calculations/05a_luf_dispersal4.py
 
 # Pass the arguments to luf.py
-python3 /storage/homefs/ch21o450/scripts/climate_Hari_etal_inprep/functions/LUF_caluclations/05a_luf_dispersal4.py -t $TIME -m $MODEL -a $TAXA
+python3 /storage/homefs/ch21o450/scripts/climate_Hari_etal_inprep/functions/LUF_calculations/05a_luf_dispersal4.py -t $TIME -m $MODEL -a $TAXA
 
