@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 # climate_Hari_etal_SciAdv_2024
-||||||| merged common ancestors
-=======
-# Project 1
 
 Scripts used for the analysis in Hari et al, in prep
 
