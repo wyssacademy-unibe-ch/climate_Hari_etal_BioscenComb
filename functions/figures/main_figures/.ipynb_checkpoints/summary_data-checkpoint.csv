@@ -1,0 +1,81 @@
+Habitat,Scenario,Mean Relative Difference,Mean Land Use Change,Standard Deviation
+cropland,SSP1-RCP2.6,-1.631,1.293,2.203
+cropland,SSP1-RCP2.6,-1.061,4.475,1.106
+cropland,SSP1-RCP2.6,0.6,2.749,3.77
+cropland,SSP1-RCP2.6,-6.024,-0.625,2.808
+cropland,SSP1-RCP2.6,-2.373,0.274,1.638
+cropland,SSP1-RCP2.6,10.924,1.785,3.239
+cropland,SSP1-RCP2.6,-3.267,5.204,1.819
+cropland,SSP1-RCP2.6,-4.341,1.077,1.541
+cropland,SSP1-RCP2.6,-1.968,2.224,1.094
+cropland,SSP1-RCP2.6,9.283,2.555,3.778
+cropland,SSP4-RCP6.0,-4.216,-0.821,3.695
+cropland,SSP4-RCP6.0,-3.663,-11.721,1.471
+cropland,SSP4-RCP6.0,0.646,2.869,3.76
+cropland,SSP4-RCP6.0,-5.936,-1.453,3.916
+cropland,SSP4-RCP6.0,-3.468,-0.333,2.44
+cropland,SSP4-RCP6.0,17.811,1.46,4.051
+cropland,SSP4-RCP6.0,-3.54,3.43,3.359
+cropland,SSP4-RCP6.0,-7.643,0.119,3.057
+cropland,SSP4-RCP6.0,-1.51,0.198,0.8
+cropland,SSP4-RCP6.0,17.017,3.549,5.259
+pasture,SSP1-RCP2.6,-2.715,-0.412,2.224
+pasture,SSP1-RCP2.6,-1.411,-2.062,1.294
+pasture,SSP1-RCP2.6,1.608,0.569,3.974
+pasture,SSP1-RCP2.6,-5.623,-0.544,2.162
+pasture,SSP1-RCP2.6,-4.424,-4.286,2.397
+pasture,SSP1-RCP2.6,13.48,1.687,3.846
+pasture,SSP1-RCP2.6,-2.994,-0.263,1.993
+pasture,SSP1-RCP2.6,-3.532,-1.337,2.883
+pasture,SSP1-RCP2.6,-2.81,-2.467,1.057
+pasture,SSP1-RCP2.6,11.153,1.676,4.314
+pasture,SSP4-RCP6.0,-6.153,-0.533,3.635
+pasture,SSP4-RCP6.0,-3.611,-1.184,1.383
+pasture,SSP4-RCP6.0,2.279,1.052,3.861
+pasture,SSP4-RCP6.0,-5.927,-0.616,3.719
+pasture,SSP4-RCP6.0,-5.634,-1.38,2.851
+pasture,SSP4-RCP6.0,21.577,2.35,3.785
+pasture,SSP4-RCP6.0,-3.635,-0.289,3.783
+pasture,SSP4-RCP6.0,-6.568,-2.571,4.839
+pasture,SSP4-RCP6.0,-2.406,-0.789,0.881
+pasture,SSP4-RCP6.0,20.418,1.936,5.115
+forested land,SSP1-RCP2.6,-1.008,1.788,1.893
+forested land,SSP1-RCP2.6,1.484,2.262,3.058
+forested land,SSP1-RCP2.6,0.732,3.883,3.428
+forested land,SSP1-RCP2.6,-2.849,-2.694,1.679
+forested land,SSP1-RCP2.6,-6.978,-2.698,3.504
+forested land,SSP1-RCP2.6,9.771,0.997,2.237
+forested land,SSP1-RCP2.6,-6.127,8.011,2.192
+forested land,SSP1-RCP2.6,-2.796,3.244,2.404
+forested land,SSP1-RCP2.6,-2.734,-2.611,0.518
+forested land,SSP1-RCP2.6,11.309,2.749,3.097
+forested land,SSP4-RCP6.0,-3.774,-2.309,2.976
+forested land,SSP4-RCP6.0,-0.074,-30.049,3.354
+forested land,SSP4-RCP6.0,0.243,2.56,3.769
+forested land,SSP4-RCP6.0,-1.603,-4.731,3.909
+forested land,SSP4-RCP6.0,-8.243,0.861,3.86
+forested land,SSP4-RCP6.0,14.868,0.856,3.988
+forested land,SSP4-RCP6.0,-6.113,5.075,4.747
+forested land,SSP4-RCP6.0,-5.634,-3.43,4.713
+forested land,SSP4-RCP6.0,-3.044,-3.489,0.979
+forested land,SSP4-RCP6.0,17.132,1.189,2.653
+non-forested land,SSP1-RCP2.6,-2.401,2.839,2.043
+non-forested land,SSP1-RCP2.6,-0.217,2.684,1.785
+non-forested land,SSP1-RCP2.6,0.491,4.828,3.135
+non-forested land,SSP1-RCP2.6,-4.823,-2.878,1.434
+non-forested land,SSP1-RCP2.6,-5.49,-3.228,2.671
+non-forested land,SSP1-RCP2.6,8.868,1.592,2.452
+non-forested land,SSP1-RCP2.6,-5.128,8.859,1.644
+non-forested land,SSP1-RCP2.6,-3.13,3.321,1.606
+non-forested land,SSP1-RCP2.6,-1.773,-1.207,0.834
+non-forested land,SSP1-RCP2.6,6.768,3.307,2.89
+non-forested land,SSP4-RCP6.0,-5.311,-1.998,3.1
+non-forested land,SSP4-RCP6.0,-2.839,-27.62,2.084
+non-forested land,SSP4-RCP6.0,0.483,3.342,3.254
+non-forested land,SSP4-RCP6.0,-5.398,-4.506,2.781
+non-forested land,SSP4-RCP6.0,-6.215,-0.866,2.995
+non-forested land,SSP4-RCP6.0,13.407,1.479,3.798
+non-forested land,SSP4-RCP6.0,-6.373,6.552,3.196
+non-forested land,SSP4-RCP6.0,-4.833,-3.823,3.187
+non-forested land,SSP4-RCP6.0,-1.949,-2.314,0.382
+non-forested land,SSP4-RCP6.0,11.681,2.616,4.256

@@ -1,0 +1,91 @@
+Region,Habitat,Scenario,Mean Climate Change,Mean Land Use Change,Std Dev New Value
+"Central, North-East & South Asia",Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-5.31122351)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-1.9977548)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.100002900556674
+"West, Central, East & South Africa",Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-2.83926549)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-27.62026343)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.0840257301401808
+Central and Western Europe,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(0.48284156)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(3.34228467)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.253556203001309
+North Africa & Western Asia,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-5.39841357)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-4.5061877)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.7808944958713955
+South America,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-6.2150305)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-0.86611034)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",2.9950711184037635
+Eastern Europe,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(13.40689318)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(1.47878192)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.79841008887949
+Oceania,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-6.37324192)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(6.55248598)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.1955888100815892
+Caribbean & Mesoamerica,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-4.83311396)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-3.8228817)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",3.187468208574001
+South-East Asia,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(-1.94920535)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(-2.31376807)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",0.38193294831119406
+North America,Non-forested land,SSP4-RCP6.0,"<xarray.DataArray 'newvalue' ()>
+array(11.68140116)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'","<xarray.DataArray ()>
+array(2.61570006)
+Coordinates:
+    time      float64 65.0
+    variable  <U29 '__xarray_dataarray_variable__'",4.256121089141435

@@ -9,6 +9,8 @@
 #SBATCH --cpus-per-task=5
 #SBATCH --mem=300G
 
+conda activate my_env
+module purge
 module load Anaconda3
 
 TIMES=(65)
@@ -17,6 +19,8 @@ SCENARIOS=("rcp26" "rcp60")
 # Calculate indices based on SLURM_ARRAY_TASK_ID
 TIME=${TIMES[$SLURM_ARRAY_TASK_ID / ${#SCENARIOS[@]}]}
 SCENARIO=${SCENARIOS[$SLURM_ARRAY_TASK_ID % ${#SCENARIOS[@]}]}
+
+
 
 
 chmod +x /storage/homefs/ch21o450/scripts/climate_Hari_etal_inprep/functions/post-processing/06a_summed_SR_dispersal0.py

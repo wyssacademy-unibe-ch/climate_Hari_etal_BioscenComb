@@ -94,8 +94,10 @@ for model in models:# Get all possible combinations of models and model_names
                 lon = bioscen_species["x"]
                 lat = bioscen_species["y"]
                 z = bioscen_species[bioscen_model_name + '_' + selected_year]
+                disp4 = bioscen_species["dispersal1"]
+                val_disp = z* disp4
 
-                df = pd.DataFrame({"lon": lon, "lat": lat, "vals": z})
+                df = pd.DataFrame({"lon": lon, "lat": lat, "vals": val_disp})
                 df = df.fillna(0)
                 convcodes_renamed = convcodes.rename(columns={'IUCN_hab':'result.code'})
                 IUCN['result.code'] = pd.to_numeric(IUCN['result.code'], errors='coerce')
