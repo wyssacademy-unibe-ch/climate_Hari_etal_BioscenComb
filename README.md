@@ -8,6 +8,6 @@ Scripts used for the analysis in Hari et al, in prep
 See [main.ipynb](./main.ipynb) for an overview of the main scripts. 
 
 ## License
-This project is licensed under the MIT License. See alos [LICENSE](./LICENSE).
+This project is licensed under the MIT License. See also [LICENSE](./LICENSE).
 
 
