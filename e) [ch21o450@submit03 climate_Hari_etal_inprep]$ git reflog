@@ -1,0 +1,56 @@
+[33m9a7c719[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: rev
+[33me8f3c1b[m HEAD@{1}: rebase (abort): returning to refs/heads/main
+[33m53e4868[m HEAD@{2}: commit: Revisions
+[33med25d57[m HEAD@{3}: commit: delete untitled
+[33m5fc8006[m HEAD@{4}: rebase (start): checkout origin/main
+[33me8f3c1b[m HEAD@{5}: commit: test
+[33mf3da814[m HEAD@{6}: pull origin main: Fast-forward
+[33mafcde17[m HEAD@{7}: commit: main
+[33m73f1ddc[m HEAD@{8}: pull: Fast-forward
+[33m46d152c[m HEAD@{9}: commit: update
+[33mc279b27[m HEAD@{10}: commit: environment
+[33m523d096[m HEAD@{11}: commit: Different Figure3 versions
+[33m30ddafa[m HEAD@{12}: commit: Fig3
+[33m50491ec[m HEAD@{13}: commit: Update Fig 3 error margins
+[33m1dc2ce1[m HEAD@{14}: commit: no gitgnore
+[33m87a0c42[m[33m ([m[1;32mbackup-branch_20240319_2[m[33m)[m HEAD@{15}: reset: moving to backup-branch_20240319_2
+[33m19aa29e[m HEAD@{16}: checkout: moving from backup-branch_20240319_2 to main
+[33m87a0c42[m[33m ([m[1;32mbackup-branch_20240319_2[m[33m)[m HEAD@{17}: checkout: moving from main to backup-branch_20240319_2
+[33m19aa29e[m HEAD@{18}: commit (merge): t
+[33m9271859[m HEAD@{19}: commit: Correct files to track
+[33m17a6a5b[m HEAD@{20}: reset: moving to HEAD~
+[33mfc61434[m HEAD@{21}: commit: Stop tracking certain files
+[33m17a6a5b[m HEAD@{22}: commit: Stop tracking certain files
+[33m87a0c42[m[33m ([m[1;32mbackup-branch_20240319_2[m[33m)[m HEAD@{23}: commit: fignew
+[33m9803419[m HEAD@{24}: pull origin main: Fast-forward
+[33m2255651[m HEAD@{25}: commit: fignew
+[33m4f02c99[m HEAD@{26}: commit: fignew
+[33mcd5fed1[m HEAD@{27}: commit: fignew
+[33mb3aeb20[m HEAD@{28}: commit: fignew
+[33m6871594[m HEAD@{29}: commit: fignew
+[33me07bf85[m HEAD@{30}: commit: fignew
+[33m8b2f562[m HEAD@{31}: commit: fignew
+[33m5f8e686[m HEAD@{32}: commit: genup
+[33mb719ef9[m HEAD@{33}: commit: f
+[33m23fbfa9[m HEAD@{34}: commit: fig4up
+[33m6c889ac[m HEAD@{35}: commit: fig4new
+[33mbb41748[m HEAD@{36}: commit: fig4
+[33m359abc1[m HEAD@{37}: commit: fig4
+[33mc526956[m HEAD@{38}: commit: fig4
+[33m6d2adf2[m[33m ([m[1;32mbackup-branch_20240319[m[33m, [m[1;32mbackup-branch2[m[33m)[m HEAD@{39}: filter-branch: rewrite
+[33m41f6993[m HEAD@{40}: commit: Stop tracking large file Figure_2.eps
+[33md93b9ac[m HEAD@{41}: commit: Update .gitignore to exclude large files
+[33m185dba4[m HEAD@{42}: reset: moving to 185dba4
+[33ma1cb51b[m HEAD@{43}: reset: moving to a1cb51b43aae5517717df56251288b8041671c8d
+[33m904c91d[m HEAD@{44}: commit: --amend
+[33me5da693[m HEAD@{45}: reset: moving to e5da6931b310e4009f5be57292c6a7d90535a3c5
+[33m185dba4[m HEAD@{46}: commit: updat
+[33m4c5803d[m HEAD@{47}: commit: updat
+[33me5da693[m HEAD@{48}: commit: .eps
+[33m1da37b3[m HEAD@{49}: commit: fig3
+[33ma1cb51b[m HEAD@{50}: commit: update
+[33ma81d96f[m HEAD@{51}: commit: figs
+[33m921646b[m HEAD@{52}: commit: figs
+[33mf5c7521[m HEAD@{53}: commit: cleanup
+[33m08a2c54[m HEAD@{54}: commit (merge): all
+[33m5f22946[m HEAD@{55}: clone: from git@github.com:wyssacademy-unibe-ch/climate_Hari_etal_inprep.git
